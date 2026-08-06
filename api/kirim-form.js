@@ -1,4 +1,5 @@
-const { db } = require('./firebase-admin');
+import { db } from './firebase-config.js';
+import { collection, addDoc } from 'firebase/firestore';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -8,12 +9,12 @@ export default async function handler(req, res) {
   const { nama, unit, roblox, alasan } = req.body;
 
   try {
-    // 1. Simpan ke Firestore via Admin SDK
-    await db.collection("pendaftar_masuk").add({
-      nama: nama,
-      roblox: roblox,
-      alasan: alasan,
-      unit: unit,
+    // 1. Simpan ke Firestore via Firebase Client SDK
+    await addDoc(collection(db, "pendaftar_masuk"), {
+      nama: nama || '',
+      roblox: roblox || '',
+      alasan: alasan || '',
+      unit: unit || '',
       waktu: new Date()
     });
 

@@ -1,4 +1,5 @@
-const { db } = require('./firebase-admin');
+import { db } from './firebase-config.js';
+import { doc, getDoc } from 'firebase/firestore';
 
 export default async function handler(req, res) {
   if (req.method !== 'GET') {
@@ -6,12 +7,13 @@ export default async function handler(req, res) {
   }
 
   try {
-    const docSnap = await db.collection("settings").doc("pendaftaran").get();
+    const docRef = doc(db, "settings", "pendaftaran");
+    const docSnap = await getDoc(docRef);
     
-    if (docSnap.exists) {
+    if (docSnap.exists()) {
       return res.status(200).json(docSnap.data());
     } else {
-      return res.status(200).json({ status: "Tutup" }); // Default
+      return res.status(200).json({ status: "Tutup" });
     }
   } catch (error) {
     console.error("Error get-settings:", error);

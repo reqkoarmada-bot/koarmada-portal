@@ -1,4 +1,5 @@
-const { db } = require('./firebase-admin');
+import { db } from './firebase-config.js';
+import { collection, query, where, getDocs } from 'firebase/firestore';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -11,12 +12,13 @@ export default async function handler(req, res) {
   }
 
   try {
-    const snapshot = await db.collection("kelulusan").where("nama", "==", nama).get();
+    const q = query(collection(db, "kelulusan"), where("nama", "==", nama));
+    const snapshot = await getDocs(q);
     
     if (!snapshot.empty) {
       let data;
-      snapshot.forEach(doc => {
-        data = doc.data();
+      snapshot.forEach(docSnap => {
+        data = docSnap.data();
       });
       return res.status(200).json({ lulus: true, unit: data.unit });
     } else {

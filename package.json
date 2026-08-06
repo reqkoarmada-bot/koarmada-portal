@@ -1,8 +1,9 @@
 {
   "name": "koarmada-portal",
   "version": "1.0.0",
+  "type": "module",
   "description": "Portal Koarmada",
   "dependencies": {
-    "firebase-admin": "^12.0.0"
+    "firebase": "^10.12.0"
   }
 }
