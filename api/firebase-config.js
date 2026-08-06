@@ -2,7 +2,7 @@ import { initializeApp, getApps, getApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: process.env.FIREBASE_API_KEY || "AIzaSyAMYa0AF2_aH8N93fR22YIa9Kg0AGjKrLI",
+  apiKey: process.env.FIREBASE_API_KEY,
   authDomain: process.env.FIREBASE_AUTH_DOMAIN || "portal-koarmada-92e19.firebaseapp.com",
   projectId: process.env.FIREBASE_PROJECT_ID || "portal-koarmada-92e19",
   storageBucket: process.env.FIREBASE_STORAGE_BUCKET || "portal-koarmada-92e19.firebasestorage.app",
