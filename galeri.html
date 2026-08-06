@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galeri - Portal KOARMADA</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --warna-utama: #00509E;
+      --warna-teks-sorot: #0088FF;
+      --warna-bg-gelap: #121824;
+      --bg-card: #1E293B;
+    }
+    body { font-family: 'Poppins', sans-serif; background-color: var(--warna-bg-gelap); }
+    .bg-utama { background-color: var(--warna-utama); }
+    .teks-sorot { color: var(--warna-teks-sorot); }
+  </style>
+</head>
+<body class="text-white min-h-screen flex flex-col justify-between">
+
+  <nav class="bg-utama text-white px-6 py-3 flex justify-between items-center shadow-lg sticky top-0 z-40">
+    <div class="flex items-center space-x-3">
+      <img src="images/Logo.svg.webp" alt="Logo Koarmada" class="w-10 h-10 object-contain bg-white rounded-full border-2 border-yellow-400 p-0.5">
+      <span class="font-black text-sm tracking-wider">GALERI KOARMADA</span>
+    </div>
+    <div>
+      <a href="index.html" class="bg-white/10 hover:bg-white/20 text-white font-bold text-xs sm:text-sm py-2 px-4 rounded-lg transition border border-white/20">← Kembali ke Home</a>
+    </div>
+  </nav>
+
+  <main class="py-12 px-6 max-w-6xl mx-auto w-full flex-grow">
+    <div class="text-center mb-10">
+      <h1 class="text-4xl font-black teks-sorot tracking-wider mb-2">DOKUMENTASI KEGIATAN</h1>
+      <p class="text-gray-400 text-sm">Kumpulan galeri foto aktivitas dan armada satuan Koarmada RI.</p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      
+      <div class="bg-gray-800 rounded-xl overflow-hidden border-2 border-gray-700 shadow-xl flex flex-col">
+        <div class="h-48 overflow-hidden bg-gray-900">
+          <img src="images/image-39.webp" alt="Kegiatan 1" class="w-full h-full object-cover hover:scale-110 transition duration-300">
+        </div>
+        <div class="p-4 flex flex-col flex-grow justify-between">
+          <h3 class="font-bold text-sm text-white mb-1">Patroli Laut Nusantara</h3>
+          <p class="text-xs text-gray-400">Pengamanan wilayah kedaulatan perairan Indonesia.</p>
+        </div>
+      </div>
+
+      <div class="bg-gray-800 rounded-xl overflow-hidden border-2 border-gray-700 shadow-xl flex flex-col">
+        <div class="h-48 overflow-hidden bg-gray-900">
+          <img src="images/RobloxScreenShot20260802_135235863.webp" alt="Kegiatan 2" class="w-full h-full object-cover hover:scale-110 transition duration-300">
+        </div>
+        <div class="p-4 flex flex-col flex-grow justify-between">
+          <h3 class="font-bold text-sm text-white mb-1">Latihan Gabungan</h3>
+          <p class="text-xs text-gray-400">Simulasi kesiapsiagaan tempur unsur kapal perang.</p>
+        </div>
+      </div>
+
+      <div class="bg-gray-800 rounded-xl overflow-hidden border-2 border-gray-700 shadow-xl flex flex-col">
+        <div class="h-48 overflow-hidden bg-gray-900">
+          <img src="images/RobloxScreenShot20260802_144137174-1 (1).webp" alt="Kegiatan 3" class="w-full h-full object-cover hover:scale-110 transition duration-300">
+        </div>
+        <div class="p-4 flex flex-col flex-grow justify-between">
+          <h3 class="font-bold text-sm text-white mb-1">Apel Siaga Pasukan</h3>
+          <p class="text-xs text-gray-400">Pemeriksaan kesiapan personel dan kelengkapan unit.</p>
+        </div>
+      </div>
+
+      <div class="bg-gray-800 rounded-xl overflow-hidden border-2 border-gray-700 shadow-xl flex flex-col">
+        <div class="h-48 overflow-hidden bg-gray-900">
+          <img src="images/Screenshot 2026-08-01 201619.webp" alt="Kegiatan 4" class="w-full h-full object-cover hover:scale-110 transition duration-300">
+        </div>
+        <div class="p-4 flex flex-col flex-grow justify-between">
+          <h3 class="font-bold text-sm text-white mb-1">Penyelamatan Sandra</h3>
+          <p class="text-xs text-gray-400">Penyelamatan Sandra Yang Dilakukan Oleh Tim SRT.</p>
+        </div>
+      </div>
+
+      <div class="bg-gray-800 rounded-xl overflow-hidden border-2 border-gray-700 shadow-xl flex flex-col">
+        <div class="h-48 overflow-hidden bg-gray-900">
+          <img src="images/7bf0f29c2af20ab1c0cc36850cbd958b.webp" alt="Kegiatan 5" class="w-full h-full object-cover hover:scale-110 transition duration-300">
+        </div>
+        <div class="p-4 flex flex-col flex-grow justify-between">
+          <h3 class="font-bold text-sm text-white mb-1">Apel Satuan Kapal Selam</h3>
+          <p class="text-xs text-gray-400">Apel Serta Pengecekan Ke Aktifan Personil Kapal Selam.</p>
+        </div>
+      </div>
+
+      <div class="bg-gray-800 rounded-xl overflow-hidden border-2 border-gray-700 shadow-xl flex flex-col">
+        <div class="h-48 overflow-hidden bg-gray-900">
+          <img src="images/RobloxScreenShot20260718_202634892.webp" alt="Kegiatan 6" class="w-full h-full object-cover hover:scale-110 transition duration-300">
+        </div>
+        <div class="p-4 flex flex-col flex-grow justify-between">
+          <h3 class="font-bold text-sm text-white mb-1">Fun Event</h3>
+          <p class="text-xs text-gray-400">Fun Event Sering Dilakukan Agar Anggota Tidak Bosan.</p>
+        </div>
+      </div>
+
+      <div class="bg-gray-800 rounded-xl overflow-hidden border-2 border-gray-700 shadow-xl flex flex-col">
+        <div class="h-48 overflow-hidden bg-gray-900">
+          <img src="images/Screenshot_20260806-001242.webp" alt="Kegiatan 7" class="w-full h-full object-cover hover:scale-110 transition duration-300">
+        </div>
+        <div class="p-4 flex flex-col flex-grow justify-between">
+          <h3 class="font-bold text-sm text-white mb-1">Pelatihan Sekad (Sekolah Kadet)</h3>
+          <p class="text-xs text-gray-400">Tugas Pelatihan Sekad Di ambil Alih Oleh Kolat (Komando Latihan).</p>
+        </div>
+      </div>
+
+      <div class="bg-gray-800 rounded-xl overflow-hidden border-2 border-gray-700 shadow-xl flex flex-col">
+        <div class="h-48 overflow-hidden bg-gray-900">
+          <img src="images/image-24.webp" alt="Kegiatan 8" class="w-full h-full object-cover hover:scale-110 transition duration-300">
+        </div>
+        <div class="p-4 flex flex-col flex-grow justify-between">
+          <h3 class="font-bold text-sm text-white mb-1">Inspeksi Bulanan</h3>
+          <p class="text-xs text-gray-400">Inspeksi Yang Rutin Di selenggarakan Setiap Bulan.</p>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="bg-utama text-white py-4 px-6 text-xs font-bold flex justify-between items-center border-t-4 border-black z-20 relative">
+    <div>© 2026 KOARMADA — Portal Pendaftaran</div>
+    <a href="index.html" class="hover:text-gray-300 underline">Kembali ke Beranda →</a>
+  </footer>
+
+</body>
+</html>
+

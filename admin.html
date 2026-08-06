@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel - Portal KOARMADA</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --warna-utama: #00509E;
+      --warna-bg-gelap: #121824;
+    }
+    body { font-family: 'Poppins', sans-serif; background-color: var(--warna-bg-gelap); }
+    .bg-utama { background-color: var(--warna-utama); }
+  </style>
+</head>
+<body class="text-white min-h-screen pb-12">
+
+  <div id="toast-container" class="fixed top-5 right-5 z-50 flex flex-col gap-3 max-w-xs w-full pointer-events-none"></div>
+
+  <div id="loginOverlay" class="fixed inset-0 bg-black/95 flex items-center justify-center p-4 z-50">
+    <div class="bg-gray-900 border-2 border-utama rounded-2xl p-6 w-full max-w-sm text-center shadow-2xl">
+      <div class="w-12 h-12 bg-blue-600/20 border border-blue-500 rounded-full flex items-center justify-center mx-auto mb-3">
+        <span class="text-2xl">🔒</span>
+      </div>
+      <h2 class="text-xl font-black text-white mb-1">AKSES ADMIN</h2>
+      <p class="text-xs text-gray-400 mb-6">Masukkan password admin untuk mengakses panel kontrol KOARMADA.</p>
+
+      <form id="formLoginAdmin" class="space-y-4">
+        <div>
+          <input type="password" id="inputPassAdmin" required placeholder="Masukkan Password Admin" class="w-full bg-gray-800 border border-gray-700 rounded-lg p-3 text-xs text-center text-white focus:outline-none focus:border-utama">
+        </div>
+        <button type="submit" class="w-full bg-utama hover:opacity-80 text-white font-bold py-2.5 rounded-lg text-xs transition">
+          Masuk Panel
+        </button>
+      </form>
+      <a href="index.html" onclick="logoutAdmin()" class="block text-[11px] text-gray-500 hover:text-gray-300 mt-4 underline">← Kembali ke Halaman Utama</a>
+    </div>
+  </div>
+
+  <div id="adminContent" class="hidden">
+    <nav class="bg-utama text-white px-6 py-4 flex justify-between items-center shadow-lg mb-8">
+      <div class="flex items-center space-x-3">
+        <img src="images/Logo.svg.webp" alt="Logo" class="w-8 h-8 object-contain bg-white rounded-full p-0.5">
+        <span class="font-black tracking-wider text-sm sm:text-base">PANEL ADMIN KOARMADA</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="index.html" onclick="logoutAdmin()" class="text-xs bg-red-600/80 hover:bg-red-600 px-4 py-2 rounded-lg font-bold transition flex items-center gap-1">
+          <span>🚪</span> Logout & Keluar
+        </a>
+      </div>
+    </nav>
+
+    <main class="max-w-6xl mx-auto px-4 space-y-8">
+
+      <section class="bg-gray-900 border border-gray-800 rounded-2xl p-6 shadow-xl">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-2">
+          <div>
+            <h2 class="text-xl font-black text-yellow-400">⚙️ Kontrol Unit & Deadline</h2>
+            <p class="text-xs text-gray-400">Atur status pendaftaran (Buka/Tutup) dan countdown timer untuk setiap unit.</p>
+          </div>
+          <button onclick="simpanPengaturanUnit()" id="btnSimpanSettings" class="bg-green-600 hover:bg-green-500 text-white font-bold text-xs px-5 py-2.5 rounded-lg transition shadow-lg">
+            💾 Simpan Semua Pengaturan
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div class="bg-gray-800/80 border border-gray-700 rounded-xl p-4 flex flex-col justify-between">
+            <div>
+              <div class="flex justify-between items-center mb-3">
+                <span class="font-black text-sm text-white">Unit Staff</span>
+                <select id="status-staff" class="bg-gray-900 border border-gray-600 rounded text-xs p-1 text-white font-bold focus:outline-none">
+                  <option value="buka">BUKA</option>
+                  <option value="tutup">TUTUP</option>
+                </select>
+              </div>
+              <label class="block text-[11px] text-gray-400 mb-1 font-bold">Deadline Unit:</label>
+              <input type="datetime-local" id="deadline-staff" class="w-full bg-gray-900 border border-gray-700 rounded p-2 text-xs text-white focus:outline-none focus:border-utama">
+            </div>
+            <button type="button" onclick="resetDeadline('staff')" class="mt-3 text-[10px] text-red-400 hover:underline text-right font-medium">Hapus Deadline</button>
+          </div>
+
+          <div class="bg-gray-800/80 border border-gray-700 rounded-xl p-4 flex flex-col justify-between">
+            <div>
+              <div class="flex justify-between items-center mb-3">
+                <span class="font-black text-sm text-white">Unit Provost</span>
+                <select id="status-provost" class="bg-gray-900 border border-gray-600 rounded text-xs p-1 text-white font-bold focus:outline-none">
+                  <option value="buka">BUKA</option>
+                  <option value="tutup">TUTUP</option>
+                </select>
+              </div>
+              <label class="block text-[11px] text-gray-400 mb-1 font-bold">Deadline Unit:</label>
+              <input type="datetime-local" id="deadline-provost" class="w-full bg-gray-900 border border-gray-700 rounded p-2 text-xs text-white focus:outline-none focus:border-utama">
+            </div>
+            <button type="button" onclick="resetDeadline('provost')" class="mt-3 text-[10px] text-red-400 hover:underline text-right font-medium">Hapus Deadline</button>
+          </div>
+
+          <div class="bg-gray-800/80 border border-gray-700 rounded-xl p-4 flex flex-col justify-between">
+            <div>
+              <div class="flex justify-between items-center mb-3">
+                <span class="font-black text-sm text-white">Unit SRT</span>
+                <select id="status-srt" class="bg-gray-900 border border-gray-600 rounded text-xs p-1 text-white font-bold focus:outline-none">
+                  <option value="buka">BUKA</option>
+                  <option value="tutup">TUTUP</option>
+                </select>
+              </div>
+              <label class="block text-[11px] text-gray-400 mb-1 font-bold">Deadline Unit:</label>
+              <input type="datetime-local" id="deadline-srt" class="w-full bg-gray-900 border border-gray-700 rounded p-2 text-xs text-white focus:outline-none focus:border-utama">
+            </div>
+            <button type="button" onclick="resetDeadline('srt')" class="mt-3 text-[10px] text-red-400 hover:underline text-right font-medium">Hapus Deadline</button>
+          </div>
+
+          <div class="bg-gray-800/80 border border-gray-700 rounded-xl p-4 flex flex-col justify-between">
+            <div>
+              <div class="flex justify-between items-center mb-3">
+                <span class="font-black text-sm text-white">Sekolah Kadet (Sekad)</span>
+                <select id="status-sekad" class="bg-gray-900 border border-gray-600 rounded text-xs p-1 text-white font-bold focus:outline-none">
+                  <option value="buka">BUKA</option>
+                  <option value="tutup">TUTUP</option>
+                </select>
+              </div>
+              <label class="block text-[11px] text-gray-400 mb-1 font-bold">Deadline Unit:</label>
+              <input type="datetime-local" id="deadline-sekad" class="w-full bg-gray-900 border border-gray-700 rounded p-2 text-xs text-white focus:outline-none focus:border-utama">
+            </div>
+            <button type="button" onclick="resetDeadline('sekad')" class="mt-3 text-[10px] text-red-400 hover:underline text-right font-medium">Hapus Deadline</button>
+          </div>
+
+          <div class="bg-gray-800/80 border border-gray-700 rounded-xl p-4 flex flex-col justify-between">
+            <div>
+              <div class="flex justify-between items-center mb-3">
+                <span class="font-black text-sm text-white">Sekolah Kapal Selam (Sekasel)</span>
+                <select id="status-sekasel" class="bg-gray-900 border border-gray-600 rounded text-xs p-1 text-white font-bold focus:outline-none">
+                  <option value="buka">BUKA</option>
+                  <option value="tutup">TUTUP</option>
+                </select>
+              </div>
+              <label class="block text-[11px] text-gray-400 mb-1 font-bold">Deadline Unit:</label>
+              <input type="datetime-local" id="deadline-sekasel" class="w-full bg-gray-900 border border-gray-700 rounded p-2 text-xs text-white focus:outline-none focus:border-utama">
+            </div>
+            <button type="button" onclick="resetDeadline('sekasel')" class="mt-3 text-[10px] text-red-400 hover:underline text-right font-medium">Hapus Deadline</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="bg-gray-900 border border-gray-800 rounded-2xl p-6 shadow-xl">
+        <h2 class="text-xl font-black text-yellow-400 mb-1">📢 Input Kelulusan Seleksi</h2>
+        <p class="text-xs text-gray-400 mb-5">Masukkan username Discord pendaftar yang dinyatakan lulus agar statusnya bisa dicheck publik.</p>
+
+        <form id="formKelulusan" class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+          <div>
+            <label class="block text-xs font-bold mb-1">Username Discord Pendaftar:</label>
+            <input type="text" id="inputLulusNama" required placeholder="Contoh: koarmada_user" class="w-full bg-gray-800 border border-gray-700 rounded-lg p-2.5 text-xs text-white focus:outline-none focus:border-utama">
+          </div>
+          <div>
+            <label class="block text-xs font-bold mb-1">Unit Penempatan:</label>
+            <select id="inputLulusUnit" class="w-full bg-gray-800 border border-gray-700 rounded-lg p-2.5 text-xs text-white focus:outline-none focus:border-utama">
+              <option value="Unit Staff">Unit Staff</option>
+              <option value="Unit Provost">Unit Provost</option>
+              <option value="Unit SRT">Unit SRT</option>
+              <option value="Sekolah Kadet (Sekad)">Sekolah Kadet (Sekad)</option>
+              <option value="Sekolah Kapal Selam (Sekasel)">Sekolah Kapal Selam (Sekasel)</option>
+            </select>
+          </div>
+          <div class="flex items-end">
+            <button type="submit" id="btnTambahLulus" class="w-full bg-utama hover:opacity-80 text-white font-bold py-2.5 rounded-lg text-xs transition">
+              + Tambah ke Daftar Kelulusan
+            </button>
+          </div>
+        </form>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs text-gray-300">
+            <thead class="bg-gray-800 text-yellow-400 uppercase font-bold text-[10px] tracking-wider">
+              <tr>
+                <th class="p-3">Username Discord</th>
+                <th class="p-3">Penempatan Unit</th>
+                <th class="p-3 text-center">Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="tabelKelulusan" class="divide-y divide-gray-800">
+              <tr><td colspan="3" class="p-4 text-center text-gray-500 italic">Memuat data kelulusan...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="bg-gray-900 border border-gray-800 rounded-2xl p-6 shadow-xl">
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-xl font-black text-yellow-400">📥 Data Pendaftar Masuk</h2>
+          <button onclick="loadPendaftarMasuk()" class="text-xs bg-gray-800 hover:bg-gray-700 text-gray-300 px-3 py-1.5 rounded-lg border border-gray-700">🔄 Refresh</button>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs text-gray-300">
+            <thead class="bg-gray-800 text-yellow-400 uppercase font-bold text-[10px] tracking-wider">
+              <tr>
+                <th class="p-3">Tgl / Waktu</th>
+                <th class="p-3">Username Discord</th>
+                <th class="p-3">Unit</th>
+                <th class="p-3">Link Roblox</th>
+                <th class="p-3">Alasan</th>
+                <th class="p-3 text-center">Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="tabelPendaftar" class="divide-y divide-gray-800">
+              <tr><td colspan="6" class="p-4 text-center text-gray-500 italic">Memuat data pendaftar...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
+    import { 
+      getFirestore, 
+      doc, 
+      getDoc, 
+      setDoc,
+      collection, 
+      addDoc, 
+      getDocs,
+      deleteDoc,
+      query,
+      orderBy 
+    } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
+
+    let app, db;
+    try {
+      const resConfig = await fetch('/api/get-config');
+      const firebaseConfig = await resConfig.json();
+      app = initializeApp(firebaseConfig);
+      db = getFirestore(app);
+    } catch (e) {
+      console.error("Gagal memuat konfigurasi Firebase dari API", e);
+    }
+
+    const units = ['staff', 'provost', 'srt', 'sekad', 'sekasel'];
+
+    // FUNGSI LOGOUT OTOMATIS SAAT TINGGALKAN HALAMAN
+    window.logoutAdmin = () => {
+      sessionStorage.removeItem("adminLoggedIn");
+    };
+
+    // OTOMATIS LOGOUT JIKA HALAMAN DITUTUP / DIPINDAHKAN / DIREFRESH
+    window.addEventListener("pagehide", () => {
+      sessionStorage.removeItem("adminLoggedIn");
+    });
+    window.addEventListener("beforeunload", () => {
+      sessionStorage.removeItem("adminLoggedIn");
+    });
+
+    const formLogin = document.getElementById('formLoginAdmin');
+    const loginOverlay = document.getElementById('loginOverlay');
+    const adminContent = document.getElementById('adminContent');
+
+    formLogin.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const inputPass = document.getElementById('inputPassAdmin').value;
+
+      try {
+        const res = await fetch('/api/login-admin', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ password: inputPass })
+        });
+        const result = await res.json();
+
+        if (res.ok && result.success) {
+          sessionStorage.setItem("adminLoggedIn", "true");
+          loginOverlay.classList.add('hidden');
+          adminContent.classList.remove('hidden');
+          showToast("Login Admin berhasil!", "success");
+          initAdminPanel();
+        } else {
+          showToast(result.message || "Password Admin Salah!", "error");
+        }
+      } catch (err) {
+        showToast("Terjadi kesalahan saat verifikasi login.", "error");
+      }
+    });
+
+    // TOAST NOTIFICATION
+    window.showToast = (message, type = 'success') => {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      const isSuccess = type === 'success';
+      const bgColor = isSuccess ? 'bg-gray-800/95 border-green-500/80 text-green-400' : 'bg-gray-800/95 border-red-500/80 text-red-400';
+      const icon = isSuccess ? '✅' : '❌';
+
+      toast.className = `${bgColor} border-2 text-xs font-bold p-4 rounded-xl shadow-2xl backdrop-blur-md pointer-events-auto flex items-center gap-3 transform translate-x-full transition-all duration-300 opacity-0`;
+      toast.innerHTML = `<span class="text-base">${icon}</span><span class="text-white">${message}</span>`;
+
+      container.appendChild(toast);
+
+      setTimeout(() => toast.classList.remove('translate-x-full', 'opacity-0'), 50);
+      setTimeout(() => {
+        toast.classList.add('translate-x-full', 'opacity-0');
+        setTimeout(() => toast.remove(), 300);
+      }, 3500);
+    };
+
+    // RESET DEADLINE
+    window.resetDeadline = (unitKey) => {
+      document.getElementById(`deadline-${unitKey}`).value = "";
+      showToast(`Deadline ${unitKey.toUpperCase()} direset. Klik 'Simpan Semua Pengaturan'.`);
+    };
+
+    // LOAD PENGATURAN STATUS & DEADLINE
+    async function loadPengaturan() {
+      try {
+        const docRef = doc(db, "settings", "pendaftaran");
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+
+          units.forEach(u => {
+            const statusElem = document.getElementById(`status-${u}`);
+            if (statusElem && data[`btn-${u}`]) statusElem.value = data[`btn-${u}`];
+
+            const deadlineElem = document.getElementById(`deadline-${u}`);
+            const valDeadline = data[`deadline_${u}`] || data[`deadline-${u}`];
+            if (deadlineElem && valDeadline) deadlineElem.value = valDeadline;
+          });
+        }
+      } catch (err) {
+        console.error("Gagal memuat pengaturan:", err);
+      }
+    }
+
+    // SIMPAN PENGATURAN
+    window.simpanPengaturanUnit = async () => {
+      const btnSimpan = document.getElementById('btnSimpanSettings');
+      btnSimpan.innerText = "Saving...";
+      btnSimpan.disabled = true;
+
+      try {
+        const payload = {};
+        units.forEach(u => {
+          payload[`btn-${u}`] = document.getElementById(`status-${u}`).value;
+          payload[`deadline_${u}`] = document.getElementById(`deadline-${u}`).value || "";
+        });
+
+        await setDoc(doc(db, "settings", "pendaftaran"), payload, { merge: true });
+        showToast("Pengaturan unit & deadline berhasil disimpan!", "success");
+      } catch (err) {
+        showToast("Gagal menyimpan pengaturan.", "error");
+      } finally {
+        btnSimpan.innerText = "💾 Simpan Semua Pengaturan";
+        btnSimpan.disabled = false;
+      }
+    };
+
+    // KELULUSAN
+    const formKelulusan = document.getElementById('formKelulusan');
+    formKelulusan.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const nama = document.getElementById('inputLulusNama').value.trim();
+      const unit = document.getElementById('inputLulusUnit').value;
+      const btn = document.getElementById('btnTambahLulus');
+
+      btn.innerText = "Menambahkan...";
+      btn.disabled = true;
+
+      try {
+        await addDoc(collection(db, "kelulusan"), { nama, unit, waktu: new Date() });
+        showToast(`Berhasil menambahkan ${nama} ke daftar lulus!`, "success");
+        formKelulusan.reset();
+        loadDaftarKelulusan();
+      } catch (err) {
+        showToast("Gagal menambahkan kelulusan.", "error");
+      } finally {
+        btn.innerText = "+ Tambah ke Daftar Kelulusan";
+        btn.disabled = false;
+      }
+    });
+
+    async function loadDaftarKelulusan() {
+      const tbody = document.getElementById('tabelKelulusan');
+      try {
+        const querySnapshot = await getDocs(collection(db, "kelulusan"));
+        if (querySnapshot.empty) {
+          tbody.innerHTML = `<tr><td colspan="3" class="p-4 text-center text-gray-500 italic">Belum ada data kelulusan.</td></tr>`;
+          return;
+        }
+
+        let html = "";
+        querySnapshot.forEach((docSnap) => {
+          const data = docSnap.data();
+          html += `
+            <tr class="hover:bg-gray-800/50">
+              <td class="p-3 font-bold text-white">${data.nama}</td>
+              <td class="p-3 text-yellow-400 font-medium">${data.unit}</td>
+              <td class="p-3 text-center">
+                <button onclick="hapusKelulusan('${docSnap.id}')" class="bg-red-600/20 border border-red-500/40 hover:bg-red-600 text-red-400 hover:text-white px-2.5 py-1 rounded text-[10px] transition">Hapus</button>
+              </td>
+            </tr>
+          `;
+        });
+        tbody.innerHTML = html;
+      } catch (err) {
+        tbody.innerHTML = `<tr><td colspan="3" class="p-4 text-center text-red-400 italic">Gagal memuat data.</td></tr>`;
+      }
+    }
+
+    window.hapusKelulusan = async (id) => {
+      if (confirm("Yakin ingin menghapus data kelulusan ini?")) {
+        try {
+          await deleteDoc(doc(db, "kelulusan", id));
+          showToast("Data kelulusan dihapus.", "success");
+          loadDaftarKelulusan();
+        } catch (err) {
+          showToast("Gagal menghapus data.", "error");
+        }
+      }
+    };
+
+    // LOAD PENDAFTAR MASUK + HAPUS PENDAFTAR
+    window.loadPendaftarMasuk = async () => {
+      const tbody = document.getElementById('tabelPendaftar');
+      tbody.innerHTML = `<tr><td colspan="6" class="p-4 text-center text-gray-500 italic">Memuat data pendaftar...</td></tr>`;
+
+      try {
+        const q = query(collection(db, "pendaftar_masuk"), orderBy("waktu", "desc"));
+        const querySnapshot = await getDocs(q);
+
+        if (querySnapshot.empty) {
+          tbody.innerHTML = `<tr><td colspan="6" class="p-4 text-center text-gray-500 italic">Belum ada pendaftar masuk.</td></tr>`;
+          return;
+        }
+
+        let html = "";
+        querySnapshot.forEach((docSnap) => {
+          const data = docSnap.data();
+          const tgl = data.waktu ? new Date(data.waktu.seconds * 1000).toLocaleString('id-ID') : '-';
+
+          html += `
+            <tr class="hover:bg-gray-800/50">
+              <td class="p-3 text-gray-400 text-[10px] whitespace-nowrap">${tgl}</td>
+              <td class="p-3 font-bold text-white">${data.nama}</td>
+              <td class="p-3 text-yellow-400 font-medium">${data.unit}</td>
+              <td class="p-3"><a href="${data.roblox}" target="_blank" class="text-blue-400 underline hover:text-blue-300 truncate block max-w-[150px]">${data.roblox}</a></td>
+              <td class="p-3 text-gray-300 max-w-xs break-words">${data.alasan}</td>
+              <td class="p-3 text-center">
+                <button onclick="hapusPendaftar('${docSnap.id}')" class="bg-red-600/20 border border-red-500/40 hover:bg-red-600 text-red-400 hover:text-white px-2.5 py-1 rounded text-[10px] transition">Hapus</button>
+              </td>
+            </tr>
+          `;
+        });
+        tbody.innerHTML = html;
+      } catch (err) {
+        tbody.innerHTML = `<tr><td colspan="6" class="p-4 text-center text-red-400 italic">Gagal memuat pendaftar.</td></tr>`;
+      }
+    };
+
+    window.hapusPendaftar = async (id) => {
+      if (confirm("Yakin ingin menghapus data pendaftar ini?")) {
+        try {
+          await deleteDoc(doc(db, "pendaftar_masuk", id));
+          showToast("Data pendaftar berhasil dihapus!", "success");
+          loadPendaftarMasuk();
+        } catch (err) {
+          showToast("Gagal menghapus pendaftar.", "error");
+        }
+      }
+    };
+
+    function initAdminPanel() {
+      loadPengaturan();
+      loadDaftarKelulusan();
+      loadPendaftarMasuk();
+    }
+  </script>
+
+</body>
+</html>
