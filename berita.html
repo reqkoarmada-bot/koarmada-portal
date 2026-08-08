@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Arsip Berita - Koarmada RI</title>
+  <title>Panel Admin - Koarmada RI</title>
   
   <script src="https://cdn.tailwindcss.com"></script>
   
@@ -14,12 +14,6 @@
   <style>
     body { font-family: 'Inter', sans-serif; }
     .font-resmi { font-family: 'Playfair Display', serif; }
-    
-    /* Custom Scrollbar */
-    ::-webkit-scrollbar { width: 8px; }
-    ::-webkit-scrollbar-track { background: #f1f5f9; }
-    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
   </style>
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased flex flex-col min-h-screen">
@@ -35,106 +29,100 @@
           <p class="text-red-600 text-xs md:text-sm font-semibold tracking-widest uppercase">"Ekapada Banda Jala Nusa"</p>
         </div>
       </div>
+      <div id="btnKeluarWrapper" class="hidden">
+        <button onclick="logoutAdmin()" class="bg-red-600 hover:bg-red-700 text-white text-xs font-semibold px-4 py-2 rounded-lg transition shadow">
+          Keluar Admin
+        </button>
+      </div>
     </div>
   </div>
 
-  <nav class="bg-blue-900 sticky top-0 z-40 shadow-md">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <ul class="flex flex-wrap justify-center md:justify-start gap-8 text-sm font-semibold text-white/90">
-        
-        <li><a href="index.html" class="block py-4 hover:text-white transition-colors border-b-2 border-transparent hover:border-amber-400">BERANDA</a></li>
-        
-        <li class="relative group">
-          <a href="#" class="flex items-center gap-1 py-4 hover:text-white transition-colors border-b-2 border-transparent hover:border-amber-400 cursor-pointer">
-            PROFIL 
-            <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-          </a>
-          <div class="absolute left-0 top-full hidden group-hover:block w-48 bg-white text-slate-800 shadow-xl rounded-b-lg overflow-hidden border-t-4 border-amber-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <ul class="flex flex-col text-sm font-medium">
-              <li><a href="sejarah.html" class="block px-4 py-3 hover:bg-slate-50 hover:text-blue-700 transition border-b border-slate-100">Sejarah Koarmada</a></li>
-              <li><a href="visi.html" class="block px-4 py-3 hover:bg-slate-50 hover:text-blue-700 transition border-b border-slate-100">Visi & Misi</a></li>
-              <li><a href="struktur.html" class="block px-4 py-3 hover:bg-slate-50 hover:text-blue-700 transition">Struktur Organisasi</a></li>
-            </ul>
-          </div>
-        </li>
+  <main class="flex-grow max-w-4xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-10">
 
-        <li><a href="berita.html" class="block py-4 text-amber-400 border-b-2 border-amber-400">BERITA</a></li>
-        
-        <li><a href="pengumuman.html" class="block py-4 hover:text-white transition-colors border-b-2 border-transparent hover:border-amber-400">PENGUMUMAN</a></li>
+    <div id="secLogin" class="max-w-md mx-auto bg-white p-8 rounded-2xl border border-slate-200 shadow-xl space-y-6">
+      <div class="text-center space-y-2">
+        <div class="text-4xl">🔐</div>
+        <h2 class="font-resmi text-2xl font-bold text-slate-900">Login Panel Humas</h2>
+        <p class="text-xs text-slate-500">Masukkan kata sandi untuk mengelola berita portal.</p>
+      </div>
 
-        <li class="relative group">
-          <a href="#" class="flex items-center gap-1 py-4 hover:text-white transition-colors border-b-2 border-transparent hover:border-amber-400 cursor-pointer">
-            GALERI 
-            <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-          </a>
-          <div class="absolute left-0 top-full hidden group-hover:block w-40 bg-white text-slate-800 shadow-xl rounded-b-lg overflow-hidden border-t-4 border-amber-400">
-            <ul class="flex flex-col text-sm font-medium">
-              <li><a href="#" class="block px-4 py-3 hover:bg-slate-50 hover:text-blue-700 transition border-b border-slate-100">Galeri Foto</a></li>
-              <li><a href="#" class="block px-4 py-3 hover:bg-slate-50 hover:text-blue-700 transition">Galeri Video</a></li>
-            </ul>
-          </div>
-        </li>
-
-        <li><a href="pendaftaran.html" class="block py-4 hover:text-white transition-colors border-b-2 border-transparent hover:border-amber-400">REKRUTMEN</a></li>
-      </ul>
-    </div>
-  </nav>
-
-  <main class="flex-grow max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 space-y-8">
-    
-    <div class="flex items-center justify-between border-b-2 border-slate-200 pb-3">
-      <h2 class="font-resmi text-2xl md:text-3xl font-bold text-slate-900 border-b-4 border-blue-800 -mb-[19px] pb-3 px-2 flex items-center gap-2">
-        <span>📰</span> Arsip Berita Terkini
-      </h2>
+      <form onsubmit="prosesLogin(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Password Admin</label>
+          <input type="password" id="inputPassword" required placeholder="Masukkan password..." 
+                 class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-800 text-sm">
+        </div>
+        <p id="loginError" class="text-xs text-red-600 hidden font-semibold">Password salah, coba lagi!</p>
+        <button type="submit" class="w-full py-3 bg-blue-900 hover:bg-blue-800 text-amber-400 font-bold text-sm rounded-xl transition shadow-md">
+          MASUK PANEL
+        </button>
+      </form>
     </div>
 
-    <div id="gridBerita" class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      <p class="text-sm text-slate-500 col-span-full text-center py-12">Memuat berita...</p>
+    <div id="secDashboard" class="hidden space-y-10">
+      
+      <div class="bg-white p-6 md:p-8 rounded-2xl border border-slate-200 shadow-md space-y-6">
+        <div class="border-b border-slate-100 pb-4 flex items-center justify-between">
+          <h2 class="font-resmi text-2xl font-bold text-slate-900 flex items-center gap-2">
+            <span>📝</span> Tambah Berita Baru
+          </h2>
+          <span class="text-xs font-semibold bg-blue-100 text-blue-800 px-3 py-1 rounded-full">Database Firebase</span>
+        </div>
+
+        <form id="formTambahBerita" class="space-y-4">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Judul Berita</label>
+            <input type="text" id="judul" required placeholder="Contoh: UPACARA PELANTIKAN SISWA..." 
+                   class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-800 text-sm">
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Tanggal Berita</label>
+              <input type="text" id="tanggal" required placeholder="Contoh: 08 AGU 2026" 
+                     class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-800 text-sm">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">URL Foto / Video (.mp4)</label>
+              <input type="url" id="mediaUrl" required placeholder="https://domain.com/gambar.png atau .mp4" 
+                     class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-800 text-sm">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Isi Berita / Deskripsi</label>
+            <textarea id="deskripsi" rows="5" required placeholder="Tuliskan detail berita selengkapnya..." 
+                      class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-800 text-sm"></textarea>
+          </div>
+
+          <button type="submit" id="btnSubmit" class="w-full py-3 bg-blue-900 hover:bg-blue-800 text-amber-400 font-bold text-sm rounded-xl transition shadow-md">
+            PUBLIKASIKAN BERITA
+          </button>
+        </form>
+      </div>
+
+      <div class="bg-white p-6 md:p-8 rounded-2xl border border-slate-200 shadow-md space-y-6">
+        <h2 class="font-resmi text-xl font-bold text-slate-900 border-b border-slate-100 pb-3">
+          Daftar Berita Terpublikasi
+        </h2>
+        <div id="listKelolaBerita" class="space-y-4">
+          <p class="text-xs text-slate-500">Memuat daftar berita...</p>
+        </div>
+      </div>
+
     </div>
 
   </main>
 
-  <div id="modalDetailBerita" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
-    <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative flex flex-col border border-slate-200">
-      
-      <button onclick="tutupModalBerita()" class="absolute top-3 right-3 bg-slate-100 hover:bg-red-600 hover:text-white text-slate-600 w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold transition z-10 shadow">
-        ✕
-      </button>
-
-      <div id="modalMedia" class="w-full bg-slate-900 flex items-center justify-center overflow-hidden rounded-t-2xl max-h-80">
-      </div>
-
-      <div class="p-6 space-y-3">
-        <div id="modalTanggal" class="text-xs text-amber-600 font-bold"></div>
-        <h3 id="modalJudul" class="font-resmi text-2xl font-bold text-slate-900 leading-snug"></h3>
-        <hr class="border-slate-100">
-        <p id="modalDeskripsi" class="text-sm text-slate-600 leading-relaxed whitespace-pre-line"></p>
-      </div>
-
-      <div class="p-4 bg-slate-50 border-t border-slate-100 text-right rounded-b-2xl">
-        <button onclick="tutupModalBerita()" class="px-5 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs font-semibold rounded-lg transition">
-          Tutup
-        </button>
-      </div>
-
-    </div>
-  </div>
-
-  <footer class="bg-slate-900 text-slate-400 py-10 mt-auto border-t-4 border-blue-900">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
-      <div class="flex justify-center gap-6 mb-6">
-        <div class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center border border-slate-700 hover:bg-slate-700 transition cursor-pointer">⚓</div>
-        <div class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center border border-slate-700 hover:bg-slate-700 transition cursor-pointer">🛡️</div>
-        <div class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center border border-slate-700 hover:bg-slate-700 transition cursor-pointer">🦅</div>
-      </div>
-      <p class="text-sm font-semibold text-slate-300">Copyright &copy; 2026 Komando Armada RI RBX</p>
-      <p class="text-xs mt-2">Designed By Humas Koarmada RI RBX</p>
+  <footer class="bg-slate-900 text-slate-400 py-6 mt-auto border-t-4 border-blue-900">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <p class="text-xs font-semibold text-slate-300">Copyright &copy; 2026 Komando Armada RI RBX</p>
     </div>
   </footer>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
-    import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
+    import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyAMYa0AF2_aH8N93fR22YIa9Kg0AGjKrLI",
@@ -148,101 +136,110 @@
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
-    // Penampung data berita agar karakter khusus/kutipan tidak merusak HTML
-    window.dataBeritaMap = {};
+    // KATA SANDI ADMIN DEFAULT (Bisa diganti)
+    const PASSWORD_ADMIN = "koarmada2026";
 
-    async function loadSemuaBerita() {
-      const grid = document.getElementById('gridBerita');
+    window.prosesLogin = function(e) {
+      e.preventDefault();
+      const pwd = document.getElementById('inputPassword').value;
+      if (pwd === PASSWORD_ADMIN) {
+        localStorage.setItem('isAdminLoggedIn', 'true');
+        tampilkanDashboard();
+      } else {
+        document.getElementById('loginError').classList.remove('hidden');
+      }
+    };
+
+    window.logoutAdmin = function() {
+      localStorage.removeItem('isAdminLoggedIn');
+      location.reload();
+    };
+
+    function tampilkanDashboard() {
+      document.getElementById('secLogin').classList.add('hidden');
+      document.getElementById('secDashboard').classList.remove('hidden');
+      document.getElementById('btnKeluarWrapper').classList.remove('hidden');
+      loadDaftarBeritaAdmin();
+    }
+
+    // Cek Sesi Login
+    if (localStorage.getItem('isAdminLoggedIn') === 'true') {
+      tampilkanDashboard();
+    }
+
+    // TAMBAH BERITA KE FIREBASE
+    document.getElementById('formTambahBerita').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = document.getElementById('btnSubmit');
+      btn.innerText = "MEMPROSES...";
+      btn.disabled = true;
+
+      try {
+        await addDoc(collection(db, "berita"), {
+          judul: document.getElementById('judul').value,
+          tanggal: document.getElementById('tanggal').value,
+          mediaUrl: document.getElementById('mediaUrl').value,
+          deskripsi: document.getElementById('deskripsi').value,
+          waktu: serverTimestamp()
+        });
+
+        alert("Berita berhasil dipublikasikan!");
+        document.getElementById('formTambahBerita').reset();
+        loadDaftarBeritaAdmin();
+      } catch (err) {
+        alert("Gagal menambahkan berita: " + err.message);
+      } finally {
+        btn.innerText = "PUBLIKASIKAN BERITA";
+        btn.disabled = false;
+      }
+    });
+
+    // LOAD DAFTAR BERITA UNTUK DIHAPUS
+    async function loadDaftarBeritaAdmin() {
+      const container = document.getElementById('listKelolaBerita');
       try {
         const q = query(collection(db, "berita"), orderBy("waktu", "desc"));
         const snapshot = await getDocs(q);
 
         if (snapshot.empty) {
-          grid.innerHTML = `<p class="text-sm text-slate-500 col-span-full text-center py-12">Belum ada berita dipublikasikan.</p>`;
+          container.innerHTML = `<p class="text-xs text-slate-500 italic">Belum ada berita di database.</p>`;
           return;
         }
 
-        grid.innerHTML = "";
+        container.innerHTML = "";
         snapshot.forEach((docSnap) => {
           const item = docSnap.data();
           const docId = docSnap.id;
-          
-          // Simpan objek ke map global
-          window.dataBeritaMap[docId] = item;
 
-          // Cek apakah media berupa video (.mp4) atau gambar
-          const isVideo = item.mediaUrl && (item.mediaUrl.includes('.mp4') || item.mediaUrl.includes('video'));
-          
-          const mediaElement = isVideo 
-            ? `<video src="${item.mediaUrl}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500"></video>`
-            : `<img src="${item.mediaUrl}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Berita">`;
-
-          grid.innerHTML += `
-            <div onclick="bukaModalBerita('${docId}')" 
-                 class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden group hover:shadow-md transition cursor-pointer flex flex-col">
-              <div class="h-48 bg-slate-200 overflow-hidden relative pointer-events-none">
-                ${mediaElement}
+          container.innerHTML += `
+            <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div>
+                <span class="text-[10px] bg-amber-100 text-amber-800 font-bold px-2 py-0.5 rounded">${item.tanggal || 'TERKINI'}</span>
+                <h4 class="font-bold text-sm text-slate-900 mt-1">${item.judul}</h4>
               </div>
-              <div class="p-5 flex-1 flex flex-col justify-between">
-                <div>
-                  <div class="text-xs text-amber-600 font-bold mb-2">${item.tanggal || 'TERKINI'}</div>
-                  <h4 class="font-bold text-slate-900 mb-3 line-clamp-2 group-hover:text-blue-700 transition">
-                    ${item.judul}
-                  </h4>
-                  <p class="text-sm text-slate-500 line-clamp-3">
-                    ${item.deskripsi}
-                  </p>
-                </div>
-              </div>
+              <button onclick="hapusBerita('${docId}')" class="bg-red-50 hover:bg-red-600 text-red-600 hover:text-white border border-red-200 text-xs font-bold px-4 py-2 rounded-lg transition text-center">
+                Hapus
+              </button>
             </div>
           `;
         });
       } catch (err) {
-        grid.innerHTML = `<p class="text-sm text-red-500 col-span-full text-center py-12">Gagal memuat berita: ${err.message}</p>`;
+        container.innerHTML = `<p class="text-xs text-red-500">Gagal memuat berita: ${err.message}</p>`;
       }
     }
 
-    // Fungsi Buka Pop-up Modal
-    window.bukaModalBerita = function(docId) {
-      const item = window.dataBeritaMap[docId];
-      if (!item) return;
-
-      const modal = document.getElementById('modalDetailBerita');
-      const containerMedia = document.getElementById('modalMedia');
-      
-      const isVideo = item.mediaUrl && (item.mediaUrl.includes('.mp4') || item.mediaUrl.includes('video'));
-
-      if (isVideo) {
-        containerMedia.innerHTML = `<video src="${item.mediaUrl}" class="w-full h-auto max-h-80 object-cover" controls autoplay></video>`;
-      } else {
-        containerMedia.innerHTML = `<img src="${item.mediaUrl}" class="w-full h-auto max-h-80 object-cover" alt="Foto Berita">`;
-      }
-
-      document.getElementById('modalTanggal').innerText = item.tanggal || 'TERKINI';
-      document.getElementById('modalJudul').innerText = item.judul;
-      document.getElementById('modalDeskripsi').innerText = item.deskripsi;
-
-      modal.classList.remove('hidden');
-      modal.classList.add('flex');
-    };
-
-    // Fungsi Tutup Pop-up Modal
-    window.tutupModalBerita = function() {
-      const modal = document.getElementById('modalDetailBerita');
-      document.getElementById('modalMedia').innerHTML = ''; // Hentikan video saat modal ditutup
-      modal.classList.add('hidden');
-      modal.classList.remove('flex');
-    };
-
-    // Klik luar area modal untuk menutup
-    window.onclick = function(e) {
-      const modal = document.getElementById('modalDetailBerita');
-      if (e.target === modal) {
-        window.tutupModalBerita();
+    // HAPUS BERITA
+    window.hapusBerita = async function(docId) {
+      if (confirm("Yakin ingin menghapus berita ini?")) {
+        try {
+          await deleteDoc(doc(db, "berita", docId));
+          alert("Berita berhasil dihapus!");
+          loadDaftarBeritaAdmin();
+        } catch (err) {
+          alert("Gagal menghapus: " + err.message);
+        }
       }
     };
-
-    loadSemuaBerita();
   </script>
 </body>
 </html>
