@@ -145,10 +145,36 @@
       <img src="images/Screenshot 2026-08-01 191627.webp" alt="Background Pengumuman" class="w-full h-full object-cover opacity-20 mix-blend-overlay">
     </div>
     <div class="relative z-10 max-w-xl mx-auto">
-      <h2 class="text-3xl font-black teks-sorot text-center mb-2 tracking-wider">CEK KELULUSAN</h2>
-      <p class="text-gray-400 text-center text-sm mb-8">Masukkan Username Discord kamu untuk melihat status kelulusan seleksi Koarmada.</p>
+      <h2 class="text-3xl font-black teks-sorot text-center mb-2 tracking-wider">PENGUMUMAN KELULUSAN</h2>
+      <p id="sub-judul-kelulusan" class="text-gray-400 text-center text-sm mb-6">Hitung mundur menuju pengumuman hasil seleksi KOARMADA.</p>
       
-      <div class="bg-gray-800/95 backdrop-blur-sm rounded-xl border border-gray-700 p-6 shadow-xl mb-6">
+      <div id="box-countdown-kelulusan" class="bg-gray-800/95 border-2 border-yellow-500/50 rounded-2xl p-6 shadow-2xl mb-6 text-center backdrop-blur-sm">
+        <p class="text-xs text-yellow-400 font-bold mb-4 uppercase tracking-widest flex items-center justify-center gap-2">
+          <span>⏱️</span> WAKTU TERSISA SEBELUM PENGUMUMAN
+        </p>
+        
+        <div class="grid grid-cols-4 gap-2 text-center">
+          <div class="bg-gray-900 border border-gray-700 rounded-xl p-3">
+            <span id="cd-hari" class="block text-2xl font-black text-yellow-400 font-mono">00</span>
+            <span class="text-[10px] text-gray-400 uppercase font-bold">Hari</span>
+          </div>
+          <div class="bg-gray-900 border border-gray-700 rounded-xl p-3">
+            <span id="cd-jam" class="block text-2xl font-black text-yellow-400 font-mono">00</span>
+            <span class="text-[10px] text-gray-400 uppercase font-bold">Jam</span>
+          </div>
+          <div class="bg-gray-900 border border-gray-700 rounded-xl p-3">
+            <span id="cd-menit" class="block text-2xl font-black text-yellow-400 font-mono">00</span>
+            <span class="text-[10px] text-gray-400 uppercase font-bold">Menit</span>
+          </div>
+          <div class="bg-gray-900 border border-gray-700 rounded-xl p-3">
+            <span id="cd-detik" class="block text-2xl font-black text-yellow-400 font-mono">00</span>
+            <span class="text-[10px] text-gray-400 uppercase font-bold">Detik</span>
+          </div>
+        </div>
+        <p class="text-[11px] text-gray-400 mt-4 italic">Kolom pencarian kelulusan akan terbuka otomatis begitu waktu habis.</p>
+      </div>
+
+      <div id="box-form-kelulusan" class="hidden bg-gray-800/95 backdrop-blur-sm rounded-xl border border-gray-700 p-6 shadow-xl mb-6">
         <label class="block text-xs font-bold mb-1">Username Discord:</label>
         <p class="text-[11px] text-gray-400 mb-2 font-medium">Contoh: <code class="text-yellow-400 bg-gray-900 px-1.5 py-0.5 rounded">koarmada_user</code> (Gunakan username baru tanpa tanda # atau angka lama)</p>
         
@@ -198,6 +224,52 @@
   <script type="module">
     let statusUnitCache = {};
     let countdownTicker = null;
+    let mainAnnouncementTicker = null;
+
+    // FUNGSI JALANKAN COUNTDOWN PENGUMUMAN UTAMA (AMBIL DARIPADA ADMIN PANEL)
+    function jalankanCountdownPengumuman() {
+      if (mainAnnouncementTicker) clearInterval(mainAnnouncementTicker);
+
+      const waktuPengumumanStr = statusUnitCache.waktu_pengumuman || statusUnitCache.deadline_pengumuman;
+
+      const boxCd = document.getElementById('box-countdown-kelulusan');
+      const boxForm = document.getElementById('box-form-kelulusan');
+      const subJudul = document.getElementById('sub-judul-kelulusan');
+
+      if (!waktuPengumumanStr) {
+        if (boxCd) boxCd.classList.add('hidden');
+        if (boxForm) boxForm.classList.remove('hidden');
+        if (subJudul) subJudul.innerText = "Masukkan Username Discord kamu untuk melihat status kelulusan seleksi Koarmada.";
+        return;
+      }
+
+      const waktuTarget = new Date(waktuPengumumanStr).getTime();
+
+      mainAnnouncementTicker = setInterval(() => {
+        const sekarang = new Date().getTime();
+        const selisih = waktuTarget - sekarang;
+
+        if (isNaN(waktuTarget) || selisih <= 0) {
+          clearInterval(mainAnnouncementTicker);
+          if (boxCd) boxCd.classList.add('hidden');
+          if (boxForm) boxForm.classList.remove('hidden');
+          if (subJudul) subJudul.innerText = "Masukkan Username Discord kamu untuk melihat status kelulusan seleksi Koarmada.";
+        } else {
+          if (boxCd) boxCd.classList.remove('hidden');
+          if (boxForm) boxForm.classList.add('hidden');
+
+          const hari = Math.floor(selisih / (1000 * 60 * 60 * 24));
+          const jam = Math.floor((selisih % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          const menit = Math.floor((selisih % (1000 * 60 * 60)) / (1000 * 60));
+          const detik = Math.floor((selisih % (1000 * 60)) / 1000);
+
+          document.getElementById('cd-hari').innerText = String(hari).padStart(2, '0');
+          document.getElementById('cd-jam').innerText = String(jam).padStart(2, '0');
+          document.getElementById('cd-menit').innerText = String(menit).padStart(2, '0');
+          document.getElementById('cd-detik').innerText = String(detik).padStart(2, '0');
+        }
+      }, 1000);
+    }
 
     // FUNGSI TOAST NOTIFICATION CUSTOM
     window.showToast = (message, type = 'success') => {
@@ -300,6 +372,7 @@
         });
 
         startUnitCountdowns();
+        jalankanCountdownPengumuman();
       } catch (err) { console.error("Gagal memuat status:", err); }
     }
 
@@ -454,7 +527,6 @@
 
     loadStatusPendaftaran();
   </script>
-
 
 </body>
 </html>
