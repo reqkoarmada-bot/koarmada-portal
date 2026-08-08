@@ -59,12 +59,23 @@
       <section class="bg-gray-900 border border-gray-800 rounded-2xl p-6 shadow-xl">
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-2">
           <div>
-            <h2 class="text-xl font-black text-yellow-400">⚙️ Kontrol Unit & Deadline</h2>
-            <p class="text-xs text-gray-400">Atur status pendaftaran (Buka/Tutup) dan countdown timer untuk setiap unit.</p>
+            <h2 class="text-xl font-black text-yellow-400">⚙️ Kontrol Pengumuman & Unit</h2>
+            <p class="text-xs text-gray-400">Atur waktu countdown pengumuman, status unit (Buka/Tutup), dan deadline per unit.</p>
           </div>
           <button onclick="simpanPengaturanUnit()" id="btnSimpanSettings" class="bg-green-600 hover:bg-green-500 text-white font-bold text-xs px-5 py-2.5 rounded-lg transition shadow-lg">
             💾 Simpan Semua Pengaturan
           </button>
+        </div>
+
+        <div class="mb-6 bg-gray-800/90 border border-yellow-500/50 rounded-xl p-4">
+          <div class="flex justify-between items-center mb-2">
+            <label class="block text-xs font-bold text-yellow-400 flex items-center gap-1.5">
+              <span>⏱️</span> Waktu & Tanggal Pengumuman Kelulusan Publik:
+            </label>
+            <button type="button" onclick="resetWaktuPengumuman()" class="text-[10px] text-red-400 hover:underline font-medium">Hapus Jam Pengumuman</button>
+          </div>
+          <input type="datetime-local" id="waktu-pengumuman" class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2.5 text-xs text-white focus:outline-none focus:border-utama">
+          <p class="text-[10px] text-gray-400 mt-1.5 italic">Kosongkan jika ingin kolom cek kelulusan langsung terbuka tanpa jam hitung mundur.</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -247,7 +258,6 @@
       sessionStorage.removeItem("adminLoggedIn");
     };
 
-    // OTOMATIS LOGOUT JIKA HALAMAN DITUTUP / DIPINDAHKAN / DIREFRESH
     window.addEventListener("pagehide", () => {
       sessionStorage.removeItem("adminLoggedIn");
     });
@@ -305,13 +315,19 @@
       }, 3500);
     };
 
-    // RESET DEADLINE
+    // RESET DEADLINE UNIT
     window.resetDeadline = (unitKey) => {
       document.getElementById(`deadline-${unitKey}`).value = "";
       showToast(`Deadline ${unitKey.toUpperCase()} direset. Klik 'Simpan Semua Pengaturan'.`);
     };
 
-    // LOAD PENGATURAN STATUS & DEADLINE
+    // RESET WAKTU PENGUMUMAN
+    window.resetWaktuPengumuman = () => {
+      document.getElementById('waktu-pengumuman').value = "";
+      showToast("Waktu pengumuman direset. Klik 'Simpan Semua Pengaturan'.");
+    };
+
+    // LOAD PENGATURAN STATUS, DEADLINE & WAKTU PENGUMUMAN
     async function loadPengaturan() {
       try {
         const docRef = doc(db, "settings", "pendaftaran");
@@ -320,6 +336,13 @@
         if (docSnap.exists()) {
           const data = docSnap.data();
 
+          // Load Waktu Pengumuman
+          const elemWaktu = document.getElementById('waktu-pengumuman');
+          if (elemWaktu && (data.waktu_pengumuman || data.deadline_pengumuman)) {
+            elemWaktu.value = data.waktu_pengumuman || data.deadline_pengumuman;
+          }
+
+          // Load Status & Deadline Unit
           units.forEach(u => {
             const statusElem = document.getElementById(`status-${u}`);
             if (statusElem && data[`btn-${u}`]) statusElem.value = data[`btn-${u}`];
@@ -334,21 +357,24 @@
       }
     }
 
-    // SIMPAN PENGATURAN
+    // SIMPAN PENGATURAN KE FIRESTORE
     window.simpanPengaturanUnit = async () => {
       const btnSimpan = document.getElementById('btnSimpanSettings');
       btnSimpan.innerText = "Saving...";
       btnSimpan.disabled = true;
 
       try {
-        const payload = {};
+        const payload = {
+          waktu_pengumuman: document.getElementById('waktu-pengumuman').value || ""
+        };
+
         units.forEach(u => {
           payload[`btn-${u}`] = document.getElementById(`status-${u}`).value;
           payload[`deadline_${u}`] = document.getElementById(`deadline-${u}`).value || "";
         });
 
         await setDoc(doc(db, "settings", "pendaftaran"), payload, { merge: true });
-        showToast("Pengaturan unit & deadline berhasil disimpan!", "success");
+        showToast("Pengaturan pengumuman & unit berhasil disimpan!", "success");
       } catch (err) {
         showToast("Gagal menyimpan pengaturan.", "error");
       } finally {
