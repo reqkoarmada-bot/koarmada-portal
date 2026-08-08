@@ -184,11 +184,14 @@
           const container = document.getElementById("container-pengumuman");
           let htmlContent = "";
 
-          const items = data.documents.map(doc => doc.fields);
+          let items = data.documents.map(doc => doc.fields);
+          // Urutkan dari yang terbaru
           items.sort((a, b) => parseInt(b.timestamp?.integerValue || b.time?.integerValue || 0) - parseInt(a.timestamp?.integerValue || a.time?.integerValue || 0));
+          
+          // AMBIL HANYA 5 PENGUMUMAN TERBARU
+          items = items.slice(0, 5);
 
           items.forEach(item => {
-            // Mencari berbagai kemungkinan nama field dari bot
             const author = item.author?.stringValue || item.sender?.stringValue || item.nama?.stringValue || item.user?.stringValue || 'Mabes Koarmada';
             const judul = item.judul?.stringValue || item.title?.stringValue || item.name?.stringValue || item.subject?.stringValue || 'PENGUMUMAN RESMI';
             const rawIsi = item.isi?.stringValue || item.message?.stringValue || item.content?.stringValue || item.text?.stringValue || item.body?.stringValue || '';
