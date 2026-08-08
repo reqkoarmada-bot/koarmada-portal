@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Berita & Informasi - Koarmada RI</title>
+  <title>Arsip Berita - Koarmada RI</title>
   
   <script src="https://cdn.tailwindcss.com"></script>
   
@@ -38,7 +38,7 @@
     </div>
   </div>
 
-  <nav class="bg-blue-900 sticky top-0 z-50 shadow-md">
+  <nav class="bg-blue-900 sticky top-0 z-40 shadow-md">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <ul class="flex flex-wrap justify-center md:justify-start gap-8 text-sm font-semibold text-white/90">
         
@@ -80,22 +80,45 @@
     </div>
   </nav>
 
-  <main class="flex-grow max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8">
+  <main class="flex-grow max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 space-y-8">
     
-    <div class="flex items-center justify-between border-b-2 border-slate-200 pb-3 mb-8">
-      <h2 class="font-resmi text-2xl md:text-3xl font-bold text-slate-900 border-b-4 border-blue-800 -mb-[19px] pb-3 px-2">
-        Publikasi & Berita Resmi
+    <div class="flex items-center justify-between border-b-2 border-slate-200 pb-3">
+      <h2 class="font-resmi text-2xl md:text-3xl font-bold text-slate-900 border-b-4 border-blue-800 -mb-[19px] pb-3 px-2 flex items-center gap-2">
+        <span>📰</span> Arsip Berita Terkini
       </h2>
     </div>
 
-    <div id="gridBeritaPublik" class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-      <div class="col-span-full text-center py-16 bg-white rounded-xl border border-slate-200 shadow-sm">
-        <div class="inline-block animate-spin rounded-full h-8 w-8 border-4 border-blue-800 border-t-transparent mb-3"></div>
-        <p class="text-slate-500 font-medium text-sm">Memuat berita terbaru dari server...</p>
-      </div>
+    <div id="gridBerita" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <p class="text-sm text-slate-500 col-span-full text-center py-12">Memuat berita...</p>
     </div>
 
   </main>
+
+  <div id="modalDetailBerita" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
+    <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative flex flex-col border border-slate-200">
+      
+      <button onclick="tutupModalBerita()" class="absolute top-3 right-3 bg-slate-100 hover:bg-red-600 hover:text-white text-slate-600 w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold transition z-10 shadow">
+        ✕
+      </button>
+
+      <div id="modalMedia" class="w-full bg-slate-900 flex items-center justify-center overflow-hidden rounded-t-2xl max-h-80">
+      </div>
+
+      <div class="p-6 space-y-3">
+        <div id="modalTanggal" class="text-xs text-amber-600 font-bold"></div>
+        <h3 id="modalJudul" class="font-resmi text-2xl font-bold text-slate-900 leading-snug"></h3>
+        <hr class="border-slate-100">
+        <p id="modalDeskripsi" class="text-sm text-slate-600 leading-relaxed whitespace-pre-line"></p>
+      </div>
+
+      <div class="p-4 bg-slate-50 border-t border-slate-100 text-right rounded-b-2xl">
+        <button onclick="tutupModalBerita()" class="px-5 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs font-semibold rounded-lg transition">
+          Tutup
+        </button>
+      </div>
+
+    </div>
+  </div>
 
   <footer class="bg-slate-900 text-slate-400 py-10 mt-auto border-t-4 border-blue-900">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
@@ -106,27 +129,13 @@
       </div>
       <p class="text-sm font-semibold text-slate-300">Copyright &copy; 2026 Komando Armada RI RBX</p>
       <p class="text-xs mt-2">Designed By Humas Koarmada RI RBX</p>
-
-      <a href="admin-berita.html" class="mt-6 inline-flex items-center gap-1.5 text-xs text-slate-500 hover:text-amber-400 transition-colors py-1 px-3 rounded-md hover:bg-slate-800/80 border border-transparent hover:border-slate-700">
-        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
-        </svg>
-        <span>Panel Admin Berita</span>
-      </a>
     </div>
   </footer>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
-    import { 
-      getFirestore, 
-      collection, 
-      getDocs, 
-      query, 
-      orderBy 
-    } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
+    import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
 
-    // Konfigurasi Firebase Resmi Portal KOARMADA
     const firebaseConfig = {
       apiKey: "AIzaSyAMYa0AF2_aH8N93fR22YIa9Kg0AGjKrLI",
       authDomain: "portal-koarmada-92e19.firebaseapp.com",
@@ -139,79 +148,101 @@
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
-    async function loadBeritaPublik() {
-      const container = document.getElementById('gridBeritaPublik');
-      if (!container) return;
+    // Penampung data berita agar karakter khusus/kutipan tidak merusak HTML
+    window.dataBeritaMap = {};
 
+    async function loadSemuaBerita() {
+      const grid = document.getElementById('gridBerita');
       try {
         const q = query(collection(db, "berita"), orderBy("waktu", "desc"));
-        const querySnapshot = await getDocs(q);
+        const snapshot = await getDocs(q);
 
-        if (querySnapshot.empty) {
-          container.innerHTML = `
-            <div class="col-span-full text-center py-16 bg-white border border-slate-200 rounded-2xl shadow-sm">
-              <p class="text-slate-600 font-bold text-base">Belum Ada Berita Dipublikasikan</p>
-              <p class="text-slate-400 text-xs mt-1">Silakan tambahkan postingan melalui halaman admin berita.</p>
-            </div>
-          `;
+        if (snapshot.empty) {
+          grid.innerHTML = `<p class="text-sm text-slate-500 col-span-full text-center py-12">Belum ada berita dipublikasikan.</p>`;
           return;
         }
 
-        let html = "";
-        querySnapshot.forEach((docSnap) => {
-          const data = docSnap.data();
+        grid.innerHTML = "";
+        snapshot.forEach((docSnap) => {
+          const item = docSnap.data();
+          const docId = docSnap.id;
+          
+          // Simpan objek ke map global
+          window.dataBeritaMap[docId] = item;
 
-          // Deteksi Otomatis Media (Video mp4 atau Gambar)
-          let mediaHtml = "";
-          const isVideo = data.mediaUrl && (data.mediaUrl.endsWith(".mp4") || data.mediaUrl.includes("video"));
+          // Cek apakah media berupa video (.mp4) atau gambar
+          const isVideo = item.mediaUrl && (item.mediaUrl.includes('.mp4') || item.mediaUrl.includes('video'));
+          
+          const mediaElement = isVideo 
+            ? `<video src="${item.mediaUrl}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500"></video>`
+            : `<img src="${item.mediaUrl}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Berita">`;
 
-          if (isVideo) {
-            mediaHtml = `
-              <div class="h-48 bg-slate-200 overflow-hidden relative">
-                <video src="${data.mediaUrl}" controls class="w-full h-full object-cover"></video>
+          grid.innerHTML += `
+            <div onclick="bukaModalBerita('${docId}')" 
+                 class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden group hover:shadow-md transition cursor-pointer flex flex-col">
+              <div class="h-48 bg-slate-200 overflow-hidden relative pointer-events-none">
+                ${mediaElement}
               </div>
-            `;
-          } else {
-            mediaHtml = `
-              <div class="h-48 bg-slate-200 overflow-hidden relative">
-                <img src="${data.mediaUrl}" alt="${data.judul}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://via.placeholder.com/600x400/0f172a/ffffff?text=KOARMADA+RI'">
-              </div>
-            `;
-          }
-
-          // Desain Kartu Persis dengan index.html
-          html += `
-            <article class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden group hover:shadow-md transition flex flex-col justify-between">
-              <div>
-                ${mediaHtml}
-                <div class="p-5">
-                  <div class="text-xs text-amber-600 font-bold mb-2 uppercase">
-                    ${data.tanggal || 'TERKINI'}
-                  </div>
-                  <h4 class="font-bold text-slate-900 mb-3 line-clamp-2 hover:text-blue-700 transition cursor-pointer">
-                    ${data.judul}
+              <div class="p-5 flex-1 flex flex-col justify-between">
+                <div>
+                  <div class="text-xs text-amber-600 font-bold mb-2">${item.tanggal || 'TERKINI'}</div>
+                  <h4 class="font-bold text-slate-900 mb-3 line-clamp-2 group-hover:text-blue-700 transition">
+                    ${item.judul}
                   </h4>
-                  <p class="text-sm text-slate-500 line-clamp-3 whitespace-pre-line">
-                    ${data.deskripsi}
+                  <p class="text-sm text-slate-500 line-clamp-3">
+                    ${item.deskripsi}
                   </p>
                 </div>
               </div>
-            </article>
+            </div>
           `;
         });
-
-        container.innerHTML = html;
       } catch (err) {
-        console.error("Gagal memuat berita:", err);
-        container.innerHTML = `
-          <div class="col-span-full text-center py-12 bg-red-50 border border-red-200 text-red-600 rounded-xl text-sm font-medium">
-            Gagal menghubungkan ke server data. Pastikan koneksi internet kamu stabil.
-          </div>
-        `;
+        grid.innerHTML = `<p class="text-sm text-red-500 col-span-full text-center py-12">Gagal memuat berita: ${err.message}</p>`;
       }
     }
 
-    loadBeritaPublik();
+    // Fungsi Buka Pop-up Modal
+    window.bukaModalBerita = function(docId) {
+      const item = window.dataBeritaMap[docId];
+      if (!item) return;
+
+      const modal = document.getElementById('modalDetailBerita');
+      const containerMedia = document.getElementById('modalMedia');
+      
+      const isVideo = item.mediaUrl && (item.mediaUrl.includes('.mp4') || item.mediaUrl.includes('video'));
+
+      if (isVideo) {
+        containerMedia.innerHTML = `<video src="${item.mediaUrl}" class="w-full h-auto max-h-80 object-cover" controls autoplay></video>`;
+      } else {
+        containerMedia.innerHTML = `<img src="${item.mediaUrl}" class="w-full h-auto max-h-80 object-cover" alt="Foto Berita">`;
+      }
+
+      document.getElementById('modalTanggal').innerText = item.tanggal || 'TERKINI';
+      document.getElementById('modalJudul').innerText = item.judul;
+      document.getElementById('modalDeskripsi').innerText = item.deskripsi;
+
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    };
+
+    // Fungsi Tutup Pop-up Modal
+    window.tutupModalBerita = function() {
+      const modal = document.getElementById('modalDetailBerita');
+      document.getElementById('modalMedia').innerHTML = ''; // Hentikan video saat modal ditutup
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    };
+
+    // Klik luar area modal untuk menutup
+    window.onclick = function(e) {
+      const modal = document.getElementById('modalDetailBerita');
+      if (e.target === modal) {
+        window.tutupModalBerita();
+      }
+    };
+
+    loadSemuaBerita();
   </script>
 </body>
 </html>
