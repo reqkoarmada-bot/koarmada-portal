@@ -1,1 +1,198 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Berita - Portal KOARMADA</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-950 text-gray-100 min-h-screen p-6">
+
+  <div class="max-w-4xl mx-auto">
+    <div class="flex justify-between items-center mb-8 border-b border-gray-800 pb-4">
+      <div>
+        <h1 class="text-2xl font-black text-white">📰 Admin Panel Khusus Berita</h1>
+        <p class="text-xs text-gray-400 mt-1">Kelola postingan, foto, dan informasi terbaru Koarmada.</p>
+      </div>
+      <a href="index.html" class="bg-gray-800 hover:bg-gray-700 text-gray-300 px-4 py-2 rounded-xl text-xs font-bold transition">← Kembali ke Web</a>
+    </div>
+
+    <div class="bg-gray-900/90 border border-gray-800 p-6 rounded-2xl shadow-xl mb-8">
+      <h3 class="text-white font-bold text-base mb-4">➕ Buat Postingan Berita Baru</h3>
+      
+      <form id="formBerita" class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Judul Berita</label>
+          <input type="text" id="inputJudulBerita" placeholder="Contoh: Upacara Kenaikan Pangkat..." class="w-full bg-gray-800 border border-gray-700 p-3 rounded-xl text-white text-sm focus:outline-none focus:border-blue-500" required>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Tanggal (Teks)</label>
+            <input type="text" id="inputTanggalBerita" placeholder="Contoh: 02 AGU 2026" class="w-full bg-gray-800 border border-gray-700 p-3 rounded-xl text-white text-sm focus:outline-none focus:border-blue-500" required>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Link Gambar / Media (URL)</label>
+            <input type="url" id="inputMediaBerita" placeholder="https://..." class="w-full bg-gray-800 border border-gray-700 p-3 rounded-xl text-white text-sm focus:outline-none focus:border-blue-500" required>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Deskripsi / Penjelasan</label>
+          <textarea id="inputDeskripsiBerita" rows="3" placeholder="Tulis ringkasan berita di sini..." class="w-full bg-gray-800 border border-gray-700 p-3 rounded-xl text-white text-sm focus:outline-none focus:border-blue-500" required></textarea>
+        </div>
+
+        <button type="submit" id="btnTambahBerita" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 px-6 rounded-xl transition shadow-lg text-sm">
+          Publikasikan Berita
+        </button>
+      </form>
+    </div>
+
+    <div class="bg-gray-900/90 border border-gray-800 p-6 rounded-2xl shadow-xl">
+      <h3 class="text-white font-bold text-base mb-4">📋 Daftar Berita yang Sudah Dipublikasikan</h3>
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-sm text-gray-300">
+          <thead class="bg-gray-800 text-gray-400 text-xs uppercase">
+            <tr>
+              <th class="p-3">Judul</th>
+              <th class="p-3">Tanggal</th>
+              <th class="p-3 text-center">Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="tabelAdminBerita" class="divide-y divide-gray-800">
+            <tr><td colspan="3" class="p-4 text-center text-gray-500 italic">Memuat data...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
+    import { 
+      getFirestore, 
+      collection, 
+      addDoc, 
+      getDocs, 
+      deleteDoc, 
+      doc, 
+      query, 
+      orderBy 
+    } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
+
+    // Konfigurasi Firebase Resmi milik Portal KOARMADA
+    const firebaseConfig = {
+      apiKey: "AIzaSyAMYa0AF2_aH8N93fR22YIa9Kg0AGjKrLI",
+      authDomain: "portal-koarmada-92e19.firebaseapp.com",
+      projectId: "portal-koarmada-92e19",
+      storageBucket: "portal-koarmada-92e19.firebasestorage.app",
+      messagingSenderId: "966060677941",
+      appId: "1:966060677941:web:cd6074b5d8e2b3b9edca7c"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // Toast Notification
+    function showToast(message, type = 'success') {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      const isSuccess = type === 'success';
+      const bgColor = isSuccess ? 'bg-gray-800/95 border-green-500/80 text-green-400' : 'bg-gray-800/95 border-red-500/80 text-red-400';
+      const icon = isSuccess ? '✅' : '❌';
+
+      toast.className = `${bgColor} border-2 text-xs font-bold p-4 rounded-xl shadow-2xl backdrop-blur-md pointer-events-auto flex items-center gap-3 transform translate-x-full transition-all duration-300 opacity-0`;
+      toast.innerHTML = `<span class="text-base">${icon}</span><span class="text-white">${message}</span>`;
+
+      container.appendChild(toast);
+      setTimeout(() => toast.classList.remove('translate-x-full', 'opacity-0'), 50);
+      setTimeout(() => {
+        toast.classList.add('translate-x-full', 'opacity-0');
+        setTimeout(() => toast.remove(), 300);
+      }, 3500);
+    }
+
+    // Submit Berita Baru
+    const formBerita = document.getElementById('formBerita');
+    formBerita.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const judul = document.getElementById('inputJudulBerita').value.trim();
+      const tanggal = document.getElementById('inputTanggalBerita').value.trim();
+      const mediaUrl = document.getElementById('inputMediaBerita').value.trim();
+      const deskripsi = document.getElementById('inputDeskripsiBerita').value.trim();
+      const btn = document.getElementById('btnTambahBerita');
+
+      btn.innerText = "Memublikasikan...";
+      btn.disabled = true;
+
+      try {
+        await addDoc(collection(db, "berita"), {
+          judul,
+          tanggal,
+          mediaUrl,
+          deskripsi,
+          waktu: new Date()
+        });
+        showToast("Berita berhasil dipublikasikan!", "success");
+        formBerita.reset();
+        loadAdminBerita();
+      } catch (err) {
+        showToast("Gagal mempublikasikan berita.", "error");
+      } finally {
+        btn.innerText = "Publikasikan Berita";
+        btn.disabled = false;
+      }
+    });
+
+    // Load Daftar Berita ke Admin
+    async function loadAdminBerita() {
+      const tbody = document.getElementById('tabelAdminBerita');
+      try {
+        const q = query(collection(db, "berita"), orderBy("waktu", "desc"));
+        const querySnapshot = await getDocs(q);
+
+        if (querySnapshot.empty) {
+          tbody.innerHTML = `<tr><td colspan="3" class="p-4 text-center text-gray-500 italic">Belum ada berita.</td></tr>`;
+          return;
+        }
+
+        let html = "";
+        querySnapshot.forEach((docSnap) => {
+          const data = docSnap.data();
+          html += `
+            <tr class="hover:bg-gray-800/50">
+              <td class="p-3 font-bold text-white">${data.judul}</td>
+              <td class="p-3 text-yellow-400 text-xs">${data.tanggal}</td>
+              <td class="p-3 text-center">
+                <button onclick="hapusBerita('${docSnap.id}')" class="bg-red-600/20 border border-red-500/40 hover:bg-red-600 text-red-400 hover:text-white px-2.5 py-1 rounded text-[10px] transition">Hapus</button>
+              </td>
+            </tr>
+          `;
+        });
+        tbody.innerHTML = html;
+      } catch (err) {
+        tbody.innerHTML = `<tr><td colspan="3" class="p-4 text-center text-red-400 italic">Gagal memuat berita.</td></tr>`;
+      }
+    }
+
+    // Hapus Berita
+    window.hapusBerita = async (id) => {
+      if (confirm("Yakin ingin menghapus berita ini?")) {
+        try {
+          await deleteDoc(doc(db, "berita", id));
+          showToast("Berita berhasil dihapus.", "success");
+          loadAdminBerita();
+        } catch (err) {
+          showToast("Gagal menghapus berita.", "error");
+        }
+      }
+    };
+
+    // Jalankan saat pertama dibuka
+    loadAdminBerita();
+  </script>
+</body>
+  </html>
 
