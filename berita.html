@@ -1,1 +1,176 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Berita Terkini - Portal KOARMADA RI</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-950 text-gray-100 min-h-screen flex flex-col justify-between font-sans">
+
+  <header class="bg-blue-950 border-b border-blue-900/60">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="bg-blue-900 border border-blue-700 w-10 h-10 rounded-xl flex items-center justify-center text-xl shadow-lg">
+          ⚓
+        </div>
+        <div>
+          <h1 class="text-white font-black text-lg tracking-wider leading-none uppercase">PORTAL KOARMADA RI</h1>
+          <p class="text-blue-400 text-[10px] font-semibold tracking-widest mt-0.5 uppercase">Komando Armada Republik Indonesia</p>
+        </div>
+      </div>
+      
+      <a href="admin-berita.html" class="bg-blue-900/50 hover:bg-blue-800 text-blue-300 border border-blue-700/50 px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5">
+        <span>🔒</span> Admin Berita
+      </a>
+    </div>
+
+    <nav class="bg-blue-950/80 border-t border-blue-900/40 backdrop-blur-md">
+      <div class="max-w-6xl mx-auto px-4">
+        <div class="flex items-center gap-1 md:gap-2 text-xs font-bold uppercase tracking-wider overflow-x-auto py-2.5">
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-gray-300 hover:text-white hover:bg-blue-900/40 transition whitespace-nowrap">Beranda</a>
+          <a href="index.html#profil" class="px-3 py-1.5 rounded-lg text-gray-300 hover:text-white hover:bg-blue-900/40 transition whitespace-nowrap">Profil</a>
+          <a href="berita.html" class="px-3 py-1.5 rounded-lg text-white bg-blue-800 border border-blue-600/50 shadow transition whitespace-nowrap">Berita</a>
+          <a href="index.html#pengumuman" class="px-3 py-1.5 rounded-lg text-gray-300 hover:text-white hover:bg-blue-900/40 transition whitespace-nowrap">Pengumuman</a>
+          <a href="index.html#galeri" class="px-3 py-1.5 rounded-lg text-gray-300 hover:text-white hover:bg-blue-900/40 transition whitespace-nowrap">Galeri</a>
+          <a href="index.html#rekrutmen" class="px-3 py-1.5 rounded-lg text-gray-300 hover:text-white hover:bg-blue-900/40 transition whitespace-nowrap">Rekrutmen</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <section class="bg-gradient-to-b from-blue-950/40 to-gray-950 py-8 border-b border-gray-800/80">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <span class="text-[10px] font-bold text-yellow-500 uppercase tracking-widest bg-yellow-500/10 border border-yellow-500/20 px-2.5 py-1 rounded-md">
+            Publikasi Resmi
+          </span>
+          <h2 class="text-2xl font-black text-white mt-2 uppercase tracking-wide">Daftar Berita & Informasi</h2>
+          <p class="text-gray-400 text-xs mt-1">Kumpulan dokumentasi, pengumuman, dan berita terbaru Komando Armada RI.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main class="max-w-6xl mx-auto px-4 py-8 flex-grow w-full">
+    
+    <div id="gridBeritaPublik" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="col-span-full text-center py-12 text-gray-500 italic text-sm">
+        Memuat berita terbaru dari database...
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="bg-gray-900 border-t border-gray-800 py-6 text-xs text-gray-500 mt-12">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <span>⚓</span>
+        <span class="text-gray-300 font-bold uppercase">Komando Armada RI</span>
+      </div>
+      <p>&copy; 2026 Portal KOARMADA RI. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
+    import { 
+      getFirestore, 
+      collection, 
+      getDocs, 
+      query, 
+      orderBy 
+    } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
+
+    // Konfigurasi Firebase Resmi Portal KOARMADA
+    const firebaseConfig = {
+      apiKey: "AIzaSyAMYa0AF2_aH8N93fR22YIa9Kg0AGjKrLI",
+      authDomain: "portal-koarmada-92e19.firebaseapp.com",
+      projectId: "portal-koarmada-92e19",
+      storageBucket: "portal-koarmada-92e19.firebasestorage.app",
+      messagingSenderId: "966060677941",
+      appId: "1:966060677941:web:cd6074b5d8e2b3b9edca7c"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    async function loadBeritaPublik() {
+      const container = document.getElementById('gridBeritaPublik');
+      if (!container) return;
+
+      try {
+        const q = query(collection(db, "berita"), orderBy("waktu", "desc"));
+        const querySnapshot = await getDocs(q);
+
+        if (querySnapshot.empty) {
+          container.innerHTML = `
+            <div class="col-span-full text-center py-16 bg-gray-900/50 border border-gray-800 rounded-2xl">
+              <p class="text-gray-400 font-medium text-sm">Belum ada berita yang dipublikasikan.</p>
+              <p class="text-gray-600 text-xs mt-1">Gunakan panel admin berita untuk menambahkan postingan pertama.</p>
+            </div>
+          `;
+          return;
+        }
+
+        let html = "";
+        querySnapshot.forEach((docSnap) => {
+          const data = docSnap.data();
+
+          // Deteksi otomatis format video (.mp4) atau gambar biasa
+          let mediaHtml = "";
+          const isVideo = data.mediaUrl && (data.mediaUrl.endsWith(".mp4") || data.mediaUrl.includes("video"));
+
+          if (isVideo) {
+            mediaHtml = `
+              <div class="relative bg-black h-48 flex items-center justify-center overflow-hidden">
+                <video src="${data.mediaUrl}" controls class="w-full h-full object-cover"></video>
+              </div>
+            `;
+          } else {
+            mediaHtml = `
+              <div class="h-48 overflow-hidden bg-gray-800">
+                <img src="${data.mediaUrl}" alt="${data.judul}" class="w-full h-full object-cover hover:scale-105 transition duration-500" onerror="this.src='https://via.placeholder.com/600x400/1e293b/ffffff?text=KOARMADA+RI'">
+              </div>
+            `;
+          }
+
+          html += `
+            <article class="bg-gray-900 border border-gray-800 rounded-2xl overflow-hidden shadow-xl flex flex-col justify-between hover:border-blue-500/50 transition duration-300">
+              <div>
+                ${mediaHtml}
+                <div class="p-5">
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="text-[10px] font-bold text-yellow-500 uppercase tracking-widest bg-yellow-500/10 border border-yellow-500/20 px-2 py-0.5 rounded">
+                      ${data.tanggal || 'TERKINI'}
+                    </span>
+                  </div>
+                  <h3 class="text-white font-black text-sm mb-2 leading-snug uppercase tracking-tight">
+                    ${data.judul}
+                  </h3>
+                  <p class="text-gray-400 text-xs leading-relaxed whitespace-pre-line">
+                    ${data.deskripsi}
+                  </p>
+                </div>
+              </div>
+            </article>
+          `;
+        });
+
+        container.innerHTML = html;
+      } catch (err) {
+        console.error("Gagal memuat berita:", err);
+        container.innerHTML = `
+          <div class="col-span-full text-center py-12 text-red-400 text-xs font-medium">
+            Gagal memuat data dari Firebase. Silakan periksa koneksi internet kamu.
+          </div>
+        `;
+      }
+    }
+
+    loadBeritaPublik();
+  </script>
+</body>
+</html>
 
