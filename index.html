@@ -1,532 +1,131 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portal Pendaftaran KOARMADA</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Berita - KOMANDO ARMADA REPUBLIK INDONESIA</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Font (Slightly more formal for news sites) -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;900&display=swap" rel="stylesheet">
-
-  <style>
-    :root {
-      --warna-utama: #00509E;
-      --warna-teks-sorot: #0088FF;
-      --warna-bg-gelap: #121824;
-      --bg-card-info: #0066CC;
-      --bg-card-daftar: #FFFFFF;
-    }
-    body { font-family: 'Poppins', sans-serif; background-color: var(--warna-bg-gelap); }
-    .bg-utama { background-color: var(--warna-utama); }
-    .teks-sorot { color: var(--warna-teks-sorot); }
-    .bg-info { background-color: var(--bg-card-info); }
-    .bg-daftar { background-color: var(--bg-card-daftar); }
-  </style>
+  <style>
+    body { 
+      font-family: 'Roboto', sans-serif; 
+      /* Latar belakang laut kapal perang (sesuaikan URL gambar) */
+      background-image: url('images/background-laut.jpg'); 
+      background-size: cover;
+      background-attachment: fixed;
+      background-position: center;
+    }
+    .bg-nav { background-color: #004b87; }
+    .text-title { color: #004b87; }
+  </style>
 </head>
-<body class="text-white min-h-screen flex flex-col justify-between">
+<body class="bg-gray-200">
 
-  <div id="toast-container" class="fixed top-5 right-5 z-50 flex flex-col gap-3 max-w-xs w-full pointer-events-none"></div>
+  <!-- Container Utama (Box putih di tengah) -->
+  <div class="max-w-6xl mx-auto bg-white min-h-screen shadow-2xl flex flex-col">
 
-  <nav class="bg-utama text-white px-6 py-3 flex justify-between items-center shadow-lg sticky top-0 z-40">
-    <div class="flex items-center space-x-3">
-      <img src="images/Logo.svg.webp" alt="Logo Koarmada" class="w-10 h-10 object-contain bg-white rounded-full border-2 border-yellow-400 p-0.5">
-    </div>
-    <div class="flex space-x-4 sm:space-x-6 text-xs sm:text-sm font-bold tracking-wider">
-      <a href="#home" class="hover:text-gray-300 transition">HOME</a>
-      <a href="persyaratan.html" class="hover:text-gray-300 transition">PERSYARATAN</a>
-      <a href="#pendaftaran" class="hover:text-gray-300 transition">PENDAFTARAN</a>
-      <a href="#cek-status" class="hover:text-gray-300 transition">CEK STATUS</a>
-    </div>
-  </nav>
+    <!-- HEADER BANNER -->
+    <header class="w-full h-32 md:h-40 bg-gradient-to-r from-blue-900 via-red-600 to-blue-900 relative flex items-center justify-between px-8 overflow-hidden">
+      <!-- Placeholder Logo Kiri -->
+      <img src="images/Logo.svg.webp" alt="Logo" class="relative z-10 w-24 h-24 md:w-32 md:h-32 object-contain drop-shadow-md">
+      
+      <!-- Judul Header -->
+      <div class="relative z-10 text-center flex-1">
+        <h1 class="text-white text-3xl md:text-5xl font-black tracking-wider drop-shadow-lg" style="-webkit-text-stroke: 1px black;">KOMANDO ARMADA REPUBLIK INDONESIA</h1>
+        <p class="text-yellow-300 text-sm md:text-base font-bold mt-1 tracking-widest drop-shadow-md">"EKAPADA BANDA JALA NUSA"</p>
+      </div>
+      
+      <!-- Placeholder Bendera/Kapal Kanan (Opsional, bisa pakai gambar background banner) -->
+      <div class="relative z-10 w-24 md:w-32 hidden md:block"></div>
+    </header>
 
-  <section id="home" class="relative py-16 px-6 border-b-4 border-utama flex items-center min-h-[300px] overflow-hidden">
-    <div class="absolute inset-0 z-0">
-      <img src="images/Screenshot 2026-08-01 191627.webp" alt="Background Kapal KRI" class="w-full h-full object-cover opacity-30 mix-blend-overlay">
-    </div>
-    <div class="relative z-10 w-full max-w-5xl mx-auto flex flex-row items-center justify-between gap-4">
-      <div class="text-left">
-        <h1 class="text-4xl sm:text-6xl font-black tracking-tight leading-none text-white drop-shadow-lg">
-          PORTAL<br>PENDAFTARAN<br><span class="teks-sorot drop-shadow-none">KOARMADA</span>
-        </h1>
-      </div>
-      <div class="shrink-0">
-        <img src="images/Logo.svg.webp" alt="Logo Koarmada Besar" class="w-32 h-32 sm:w-48 sm:h-48 object-contain drop-shadow-2xl">
-      </div>
-    </div>
-  </section>
+    <!-- MENU NAVIGASI -->
+    <nav class="bg-nav text-white text-sm md:text-base font-medium py-3 border-b-4 border-blue-900">
+      <ul class="flex flex-wrap justify-center gap-4 md:gap-8 px-4">
+        <li><a href="#" class="hover:text-yellow-300 transition">BERANDA</a></li>
+        <li><a href="#" class="hover:text-yellow-300 transition">PROFIL ⌄</a></li>
+        <li><a href="#" class="hover:text-yellow-300 transition">BERITA</a></li>
+        <li><a href="#" class="hover:text-yellow-300 transition">ARTIKEL</a></li>
+        <li><a href="#" class="hover:text-yellow-300 transition">PENGUMUMAN</a></li>
+        <li><a href="#" class="hover:text-yellow-300 transition">GALERI ⌄</a></li>
+        <li><a href="#" class="hover:text-yellow-300 transition">REKRUTMEN</a></li>
+        <li><a href="#" class="hover:text-yellow-300 transition">INFORMASI ⌄</a></li>
+      </ul>
+    </nav>
 
-  <section class="relative py-12 px-6 border-y-4 border-utama">
-    <div class="relative z-10 max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-6">
-      <a href="galeri.html" class="bg-info text-white p-5 rounded-xl border-2 border-black shadow-lg text-center flex flex-col justify-between min-h-[140px] hover:scale-105 transition-transform duration-200">
-        <div>
-          <h3 class="font-black text-lg mb-2">GALERI</h3>
-          <p class="text-xs font-medium leading-relaxed">Berisi hasil dokumentasi dari kegiatan Koarmada.</p>
-        </div>
-        <span class="text-[11px] font-bold text-yellow-300 underline mt-3">Buka Galeri →</span>
-      </a>
-      <a href="persyaratan.html" class="bg-info text-white p-5 rounded-xl border-2 border-black shadow-lg text-center flex flex-col justify-between min-h-[140px] hover:scale-105 transition-transform duration-200">
-        <div>
-          <h3 class="font-black text-lg mb-2">PERSYARATAN</h3>
-          <p class="text-xs font-medium leading-relaxed">Syarat dan ketentuan lengkap untuk bergabung dengan Koarmada.</p>
-        </div>
-        <span class="text-[11px] font-bold text-yellow-300 underline mt-3">Lihat Persyaratan →</span>
-      </a>
-      <a href="fungsi-unit.html" class="bg-info text-white p-5 rounded-xl border-2 border-black shadow-lg text-center flex flex-col justify-between min-h-[140px] hover:scale-105 transition-transform duration-200">
-        <div>
-          <h3 class="font-black text-lg mb-2">FUNGSI UNIT</h3>
-          <p class="text-xs font-medium leading-relaxed">Penjelasan fungsi setiap unit bagian di Koarmada RI.</p>
-        </div>
-        <span class="text-[11px] font-bold text-yellow-300 underline mt-3">Lihat Fungsi Unit →</span>
-      </a>
-    </div>
-  </section>
+    <!-- MAIN CONTENT AREA -->
+    <main class="flex-1 p-6 md:p-10">
+      
+      <!-- Banner Artikel Utama (Kobarkan Semangat...) -->
+      <div class="w-full bg-gray-300 h-48 md:h-64 mb-8 flex items-center justify-center relative overflow-hidden rounded-sm shadow-sm border border-gray-400">
+        <!-- Ganti src dengan gambar banner aslinya -->
+        <img src="images/banner-semangat.jpg" alt="Kobarkan Semangat" class="w-full h-full object-cover">
+        
+        <!-- Indikator slider (Dots) -->
+        <div class="absolute bottom-3 flex gap-2">
+          <div class="w-3 h-3 rounded-full bg-white shadow"></div>
+          <div class="w-3 h-3 rounded-full bg-gray-400 border border-white"></div>
+          <div class="w-3 h-3 rounded-full bg-gray-400 border border-white"></div>
+          <div class="w-3 h-3 rounded-full bg-gray-400 border border-white"></div>
+        </div>
+      </div>
 
-  <section id="pendaftaran" class="relative py-12 px-6 overflow-hidden">
-    <div class="absolute inset-0 z-0">
-      <img src="images/image-39.webp" alt="Background Pendaftaran" class="w-full h-full object-cover opacity-20 mix-blend-overlay">
-    </div>
-    <div class="relative z-10 max-w-5xl mx-auto">
-      <h2 class="text-4xl font-black teks-sorot text-center mb-8 tracking-wider drop-shadow-md">PENDAFTARAN</h2>
+      <!-- ARTIKEL -->
+      <article>
+        <h2 class="text-2xl md:text-3xl font-bold text-title mb-4">Dua Jabatan Strategis Jajaran Koarmada RI Diserahterimakan</h2>
+        
+        <!-- Meta Data Artikel -->
+        <div class="text-xs md:text-sm text-gray-500 border-b border-gray-300 pb-3 mb-6 flex items-center gap-2">
+          <span>Posted Byyyy : Admin, 27/02/2025 15:57 WIB,</span>
+          <span>👁️ 1635</span>
+        </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-6">
-        <div class="bg-daftar text-black p-5 rounded-2xl border-4 border-black flex flex-col justify-between items-center text-center shadow-xl min-h-[220px]">
-          <div class="w-full flex flex-col items-center">
-            <h3 class="font-black text-base mb-1">Unit Staff</h3>
-            <p id="desc-staff" class="text-xs text-gray-700 font-medium mb-2">Memuat status...</p>
-            <div id="cd-staff" class="hidden text-[11px] font-mono font-bold text-amber-700 bg-amber-100 border border-amber-300 px-2.5 py-1 rounded-lg mb-3 w-full">--:--:--</div>
-          </div>
-          <button id="btn-staff" onclick="bukaModal('Unit Staff')" class="bg-utama hover:opacity-80 text-white font-bold py-2.5 px-6 rounded-lg w-full text-sm transition">Daftar</button>
-        </div>
+        <!-- Gambar Artikel -->
+        <div class="mb-6 flex justify-center">
+          <img src="images/sertijab.jpg" alt="Serah Terima Jabatan" class="max-w-full h-auto border-4 border-gray-100 shadow-md">
+        </div>
 
-        <div class="bg-daftar text-black p-5 rounded-2xl border-4 border-black flex flex-col justify-between items-center text-center shadow-xl min-h-[220px]">
-          <div class="w-full flex flex-col items-center">
-            <h3 class="font-black text-base mb-1">Unit Provost</h3>
-            <p id="desc-provost" class="text-xs text-gray-700 font-medium mb-2">Memuat status...</p>
-            <div id="cd-provost" class="hidden text-[11px] font-mono font-bold text-amber-700 bg-amber-100 border border-amber-300 px-2.5 py-1 rounded-lg mb-3 w-full">--:--:--</div>
-          </div>
-          <button id="btn-provost" onclick="bukaModal('Unit Provost')" class="bg-utama hover:opacity-80 text-white font-bold py-2.5 px-6 rounded-lg w-full text-sm transition">Daftar</button>
-        </div>
+        <!-- Teks Artikel -->
+        <div class="text-gray-800 text-justify leading-relaxed space-y-4">
+          <p class="font-bold">TNI Angkatan Laut, Koarmada RI</p>
+          
+          <p>Panglima Komando Armada Republik Indonesia (Pangkoarmada RI) Laksamana Madya TNI Dr. Denih Hendrata, S.E., M.M., CHRMP., memimpin Serah Terima (Sertijab) Dua Jabatan Strategis di lingkungan Koarmada RI, yakni Asisten Intelijen (Asintel) Pangkoarmada RI dan Kadiskomlek Koarmada RI, bertempat di Lounge Matjan Kumbang, Mako Koarmada RI, Jakarta, Kamis (27/02/2025).</p>
+          
+          <p>Jabatan Asintel Pangkoarmada RI diserahterimakan dari Laksamana Pertama TNI Iwan Setiawan, S.H. kepada Kolonel Laut (S) Erwin Edi Anto Hutapea, M.Tr.Opsla. yang sebelumnya menjabat Paban VI/Mintel Sintel TNI. Sementara Laksamana Pertama TNI Iwan Setiawan akan menjabat Staf Khusus Kasal.</p>
+          
+          <p>Sementara Jabatan Kadiskomlek Koarmada RI diserahkan dari Pangkoarmada RI kepada Kolonel Laut (E) Yan Fauzullah, S.T., M.S., C.E.H., melalui acara pengukuhan bersamaan sertijab Asintel Pangkoarmada RI. Yan Fauzullah sebelumnya menjabat di Kepala Departemen Tenaga Pendidik Akademi TNI Angkatan Laut (Kadepgadik AAL).</p>
+          
+          <p>Seusai acara Sertijab, Pangkoarmada RI Laksamana Madya TNI Denih Hendrata dalam sambutannya mengucapkan terima kasih kepada pejabat lama atas dedikasi, loyalitas dan pengabdiannya selama menjabat di Koarmada RI, sehingga organisasi Koarmada RI menjadi lebih baik. Panglima Koarmada RI juga mengucapkan selamat datang dan bergabung kepada pejabat baru dalam rangka pengabdian di Koarmada RI dan berharap kedepannya organisasi ini bisa menjadi lebih baik lagi dengan ide-ide kreatif dari pejabat baru.</p>
+          
+          <p>Turut hadir dalam kegiatan ini, yaitu Kepala Staf Armada Republik Indonesia (Kaskoarmada RI) Laksamana Muda TNI Eko Wahjono, S.E., M.M., para Pejabat Utama (PJU) dan Kasatker Koarmada RI.</p>
+          
+          <p>Demikian berita Dispen Koarmada RI.</p>
+        </div>
+      </article>
+      
+    </main>
 
-        <div class="bg-daftar text-black p-5 rounded-2xl border-4 border-black flex flex-col justify-between items-center text-center shadow-xl min-h-[220px]">
-          <div class="w-full flex flex-col items-center">
-            <h3 class="font-black text-base mb-1">Unit SRT</h3>
-            <p id="desc-srt" class="text-xs text-gray-700 font-medium mb-2">Memuat status...</p>
-            <div id="cd-srt" class="hidden text-[11px] font-mono font-bold text-amber-700 bg-amber-100 border border-amber-300 px-2.5 py-1 rounded-lg mb-3 w-full">--:--:--</div>
-          </div>
-          <button id="btn-srt" onclick="bukaModal('Unit SRT')" class="bg-utama hover:opacity-80 text-white font-bold py-2.5 px-6 rounded-lg w-full text-sm transition">Daftar</button>
-        </div>
+    <!-- FOOTER -->
+    <footer class="mt-auto py-8 border-t border-gray-300 text-center flex flex-col items-center">
+      <!-- Logo-logo kesatuan di footer -->
+      <div class="flex justify-center gap-4 mb-4">
+        <!-- Ganti dengan icon/logo yang sesuai -->
+        <div class="w-8 h-8 bg-red-600 rounded-full"></div> 
+        <div class="w-8 h-8 bg-green-700 rounded-full"></div>
+        <div class="w-8 h-8 bg-yellow-600 rounded-full"></div>
+        <div class="w-8 h-8 bg-green-600 rounded-full"></div>
+      </div>
+      
+      <p class="text-xs font-bold text-gray-800">Copyright © Tentara Nasional Indonesia Angkatan Laut</p>
+      <p class="text-xs text-gray-500">Designed By Disinfolahtal</p>
+    </footer>
 
-        <div class="bg-daftar text-black p-5 rounded-2xl border-4 border-black flex flex-col justify-between items-center text-center shadow-xl min-h-[220px]">
-          <div class="w-full flex flex-col items-center">
-            <h3 class="font-black text-base mb-1 leading-tight">Sekolah Kadet<br>(Sekad)</h3>
-            <p id="desc-sekad" class="text-xs text-gray-700 font-medium mb-2">Memuat status...</p>
-            <div id="cd-sekad" class="hidden text-[11px] font-mono font-bold text-amber-700 bg-amber-100 border border-amber-300 px-2.5 py-1 rounded-lg mb-3 w-full">--:--:--</div>
-          </div>
-          <button id="btn-sekad" onclick="bukaModal('Sekolah Kadet (Sekad)')" class="bg-utama hover:opacity-80 text-white font-bold py-2.5 px-6 rounded-lg w-full text-sm transition">Daftar</button>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-        <div class="bg-daftar text-black p-5 rounded-2xl border-4 border-black flex flex-col justify-between items-center text-center shadow-xl min-h-[220px]">
-          <div class="w-full flex flex-col items-center">
-            <h3 class="font-black text-base mb-1 leading-tight">Sekolah Kapal Selam<br>(Sekasel)</h3>
-            <p id="desc-sekasel" class="text-xs text-gray-700 font-medium mb-2">Memuat status...</p>
-            <div id="cd-sekasel" class="hidden text-[11px] font-mono font-bold text-amber-700 bg-amber-100 border border-amber-300 px-2.5 py-1 rounded-lg mb-3 w-full">--:--:--</div>
-          </div>
-          <button id="btn-sekasel" onclick="bukaModal('Sekolah Kapal Selam (Sekasel)')" class="bg-utama hover:opacity-80 text-white font-bold py-2.5 px-6 rounded-lg w-full text-sm transition">Daftar</button>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <section id="cek-status" class="relative py-12 px-6 bg-gray-900 border-t-4 border-utama overflow-hidden">
-    <div class="absolute inset-0 z-0">
-      <img src="images/Screenshot 2026-08-01 191627.webp" alt="Background Pengumuman" class="w-full h-full object-cover opacity-20 mix-blend-overlay">
-    </div>
-    <div class="relative z-10 max-w-xl mx-auto">
-      <h2 class="text-3xl font-black teks-sorot text-center mb-2 tracking-wider">PENGUMUMAN KELULUSAN</h2>
-      <p id="sub-judul-kelulusan" class="text-gray-400 text-center text-sm mb-6">Hitung mundur menuju pengumuman hasil seleksi KOARMADA.</p>
-      
-      <div id="box-countdown-kelulusan" class="bg-gray-800/95 border-2 border-yellow-500/50 rounded-2xl p-6 shadow-2xl mb-6 text-center backdrop-blur-sm">
-        <p class="text-xs text-yellow-400 font-bold mb-4 uppercase tracking-widest flex items-center justify-center gap-2">
-          <span>⏱️</span> WAKTU TERSISA SEBELUM PENGUMUMAN
-        </p>
-        
-        <div class="grid grid-cols-4 gap-2 text-center">
-          <div class="bg-gray-900 border border-gray-700 rounded-xl p-3">
-            <span id="cd-hari" class="block text-2xl font-black text-yellow-400 font-mono">00</span>
-            <span class="text-[10px] text-gray-400 uppercase font-bold">Hari</span>
-          </div>
-          <div class="bg-gray-900 border border-gray-700 rounded-xl p-3">
-            <span id="cd-jam" class="block text-2xl font-black text-yellow-400 font-mono">00</span>
-            <span class="text-[10px] text-gray-400 uppercase font-bold">Jam</span>
-          </div>
-          <div class="bg-gray-900 border border-gray-700 rounded-xl p-3">
-            <span id="cd-menit" class="block text-2xl font-black text-yellow-400 font-mono">00</span>
-            <span class="text-[10px] text-gray-400 uppercase font-bold">Menit</span>
-          </div>
-          <div class="bg-gray-900 border border-gray-700 rounded-xl p-3">
-            <span id="cd-detik" class="block text-2xl font-black text-yellow-400 font-mono">00</span>
-            <span class="text-[10px] text-gray-400 uppercase font-bold">Detik</span>
-          </div>
-        </div>
-        <p class="text-[11px] text-gray-400 mt-4 italic">Kolom pencarian kelulusan akan terbuka otomatis begitu waktu habis.</p>
-      </div>
-
-      <div id="box-form-kelulusan" class="hidden bg-gray-800/95 backdrop-blur-sm rounded-xl border border-gray-700 p-6 shadow-xl mb-6">
-        <label class="block text-xs font-bold mb-1">Username Discord:</label>
-        <p class="text-[11px] text-gray-400 mb-2 font-medium">Contoh: <code class="text-yellow-400 bg-gray-900 px-1.5 py-0.5 rounded">koarmada_user</code> (Gunakan username baru tanpa tanda # atau angka lama)</p>
-        
-        <div class="flex gap-2">
-          <input type="text" id="inputCekNama" placeholder="Ketik username Discord di sini..." class="w-full bg-gray-900 border border-gray-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-utama">
-          <button onclick="cekKelulusanUser()" id="btnCek" class="bg-utama hover:opacity-80 text-white font-bold px-6 py-3 rounded-lg text-sm transition shrink-0">Cek Status</button>
-        </div>
-      </div>
-
-      <div id="hasilCek" class="hidden"></div>
-
-    </div>
-  </section>
-
-  <footer class="bg-utama text-white py-4 px-6 text-xs font-bold flex justify-between items-center border-t-4 border-black z-20 relative">
-    <div>© 2026 KOARMADA — Portal Pendaftaran</div>
-    <a href="admin.html" class="hover:text-gray-300 underline">Login Admin →</a>
-  </footer>
-
-  <div id="modalForm" class="fixed inset-0 bg-black/90 flex items-center justify-center p-4 hidden z-50">
-    <div class="bg-gray-900 border-2 border-utama rounded-2xl p-6 w-full max-w-md relative text-white shadow-2xl">
-      <button onclick="tutupModal()" class="absolute top-4 right-5 text-gray-400 hover:text-white text-2xl font-black">&times;</button>
-      
-      <h3 class="text-2xl font-black teks-sorot mb-1">Form Pendaftaran</h3>
-      <p id="labelUnit" class="text-xs text-gray-300 font-medium mb-5"></p>
-
-      <form id="formPendaftaranUser" class="space-y-4">
-        <div>
-          <label class="block text-xs mb-1 font-bold">Username Discord:</label>
-          <input type="text" id="inputNama" required placeholder="misal: koarmada_user" class="w-full bg-gray-800 border border-gray-700 rounded-lg p-2.5 text-sm text-white focus:outline-none focus:border-utama">
-          <span class="text-[10px] text-gray-400 block mt-1">Pastikan username Discord aktif dan bisa di-DM panitia.</span>
-        </div>
-        <div>
-          <label class="block text-xs mb-1 font-bold">Link Profile Roblox:</label>
-          <input type="text" id="inputKontak" required placeholder="https://www.roblox.com/users/..." class="w-full bg-gray-800 border border-gray-700 rounded-lg p-2.5 text-sm text-white focus:outline-none focus:border-utama">
-        </div>
-        <div>
-          <label class="block text-xs mb-1 font-bold">Alasan Mendaftar:</label>
-          <textarea id="inputAlasan" rows="3" required placeholder="Tuliskan alasan bergabung..." class="w-full bg-gray-800 border border-gray-700 rounded-lg p-2.5 text-sm text-white focus:outline-none focus:border-utama"></textarea>
-        </div>
-
-        <button type="submit" id="btnKirim" class="w-full bg-utama hover:opacity-80 text-white font-bold py-3 rounded-lg transition mt-4">Kirim Pendaftaran</button>
-      </form>
-    </div>
-  </div>
-
-  <script type="module">
-    let statusUnitCache = {};
-    let countdownTicker = null;
-    let mainAnnouncementTicker = null;
-
-    // FUNGSI JALANKAN COUNTDOWN PENGUMUMAN UTAMA (AMBIL DARIPADA ADMIN PANEL)
-    function jalankanCountdownPengumuman() {
-      if (mainAnnouncementTicker) clearInterval(mainAnnouncementTicker);
-
-      const waktuPengumumanStr = statusUnitCache.waktu_pengumuman || statusUnitCache.deadline_pengumuman;
-
-      const boxCd = document.getElementById('box-countdown-kelulusan');
-      const boxForm = document.getElementById('box-form-kelulusan');
-      const subJudul = document.getElementById('sub-judul-kelulusan');
-
-      if (!waktuPengumumanStr) {
-        if (boxCd) boxCd.classList.add('hidden');
-        if (boxForm) boxForm.classList.remove('hidden');
-        if (subJudul) subJudul.innerText = "Masukkan Username Discord kamu untuk melihat status kelulusan seleksi Koarmada.";
-        return;
-      }
-
-      const waktuTarget = new Date(waktuPengumumanStr).getTime();
-
-      mainAnnouncementTicker = setInterval(() => {
-        const sekarang = new Date().getTime();
-        const selisih = waktuTarget - sekarang;
-
-        if (isNaN(waktuTarget) || selisih <= 0) {
-          clearInterval(mainAnnouncementTicker);
-          if (boxCd) boxCd.classList.add('hidden');
-          if (boxForm) boxForm.classList.remove('hidden');
-          if (subJudul) subJudul.innerText = "Masukkan Username Discord kamu untuk melihat status kelulusan seleksi Koarmada.";
-        } else {
-          if (boxCd) boxCd.classList.remove('hidden');
-          if (boxForm) boxForm.classList.add('hidden');
-
-          const hari = Math.floor(selisih / (1000 * 60 * 60 * 24));
-          const jam = Math.floor((selisih % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-          const menit = Math.floor((selisih % (1000 * 60 * 60)) / (1000 * 60));
-          const detik = Math.floor((selisih % (1000 * 60)) / 1000);
-
-          document.getElementById('cd-hari').innerText = String(hari).padStart(2, '0');
-          document.getElementById('cd-jam').innerText = String(jam).padStart(2, '0');
-          document.getElementById('cd-menit').innerText = String(menit).padStart(2, '0');
-          document.getElementById('cd-detik').innerText = String(detik).padStart(2, '0');
-        }
-      }, 1000);
-    }
-
-    // FUNGSI TOAST NOTIFICATION CUSTOM
-    window.showToast = (message, type = 'success') => {
-      const container = document.getElementById('toast-container');
-      const toast = document.createElement('div');
-      const isSuccess = type === 'success';
-      const bgColor = isSuccess ? 'bg-gray-800/95 border-green-500/80 text-green-400' : 'bg-gray-800/95 border-red-500/80 text-red-400';
-      const icon = isSuccess ? '✅' : '❌';
-
-      toast.className = `${bgColor} border-2 text-xs font-bold p-4 rounded-xl shadow-2xl backdrop-blur-md pointer-events-auto flex items-center gap-3 transform translate-x-full transition-all duration-300 opacity-0`;
-      toast.innerHTML = `<span class="text-base">${icon}</span><span class="text-white">${message}</span>`;
-
-      container.appendChild(toast);
-
-      setTimeout(() => {
-        toast.classList.remove('translate-x-full', 'opacity-0');
-      }, 50);
-
-      setTimeout(() => {
-        toast.classList.add('translate-x-full', 'opacity-0');
-        setTimeout(() => toast.remove(), 300);
-      }, 4000);
-    };
-
-    // FUNGSI JALANKAN COUNTDOWN TIMER MASING-MASING UNIT
-    function startUnitCountdowns() {
-      if (countdownTicker) clearInterval(countdownTicker);
-
-      const units = ['staff', 'provost', 'srt', 'sekad', 'sekasel'];
-
-      countdownTicker = setInterval(() => {
-        const now = new Date().getTime();
-
-        units.forEach(u => {
-          const status = statusUnitCache[`btn-${u}`] || 'buka';
-          const deadlineStr = statusUnitCache[`deadline_${u}`] || statusUnitCache[`deadline-${u}`] || statusUnitCache.deadline; 
-          const cdElem = document.getElementById(`cd-${u}`);
-          const btn = document.getElementById(`btn-${u}`);
-          const desc = document.getElementById(`desc-${u}`);
-
-          if (status === 'tutup') {
-            if (cdElem) cdElem.classList.add('hidden');
-            return;
-          }
-
-          if (deadlineStr) {
-            const targetTime = new Date(deadlineStr).getTime();
-            if (!isNaN(targetTime)) {
-              const diff = targetTime - now;
-
-              if (diff <= 0) {
-                if (cdElem) cdElem.classList.add('hidden');
-                if (desc) { desc.innerText = "Pendaftaran Ditutup"; desc.className = "text-xs text-red-600 font-bold mb-2"; }
-                if (btn) { btn.innerText = "TUTUP"; btn.disabled = true; btn.classList.remove('bg-utama', 'hover:opacity-80'); btn.classList.add('bg-gray-400', 'cursor-not-allowed'); }
-              } else {
-                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-                let timeText = `⏱️ `;
-                if (days > 0) timeText += `${days}h `;
-                timeText += `${String(hours).padStart(2, '0')}j ${String(minutes).padStart(2, '0')}m ${String(seconds).padStart(2, '0')}s`;
-
-                if (cdElem) {
-                  cdElem.innerText = timeText;
-                  cdElem.classList.remove('hidden');
-                }
-              }
-            } else {
-              if (cdElem) cdElem.classList.add('hidden');
-            }
-          } else {
-            if (cdElem) cdElem.classList.add('hidden');
-          }
-        });
-      }, 1000);
-    }
-
-    async function loadStatusPendaftaran() {
-      try {
-        const res = await fetch('/api/get-settings');
-        if (res.ok) {
-          statusUnitCache = await res.json();
-        }
-        
-        const units = ['staff', 'provost', 'srt', 'sekad', 'sekasel'];
-        units.forEach(u => {
-          const status = statusUnitCache[`btn-${u}`] || 'buka';
-          const btn = document.getElementById(`btn-${u}`);
-          const desc = document.getElementById(`desc-${u}`);
-
-          if (status === 'tutup') {
-            if (desc) { desc.innerText = "Pendaftaran Ditutup"; desc.className = "text-xs text-red-600 font-bold mb-2"; }
-            if (btn) { btn.innerText = "TUTUP"; btn.disabled = true; btn.classList.remove('bg-utama', 'hover:opacity-80'); btn.classList.add('bg-gray-400', 'cursor-not-allowed'); }
-          } else {
-            if (desc) { desc.innerText = `Klik untuk mendaftar`; desc.className = "text-xs text-gray-700 font-medium mb-2"; }
-            if (btn) { btn.innerText = "Daftar"; btn.disabled = false; btn.classList.add('bg-utama', 'hover:opacity-80'); btn.classList.remove('bg-gray-400', 'cursor-not-allowed'); }
-          }
-        });
-
-        startUnitCountdowns();
-        jalankanCountdownPengumuman();
-      } catch (err) { console.error("Gagal memuat status:", err); }
-    }
-
-    // FUNGSI CEK KELULUSAN USER
-    window.cekKelulusanUser = async () => {
-      const inputCekNama = document.getElementById('inputCekNama').value.trim();
-      const hasilCek = document.getElementById('hasilCek');
-      const btnCek = document.getElementById('btnCek');
-
-      if (!inputCekNama) {
-        showToast("Silakan masukkan username Discord kamu terlebih dahulu!", "error");
-        return;
-      }
-
-      btnCek.innerText = "Mencari...";
-      btnCek.disabled = true;
-      hasilCek.classList.remove('hidden');
-      hasilCek.innerHTML = `<p class="text-center text-gray-400 text-xs italic bg-gray-800 p-4 rounded-xl border border-gray-700">Memeriksa database kelulusan...</p>`;
-
-      try {
-        const response = await fetch('/api/cek-kelulusan', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ nama: inputCekNama })
-        });
-        
-        const data = await response.json();
-
-        if (!data.lulus) {
-          hasilCek.innerHTML = `
-            <div class="bg-gray-800/95 backdrop-blur-sm rounded-xl border border-red-500/50 p-6 shadow-xl text-center">
-              <div class="text-red-400 font-black text-base mb-2">❌ BELUM LULUS / TIDAK DITEMUKAN</div>
-              <p class="text-xs text-gray-300">Nama <strong class="text-white">"${inputCekNama}"</strong> tidak tercantum dalam daftar kelulusan atau belum diumumkan.</p>
-            </div>
-          `;
-          return;
-        }
-
-        const unitLower = data.unit.toLowerCase();
-        let instruksiHtml = "";
-        if (unitLower.includes("staff")) {
-          instruksiHtml = `
-            <p class="text-xs text-gray-300 mb-2">Wajib join server Discord berikut:</p>
-            <a href="https://discord.gg/GaFb5CD6Gk" target="_blank" class="text-yellow-400 underline font-bold text-sm">discord.gg/GaFb5CD6Gk</a>
-          `;
-        } else if (unitLower.includes("provost")) {
-          instruksiHtml = `
-            <p class="text-xs text-gray-300 mb-2">Wajib join server Discord berikut:</p>
-            <a href="https://discord.gg/RgMC6DHRk6" target="_blank" class="text-yellow-400 underline font-bold text-sm">discord.gg/RgMC6DHRk6</a>
-          `;
-        } else if (unitLower.includes("srt")) {
-          instruksiHtml = `
-            <p class="text-xs text-gray-300 mb-2">Wajib join server Discord berikut:</p>
-            <a href="https://discord.gg/4aw96j3VJ7" target="_blank" class="text-yellow-400 underline font-bold text-sm">discord.gg/4aw96j3VJ7</a>
-          `;
-        } else if (unitLower.includes("kadet") || unitLower.includes("sekad")) {
-          instruksiHtml = `
-            <p class="text-xs text-gray-300 mb-2">Wajib join server Discord berikut:</p>
-            <a href="https://discord.gg/nsZ65TnNxp" target="_blank" class="text-yellow-400 underline font-bold text-sm">discord.gg/nsZ65TnNxp</a>
-          `;
-        } else if (unitLower.includes("selam") || unitLower.includes("sekasel")) {
-          instruksiHtml = `
-            <p class="text-xs text-gray-300 mb-2">Wajib join server Discord berikut:</p>
-            <a href="https://discord.gg/C7ykynBNnP" target="_blank" class="text-yellow-400 underline font-bold text-sm">discord.gg/C7ykynBNnP</a>
-          `;
-        } else {
-          instruksiHtml = `<p class="text-xs text-gray-300">Silakan hubungi panitia terkait penempatan unit kamu.</p>`;
-        }
-
-        hasilCek.innerHTML = `
-          <div class="bg-gray-800/95 backdrop-blur-sm rounded-xl border-2 border-green-500/50 p-6 shadow-xl">
-            <div class="flex justify-between items-center mb-4 pb-3 border-b border-gray-700">
-              <div>
-                <span class="text-xs font-bold text-green-400 bg-green-600/20 border border-green-500/30 px-2.5 py-1 rounded-full">LULUS</span>
-                <h3 class="font-black text-lg text-white mt-2">${inputCekNama}</h3>
-              </div>
-              <div class="text-right">
-                <span class="text-[10px] text-gray-400 block uppercase">Penempatan Unit</span>
-                <span class="text-sm font-bold text-yellow-400">${data.unit}</span>
-              </div>
-            </div>
-
-            <div class="bg-gray-900/60 p-4 rounded-lg border border-gray-700">
-              <strong class="text-white block mb-2 text-xs flex items-center gap-1.5">
-                <span>📌</span> INSTRUKSI KHUSUS KELULUSAN:
-              </strong>
-              ${instruksiHtml}
-            </div>
-          </div>
-        `;
-
-      } catch (err) {
-        console.error("Gagal mengecek kelulusan:", err);
-        hasilCek.innerHTML = `<p class="text-center text-red-400 text-xs italic bg-gray-800 p-4 rounded-xl border border-gray-700">Terjadi kesalahan saat memeriksa database.</p>`;
-      } finally {
-        btnCek.innerText = "Cek Status";
-        btnCek.disabled = false;
-      }
-    };
-
-    const formPendaftaranUser = document.getElementById('formPendaftaranUser');
-    let unitPilihan = "";
-
-    window.bukaModal = (namaUnit) => {
-      unitPilihan = namaUnit;
-      document.getElementById('labelUnit').innerText = "Unit yang dipilih: " + namaUnit;
-      document.getElementById('modalForm').classList.remove('hidden');
-    }
-
-    window.tutupModal = () => { document.getElementById('modalForm').classList.add('hidden'); }
-
-    // SUBMIT PENDAFTARAN
-    formPendaftaranUser.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const btnKirim = document.getElementById('btnKirim');
-      const nama = document.getElementById('inputNama').value.trim();
-      const roblox = document.getElementById('inputKontak').value.trim();
-      const alasan = document.getElementById('inputAlasan').value.trim();
-
-      btnKirim.innerText = "Mengirim...";
-      btnKirim.disabled = true;
-
-      try {
-        const response = await fetch('/api/kirim-form', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            nama: nama,
-            unit: unitPilihan,
-            roblox: roblox,
-            alasan: alasan
-          })
-        });
-
-        const result = await response.json();
-        
-        if (response.ok && result.success) {
-          showToast("Pendaftaran kamu berhasil dikirim!", "success");
-          tutupModal();
-          formPendaftaranUser.reset();
-        } else {
-          showToast(result.message || "Gagal mengirim pendaftaran", "error");
-        }
-      } catch (err) {
-        console.error("Error submit:", err);
-        showToast("Gagal mengirim pendaftaran, silakan coba lagi.", "error");
-      } finally {
-        btnKirim.innerText = "Kirim Pendaftaran";
-        btnKirim.disabled = false;
-      }
-    });
-
-    loadStatusPendaftaran();
-  </script>
+  </div>
 
 </body>
 </html>
