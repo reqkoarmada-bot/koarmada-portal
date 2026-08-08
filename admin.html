@@ -37,7 +37,7 @@
           Masuk Panel
         </button>
       </form>
-      <a href="pendaftaran.html" onclick="logoutAdmin()" class="block text-[11px] text-gray-500 hover:text-gray-300 mt-4 underline">← Kembali ke Halaman Utama</a>
+      <a href="pendaftar.html" onclick="logoutAdmin()" class="block text-[11px] text-gray-500 hover:text-gray-300 mt-4 underline">← Kembali ke Halaman Utama</a>
     </div>
   </div>
 
@@ -447,7 +447,7 @@
       }
     };
 
-    // LOAD PENDAFTAR MASUK + HAPUS PENDAFTAR
+    // LOAD PENDAFTAR MASUK + HAPUS PENDAFTAR (DISESUAIKAN KE "pendaftar_masuk")
     window.loadPendaftarMasuk = async () => {
       const tbody = document.getElementById('tabelPendaftar');
       tbody.innerHTML = `<tr><td colspan="6" class="p-4 text-center text-gray-500 italic">Memuat data pendaftar...</td></tr>`;
