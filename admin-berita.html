@@ -60,9 +60,15 @@
           </div>
 
           <div>
-            <label class="block text-xs font-semibold text-slate-300 mb-1">URL Media (Gambar/Video MP4)</label>
-            <input type="url" id="mediaUrl" required placeholder="https://..."
-              class="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-sm text-white focus:outline-none focus:border-amber-400">
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Upload Foto Berita (Langsung dari Galeri HP)</label>
+            <input type="file" id="fileGambar" accept="image/*"
+              class="w-full text-xs text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-amber-500 file:text-slate-950 hover:file:bg-amber-400 cursor-pointer bg-slate-900 border border-slate-700 rounded-lg p-1">
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-400 mb-1">Atau Gunakan Link URL Media (Opsional)</label>
+            <input type="url" id="mediaUrl" placeholder="https://... (Kosongkan jika sudah upload foto di atas)"
+              class="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-xs text-white focus:outline-none focus:border-amber-400">
           </div>
 
           <div>
@@ -121,7 +127,7 @@
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
-    // VERIFIKASI PASSWORD VIA VERCEL SERVERLESS API
+    // LOGIN API
     window.verifikasiPassword = async function(e) {
       e.preventDefault();
       const pwd = document.getElementById('inputPassword').value;
@@ -144,7 +150,7 @@
         if (response.ok && result.success) {
           document.getElementById('modalLogin').classList.add('hidden');
           document.getElementById('kontenAdmin').classList.remove('hidden');
-          loadDaftarBeritaAdmin(); // Muat berita setelah berhasil login
+          loadDaftarBeritaAdmin();
         } else {
           msgErr.innerText = result.message || "Password Salah!";
           msgErr.classList.remove('hidden');
@@ -158,22 +164,70 @@
       }
     };
 
+    // FUNGSI KOMPRES FOTO DARI HP KE BASE64
+    function kompresGambar(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = (e) => {
+          const img = new Image();
+          img.src = e.target.result;
+          img.onload = () => {
+            const canvas = document.createElement('canvas');
+            let width = img.width;
+            let height = img.height;
+            const maxDim = 1000;
+
+            if (width > maxDim || height > maxDim) {
+              if (width > height) {
+                height = Math.round((height * maxDim) / width);
+                width = maxDim;
+              } else {
+                width = Math.round((width * maxDim) / height);
+                height = maxDim;
+              }
+            }
+
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, width, height);
+            resolve(canvas.toDataURL('image/jpeg', 0.7)); // Kompres ke JPEG 70% kualitas
+          };
+        };
+        reader.onerror = err => reject(err);
+      });
+    }
+
     // TAMBAH BERITA
     document.getElementById('formTambahBerita').addEventListener('submit', async (e) => {
       e.preventDefault();
       const btn = document.getElementById('btnPublish');
-      btn.innerText = "Mempublikasikan...";
+      btn.innerText = "Memproses Gambar & Upload...";
       btn.disabled = true;
 
       const judul = document.getElementById('judul').value;
-      const mediaUrl = document.getElementById('mediaUrl').value;
+      const fileInput = document.getElementById('fileGambar');
+      let mediaUrl = document.getElementById('mediaUrl').value;
       const deskripsi = document.getElementById('deskripsi').value;
 
-      const now = new Date();
-      const opsiTgl = { day: '2-digit', month: 'short', year: 'numeric' };
-      const tanggalFormat = now.toLocaleDateString('id-ID', opsiTgl).toUpperCase();
-
       try {
+        // Jika user memilih file dari galeri HP
+        if (fileInput.files && fileInput.files[0]) {
+          mediaUrl = await kompresGambar(fileInput.files[0]);
+        }
+
+        if (!mediaUrl) {
+          alert("Pilih foto dari Galeri HP atau isi Link URL Gambar terlebih dahulu!");
+          btn.innerText = "🚀 Publikasikan Berita";
+          btn.disabled = false;
+          return;
+        }
+
+        const now = new Date();
+        const opsiTgl = { day: '2-digit', month: 'short', year: 'numeric' };
+        const tanggalFormat = now.toLocaleDateString('id-ID', opsiTgl).toUpperCase();
+
         await addDoc(collection(db, "berita"), {
           judul: judul,
           mediaUrl: mediaUrl,
@@ -184,7 +238,7 @@
 
         alert("Berita berhasil dipublikasikan!");
         document.getElementById('formTambahBerita').reset();
-        loadDaftarBeritaAdmin(); // Refresh daftar berita
+        loadDaftarBeritaAdmin();
       } catch (err) {
         alert("Gagal menyimpan berita: " + err.message);
       } finally {
@@ -193,7 +247,7 @@
       }
     });
 
-    // LOAD DAFTAR BERITA DENGAN TOMBOL HAPUS
+    // LOAD DAFTAR BERITA
     async function loadDaftarBeritaAdmin() {
       const container = document.getElementById('listBeritaAdmin');
       container.innerHTML = `<p class="text-xs text-slate-400 text-center py-4">Memuat daftar berita...</p>`;
@@ -235,15 +289,14 @@
       }
     }
 
-    // FUNGSI HAPUS BERITA
+    // HAPUS BERITA
     window.hapusBerita = async function(id) {
-      const konfirmasi = confirm("Apakah Anda yakin ingin menghapus berita ini?");
-      if (!konfirmasi) return;
+      if (!confirm("Apakah Anda yakin ingin menghapus berita ini?")) return;
 
       try {
         await deleteDoc(doc(db, "berita", id));
         alert("Berita berhasil dihapus!");
-        loadDaftarBeritaAdmin(); // Refresh daftar setelah hapus
+        loadDaftarBeritaAdmin();
       } catch (err) {
         alert("Gagal menghapus berita: " + err.message);
       }
