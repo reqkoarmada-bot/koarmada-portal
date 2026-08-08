@@ -15,7 +15,6 @@
     body { font-family: 'Inter', sans-serif; }
     .font-resmi { font-family: 'Playfair Display', serif; }
     
-    /* Custom Scrollbar */
     ::-webkit-scrollbar { width: 8px; }
     ::-webkit-scrollbar-track { background: #f1f5f9; }
     ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
@@ -41,9 +40,7 @@
   <nav class="bg-blue-900 sticky top-0 z-40 shadow-md">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <ul class="flex flex-wrap justify-center md:justify-start gap-8 text-sm font-semibold text-white/90">
-        
         <li><a href="index.html" class="block py-4 hover:text-white transition-colors border-b-2 border-transparent hover:border-amber-400">BERANDA</a></li>
-        
         <li class="relative group">
           <a href="#" class="flex items-center gap-1 py-4 hover:text-white transition-colors border-b-2 border-transparent hover:border-amber-400 cursor-pointer">
             PROFIL 
@@ -57,11 +54,8 @@
             </ul>
           </div>
         </li>
-
         <li><a href="berita.html" class="block py-4 text-amber-400 border-b-2 border-amber-400">BERITA</a></li>
-        
         <li><a href="pengumuman.html" class="block py-4 hover:text-white transition-colors border-b-2 border-transparent hover:border-amber-400">PENGUMUMAN</a></li>
-
         <li class="relative group">
           <a href="#" class="flex items-center gap-1 py-4 hover:text-white transition-colors border-b-2 border-transparent hover:border-amber-400 cursor-pointer">
             GALERI 
@@ -74,7 +68,6 @@
             </ul>
           </div>
         </li>
-
         <li><a href="pendaftaran.html" class="block py-4 hover:text-white transition-colors border-b-2 border-transparent hover:border-amber-400">REKRUTMEN</a></li>
       </ul>
     </div>
@@ -92,83 +85,73 @@
       <p class="text-sm text-slate-500 col-span-full text-center py-12">Memuat berita...</p>
     </div>
 
-    <hr class="border-slate-200 my-10">
+    <hr class="border-slate-200 my-8">
 
-    <section id="areaAdmin" class="max-w-3xl mx-auto pt-4 pb-8">
+    <section id="areaAdmin" class="max-w-xl mx-auto pt-2 pb-6">
       
-      <div id="secLoginAdmin" class="bg-white p-6 md:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-4">
-        <div class="flex items-center gap-3 border-b border-slate-100 pb-3">
-          <span class="text-2xl">🔐</span>
-          <div>
-            <h3 class="font-resmi text-lg font-bold text-slate-900">Login Kelola Berita (Admin)</h3>
-            <p class="text-xs text-slate-500">Autentikasi terhubung langsung via Vercel API.</p>
-          </div>
-        </div>
-
-        <form onsubmit="prosesLoginAdmin(event)" class="flex flex-col md:flex-row gap-3">
-          <input type="password" id="inputPasswordAdmin" required placeholder="Masukkan password admin..." 
-                 class="flex-1 px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-800 text-sm">
-          <button type="submit" id="btnLoginSubmit" class="px-6 py-2.5 bg-blue-900 hover:bg-blue-800 text-amber-400 font-bold text-sm rounded-xl transition shadow">
-            LOGIN
+      <div id="secLoginAdmin" class="bg-slate-100/80 p-3 rounded-xl border border-slate-200/80 flex flex-col items-center gap-2">
+        <form onsubmit="prosesLoginAdmin(event)" class="w-full flex items-center gap-2">
+          <span class="text-sm">🔒</span>
+          <input type="password" id="inputPasswordAdmin" required placeholder="Akses Admin Humas..." 
+                 class="flex-1 px-3 py-1.5 text-xs rounded-lg border border-slate-300 focus:outline-none focus:ring-1 focus:ring-blue-800 bg-white">
+          <button type="submit" id="btnLoginSubmit" class="px-4 py-1.5 bg-slate-800 hover:bg-slate-900 text-amber-400 font-semibold text-xs rounded-lg transition">
+            Masuk
           </button>
         </form>
-        <p id="loginError" class="text-xs text-red-600 hidden font-semibold"></p>
+        <p id="loginError" class="text-[11px] text-red-600 hidden font-medium text-center"></p>
       </div>
 
-      <div id="secDashboardAdmin" class="hidden space-y-8">
+      <div id="secDashboardAdmin" class="hidden space-y-6">
         
-        <div class="flex items-center justify-between bg-blue-900 text-white p-4 rounded-xl shadow">
-          <div class="flex items-center gap-2">
-            <span class="text-xl">⚙️</span>
-            <span class="font-bold text-sm tracking-wide">PANEL ADMIN HUMAS</span>
-          </div>
-          <button onclick="logoutAdmin()" class="bg-red-600 hover:bg-red-700 text-white text-xs font-semibold px-4 py-1.5 rounded-lg transition">
-            Keluar Admin
+        <div class="flex items-center justify-between bg-blue-900 text-white px-4 py-2.5 rounded-xl shadow">
+          <span class="font-bold text-xs tracking-wide flex items-center gap-1.5">⚙️ PANEL ADMIN HUMAS</span>
+          <button onclick="logoutAdmin()" class="bg-red-600 hover:bg-red-700 text-white text-[11px] font-semibold px-3 py-1 rounded-md transition">
+            Keluar
           </button>
         </div>
 
-        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
-          <h3 class="font-resmi text-xl font-bold text-slate-900 border-b border-slate-100 pb-2">
+        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-3">
+          <h3 class="font-resmi text-base font-bold text-slate-900 border-b border-slate-100 pb-2">
             ➕ Tambah Berita Baru
           </h3>
 
-          <form id="formTambahBerita" class="space-y-4">
+          <form id="formTambahBerita" class="space-y-3 text-xs">
             <div>
-              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Judul Berita</label>
-              <input type="text" id="judul" required placeholder="Contoh: UPACARA PELANTIKAN SISWA..." 
-                     class="w-full px-4 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-800 text-sm">
+              <label class="block font-bold text-slate-700 uppercase mb-1">Judul Berita</label>
+              <input type="text" id="judul" required placeholder="Judul berita..." 
+                     class="w-full px-3 py-2 rounded-lg border border-slate-200 focus:outline-none focus:ring-1 focus:ring-blue-800">
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
               <div>
-                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Tanggal</label>
+                <label class="block font-bold text-slate-700 uppercase mb-1">Tanggal</label>
                 <input type="text" id="tanggal" required placeholder="Contoh: 08 AGU 2026" 
-                       class="w-full px-4 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-800 text-sm">
+                       class="w-full px-3 py-2 rounded-lg border border-slate-200 focus:outline-none focus:ring-1 focus:ring-blue-800">
               </div>
               <div>
-                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">URL Foto / Video (.mp4)</label>
-                <input type="url" id="mediaUrl" required placeholder="https://domain.com/gambar.png" 
-                       class="w-full px-4 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-800 text-sm">
+                <label class="block font-bold text-slate-700 uppercase mb-1">URL Media (.png, .jpg, .mp4)</label>
+                <input type="url" id="mediaUrl" required placeholder="https://..." 
+                       class="w-full px-3 py-2 rounded-lg border border-slate-200 focus:outline-none focus:ring-1 focus:ring-blue-800">
               </div>
             </div>
 
             <div>
-              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Isi Berita</label>
-              <textarea id="deskripsi" rows="4" required placeholder="Tuliskan isi berita lengkap..." 
-                        class="w-full px-4 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-800 text-sm"></textarea>
+              <label class="block font-bold text-slate-700 uppercase mb-1">Isi Berita</label>
+              <textarea id="deskripsi" rows="3" required placeholder="Detail berita..." 
+                        class="w-full px-3 py-2 rounded-lg border border-slate-200 focus:outline-none focus:ring-1 focus:ring-blue-800"></textarea>
             </div>
 
-            <button type="submit" id="btnSubmit" class="w-full py-3 bg-blue-900 hover:bg-blue-800 text-amber-400 font-bold text-sm rounded-xl transition shadow">
+            <button type="submit" id="btnSubmit" class="w-full py-2 bg-blue-900 hover:bg-blue-800 text-amber-400 font-bold rounded-lg transition shadow-sm">
               PUBLIKASIKAN BERITA
             </button>
           </form>
         </div>
 
-        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
-          <h3 class="font-resmi text-lg font-bold text-slate-900 border-b border-slate-100 pb-2">
-            🗑️ Kelola / Hapus Berita
+        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-3">
+          <h3 class="font-resmi text-sm font-bold text-slate-900 border-b border-slate-100 pb-2">
+            🗑️ Kelola Berita
           </h3>
-          <div id="listKelolaBerita" class="space-y-3">
+          <div id="listKelolaBerita" class="space-y-2">
             <p class="text-xs text-slate-500">Memuat berita...</p>
           </div>
         </div>
@@ -182,12 +165,11 @@
   <div id="modalDetailBerita" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
     <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative flex flex-col border border-slate-200">
       
-      <button onclick="tutupModalBerita()" class="absolute top-3 right-3 bg-slate-100 hover:bg-red-600 hover:text-white text-slate-600 w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold transition z-10 shadow">
+      <button onclick="tutupModalBerita()" class="absolute top-3 right-3 bg-slate-100 hover:bg-red-600 hover:text-white text-slate-600 w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition z-10 shadow">
         ✕
       </button>
 
-      <div id="modalMedia" class="w-full bg-slate-900 flex items-center justify-center overflow-hidden rounded-t-2xl max-h-80">
-      </div>
+      <div id="modalMedia" class="w-full bg-slate-900 flex items-center justify-center overflow-hidden rounded-t-2xl max-h-80"></div>
 
       <div class="p-6 space-y-3">
         <div id="modalTanggal" class="text-xs text-amber-600 font-bold"></div>
@@ -197,7 +179,7 @@
       </div>
 
       <div class="p-4 bg-slate-50 border-t border-slate-100 text-right rounded-b-2xl">
-        <button onclick="tutupModalBerita()" class="px-5 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs font-semibold rounded-lg transition">
+        <button onclick="tutupModalBerita()" class="px-4 py-1.5 bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs font-semibold rounded-lg transition">
           Tutup
         </button>
       </div>
@@ -205,15 +187,10 @@
     </div>
   </div>
 
-  <footer class="bg-slate-900 text-slate-400 py-10 mt-auto border-t-4 border-blue-900">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
-      <div class="flex justify-center gap-6 mb-6">
-        <div class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center border border-slate-700 hover:bg-slate-700 transition cursor-pointer">⚓</div>
-        <div class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center border border-slate-700 hover:bg-slate-700 transition cursor-pointer">🛡️</div>
-        <div class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center border border-slate-700 hover:bg-slate-700 transition cursor-pointer">🦅</div>
-      </div>
+  <footer class="bg-slate-900 text-slate-400 py-8 mt-auto border-t-4 border-blue-900">
+    <div class="max-w-6xl mx-auto px-4 text-center">
       <p class="text-sm font-semibold text-slate-300">Copyright &copy; 2026 Komando Armada RI RBX</p>
-      <p class="text-xs mt-2">Designed By Humas Koarmada RI RBX</p>
+      <p class="text-xs text-slate-500 mt-1">Designed By Humas Koarmada RI RBX</p>
     </div>
   </footer>
 
@@ -233,12 +210,10 @@
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
-    // ENDPOINT API VERCEL (Ubah URL ini jika route API kamu berbeda, misal: /api/admin-login)
     const API_LOGIN_URL = "/api/login";
-
     window.dataBeritaMap = {};
 
-    // 1. LOAD BERITA UTAMA & LIST ADMIN
+    // 1. LOAD BERITA
     async function loadSemuaBerita() {
       const grid = document.getElementById('gridBerita');
       const listAdmin = document.getElementById('listKelolaBerita');
@@ -268,7 +243,6 @@
             ? `<video src="${item.mediaUrl}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500"></video>`
             : `<img src="${item.mediaUrl}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Berita">`;
 
-          // Grid Berita Publik
           grid.innerHTML += `
             <div onclick="bukaModalBerita('${docId}')" 
                  class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden group hover:shadow-md transition cursor-pointer flex flex-col">
@@ -289,15 +263,14 @@
             </div>
           `;
 
-          // List Berita untuk Admin Hapus
           if (listAdmin) {
             listAdmin.innerHTML += `
-              <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-3">
-                <div>
-                  <span class="text-[10px] bg-amber-100 text-amber-800 font-bold px-2 py-0.5 rounded">${item.tanggal || 'TERKINI'}</span>
-                  <h5 class="font-bold text-xs text-slate-900 mt-1">${item.judul}</h5>
+              <div class="p-2.5 bg-slate-50 rounded-lg border border-slate-200 flex items-center justify-between gap-2">
+                <div class="truncate">
+                  <span class="text-[9px] bg-amber-100 text-amber-800 font-bold px-1.5 py-0.5 rounded">${item.tanggal || 'TERKINI'}</span>
+                  <h5 class="font-bold text-xs text-slate-900 truncate mt-0.5">${item.judul}</h5>
                 </div>
-                <button onclick="hapusBerita('${docId}')" class="bg-red-50 hover:bg-red-600 text-red-600 hover:text-white border border-red-200 text-xs font-bold px-3 py-1.5 rounded-lg transition text-center">
+                <button onclick="hapusBerita('${docId}')" class="bg-red-50 hover:bg-red-600 text-red-600 hover:text-white border border-red-200 text-[11px] font-bold px-2.5 py-1 rounded transition">
                   Hapus
                 </button>
               </div>
@@ -309,14 +282,13 @@
       }
     }
 
-    // 2. FUNGSI POP-UP MODAL
+    // 2. MODAL POP-UP
     window.bukaModalBerita = function(docId) {
       const item = window.dataBeritaMap[docId];
       if (!item) return;
 
       const modal = document.getElementById('modalDetailBerita');
       const containerMedia = document.getElementById('modalMedia');
-      
       const isVideo = item.mediaUrl && (item.mediaUrl.includes('.mp4') || item.mediaUrl.includes('video'));
 
       if (isVideo) {
@@ -342,19 +314,17 @@
 
     window.onclick = function(e) {
       const modal = document.getElementById('modalDetailBerita');
-      if (e.target === modal) {
-        window.tutupModalBerita();
-      }
+      if (e.target === modal) window.tutupModalBerita();
     };
 
-    // 3. LOGIK LOGIN VIA VERCEL API
+    // 3. LOGIN VIA VERCEL API
     window.prosesLoginAdmin = async function(e) {
       e.preventDefault();
       const pwd = document.getElementById('inputPasswordAdmin').value;
       const btn = document.getElementById('btnLoginSubmit');
       const errEl = document.getElementById('loginError');
 
-      btn.innerText = "VERIFIKASI...";
+      btn.innerText = "...";
       btn.disabled = true;
       errEl.classList.add('hidden');
 
@@ -371,14 +341,14 @@
           localStorage.setItem('isAdminLoggedIn', 'true');
           cekSesiAdmin();
         } else {
-          errEl.innerText = resData.message || "Password salah atau akses ditolak!";
+          errEl.innerText = resData.message || "Password salah!";
           errEl.classList.remove('hidden');
         }
       } catch (err) {
-        errEl.innerText = "Gagal terhubung ke API Vercel: " + err.message;
+        errEl.innerText = "Gagal terhubung ke API Vercel.";
         errEl.classList.remove('hidden');
       } finally {
-        btn.innerText = "LOGIN";
+        btn.innerText = "Masuk";
         btn.disabled = false;
       }
     };
@@ -415,11 +385,11 @@
           waktu: serverTimestamp()
         });
 
-        alert("Berita berhasil dipublikasikan!");
+        alert("Berita dipublikasikan!");
         document.getElementById('formTambahBerita').reset();
         loadSemuaBerita();
       } catch (err) {
-        alert("Gagal menambahkan berita: " + err.message);
+        alert("Gagal menambahkan: " + err.message);
       } finally {
         btn.innerText = "PUBLIKASIKAN BERITA";
         btn.disabled = false;
@@ -428,13 +398,13 @@
 
     // HAPUS BERITA
     window.hapusBerita = async function(docId) {
-      if (confirm("Yakin ingin menghapus berita ini?")) {
+      if (confirm("Hapus berita ini?")) {
         try {
           await deleteDoc(doc(db, "berita", docId));
           alert("Berita berhasil dihapus!");
           loadSemuaBerita();
         } catch (err) {
-          alert("Gagal menghapus berita: " + err.message);
+          alert("Gagal menghapus: " + err.message);
         }
       }
     };
@@ -444,4 +414,5 @@
     loadSemuaBerita();
   </script>
 </body>
-</html>
+  </html>
+  
