@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Struktur Organisasi - Koarmada RI</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .font-resmi { font-family: 'Playfair Display', serif; }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #f1f5f9; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased flex flex-col min-h-screen">
+
+  <!-- TOP HEADER (Logo & Judul Instansi) -->
+  <div class="bg-slate-900 text-white">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-4">
+        <!-- Ganti dengan Logo Asli -->
+        <div class="w-14 h-14 bg-white rounded-full p-1 shadow-lg">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Koarmada_RI.svg/250px-Koarmada_RI.svg.png?utm_source=id.wikipedia.org&utm_campaign=parser&utm_content=thumbnail" alt="Logo" class="w-full h-full object-contain">
+        </div>
+        <div>
+          <h1 class="text-xl md:text-2xl font-bold tracking-wide uppercase">Komando Armada Republik Indonesia</h1>
+          <p class="text-red-600 text-xs md:text-sm font-semibold tracking-widest uppercase">"Ekapada Banda Jala Nusa"</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STICKY NAVBAR -->
+  <nav class="bg-blue-900 sticky top-0 z-50 shadow-md">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <ul class="flex flex-wrap justify-center md:justify-start gap-8 text-sm font-semibold text-white/90">
+        <li><a href="index.html" class="block py-4 hover:text-white transition-colors border-b-2 border-transparent hover:border-amber-400">BERANDA</a></li>
+        
+        <!-- Dropdown PROFIL -->
+        <li class="relative group">
+          <a href="#" class="flex items-center gap-1 py-4 text-amber-400 border-b-2 border-amber-400 cursor-pointer">
+            PROFIL 
+            <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </a>
+          <div class="absolute left-0 top-full hidden group-hover:block w-48 bg-white text-slate-800 shadow-xl rounded-b-lg overflow-hidden border-t-4 border-amber-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <ul class="flex flex-col text-sm font-medium">
+              <li><a href="sejarah.html" class="block px-4 py-3 hover:bg-slate-50 hover:text-blue-700 transition border-b border-slate-100">Sejarah Koarmada</a></li>
+              <li><a href="visi-misi.html" class="block px-4 py-3 hover:bg-slate-50 hover:text-blue-700 transition border-b border-slate-100">Visi & Misi</a></li>
+              <li><a href="struktur.html" class="block px-4 py-3 bg-slate-50 text-blue-700 transition">Struktur Organisasi</a></li>
+            </ul>
+          </div>
+        </li>
+
+        <li><a href="berita.html" class="block py-4 hover:text-white transition-colors border-b-2 border-transparent hover:border-amber-400">BERITA</a></li>
+        <li><a href="#" class="block py-4 hover:text-white transition-colors border-b-2 border-transparent hover:border-amber-400">ARTIKEL</a></li>
+        <li><a href="#" class="block py-4 hover:text-white transition-colors border-b-2 border-transparent hover:border-amber-400">PENGUMUMAN</a></li>
+
+        <li class="relative group">
+          <a href="#" class="flex items-center gap-1 py-4 hover:text-white transition-colors border-b-2 border-transparent hover:border-amber-400 cursor-pointer">
+            GALERI 
+            <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </a>
+          <div class="absolute left-0 top-full hidden group-hover:block w-40 bg-white text-slate-800 shadow-xl rounded-b-lg overflow-hidden border-t-4 border-amber-400">
+            <ul class="flex flex-col text-sm font-medium">
+              <li><a href="#" class="block px-4 py-3 hover:bg-slate-50 hover:text-blue-700 transition border-b border-slate-100">Galeri Foto</a></li>
+              <li><a href="#" class="block px-4 py-3 hover:bg-slate-50 hover:text-blue-700 transition">Galeri Video</a></li>
+            </ul>
+          </div>
+        </li>
+        <li><a href="#" class="block py-4 hover:text-white transition-colors border-b-2 border-transparent hover:border-amber-400">REKRUTMEN</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT: STRUKTUR HIERARKI + PANGKAT PDH -->
+  <main class="flex-grow max-w-[1400px] mx-auto w-full px-4 sm:px-6 lg:px-8 py-12">
+    <div class="text-center mb-10">
+      <h1 class="font-resmi text-3xl md:text-4xl font-bold text-slate-900 mb-4 uppercase">Struktur Hierarki Jabatan</h1>
+      <div class="w-24 h-1.5 bg-amber-400 mx-auto rounded-full"></div>
+      <p class="text-slate-500 mt-4 font-medium">Daftar Jabatan & Pejabat Koarmada RI Berdasarkan Tingkatan Pangkat PDH</p>
+    </div>
+
+    <!-- WADAH BAGAN ORGANISASI -->
+    <div class="bg-white rounded-3xl shadow-sm border border-slate-100 p-8 overflow-x-auto mb-16 pt-16">
+      <div class="min-w-[1200px] relative font-sans text-sm pb-10 flex flex-col items-center">
+        
+        <!-- Tulang Punggung Garis Tengah -->
+        <div class="absolute left-1/2 top-10 bottom-10 w-[2px] bg-slate-800 transform -translate-x-1/2 z-0"></div>
+
+        <!-- 1. LAKSAMANA MADYA TNI -->
+        <div class="relative z-10 w-full flex justify-center pt-2">
+          <div class="border-2 border-slate-900 bg-slate-900 text-white w-[350px] rounded-xl p-6 text-center shadow-lg relative flex flex-col items-center">
+            
+            <!-- Epaulette PDH Laksdya -->
+            <div class="w-12 flex flex-col items-center bg-slate-900 border-2 border-amber-500 rounded-t-full pt-1.5 pb-2 shadow-md mb-4 absolute -top-10">
+              <span class="text-[12px] text-amber-400 mb-1">⚓</span>
+              <div class="flex flex-col gap-1 mt-0.5">
+                <span class="text-amber-400 text-[14px] leading-none">&#9733;</span>
+                <span class="text-amber-400 text-[14px] leading-none">&#9733;</span>
+                <span class="text-amber-400 text-[14px] leading-none">&#9733;</span>
+              </div>
+            </div>
+
+            <div class="font-black text-xl uppercase tracking-wider mt-5">PANGKOARMADA RI</div>
+            <div class="text-slate-200 text-sm font-semibold mt-1 mb-3">Laksamana Madya TNI rafaweeh M.Tr.Opsla</div>
+            <div class="text-amber-400 text-[10px] font-bold tracking-widest bg-slate-800/50 inline-block px-3 py-1 rounded">LAKSAMANA MADYA TNI</div>
+          </div>
+        </div>
+
+        <!-- 2. LAKSAMANA MUDA TNI -->
+        <div class="relative z-10 w-full flex justify-center mt-16">
+          <div class="border-2 border-slate-900 bg-white w-[300px] rounded-xl p-5 text-center shadow-md flex flex-col items-center relative">
+            
+            <!-- Epaulette PDH Laksda -->
+            <div class="w-10 flex flex-col items-center bg-slate-900 border-2 border-amber-500 rounded-t-full pt-1 pb-1.5 shadow-md mb-3 absolute -top-8">
+              <span class="text-[10px] text-amber-400 mb-0.5">⚓</span>
+              <div class="flex flex-col gap-0.5 mt-0.5">
+                <span class="text-amber-400 text-[12px] leading-none">&#9733;</span>
+                <span class="text-amber-400 text-[12px] leading-none">&#9733;</span>
+              </div>
+            </div>
+
+            <div class="font-bold text-lg uppercase text-slate-900 mt-4">KASKOARMADA RI</div>
+            <div class="text-slate-700 text-sm font-semibold mt-1 mb-3">Laksamana Muda TNI Lmncv9 M.Tr.Opsla</div>
+            <div class="text-blue-800 text-[10px] font-bold bg-blue-50 inline-block px-3 py-1 rounded">LAKSAMANA MUDA TNI</div>
+          </div>
+        </div>
+
+        <!-- 3. LAKSAMANA PERTAMA TNI (8 Jabatan) -->
+        <div class="relative z-10 w-full mt-14 flex flex-col items-center">
+          <div class="bg-slate-200 text-slate-700 font-bold px-6 py-1.5 rounded-full text-[11px] mb-2 border border-slate-300 z-10">LAKSAMANA PERTAMA TNI</div>
+          
+          <div class="w-full flex relative pt-6" style="padding-left: 6.25%; padding-right: 6.25%;">
+            <!-- Garis horizontal -->
+            <div class="absolute top-0 h-[2px] bg-slate-800" style="left: 6.25%; right: 6.25%;"></div>
+            
+            <div class="grid grid-cols-8 gap-3 w-full">
+              <!-- Item 3-10 -->
+              <div class="relative pt-4"><div class="absolute top-0 left-1/2 w-[2px] h-4 bg-slate-800 transform -translate-x-1/2 -mt-4"></div><div class="bg-white border-t-4 border-blue-800 border-x border-b border-slate-200 p-2 text-center shadow-sm h-full flex flex-col items-center justify-start rounded-b"><div class="w-6 flex flex-col items-center bg-slate-900 border border-amber-500 rounded-t-full pt-[2px] pb-1.5 shadow-sm mb-2"><span class="text-[6px] text-amber-400 mb-[2px]">⚓</span><span class="text-amber-400 text-[8px] leading-none">&#9733;</span></div><span class="font-bold text-[9px] text-slate-800 uppercase mb-2 leading-tight flex-grow">IRKOARMADA RI</span><span class="text-[8px] text-slate-500 font-medium border-t border-slate-100 pt-1 w-full">Laksma TNI [Nama Pejabat]</span></div></div>
+              <div class="relative pt-4"><div class="absolute top-0 left-1/2 w-[2px] h-4 bg-slate-800 transform -translate-x-1/2 -mt-4"></div><div class="bg-white border-t-4 border-blue-800 border-x border-b border-slate-200 p-2 text-center shadow-sm h-full flex flex-col items-center justify-start rounded-b"><div class="w-6 flex flex-col items-center bg-slate-900 border border-amber-500 rounded-t-full pt-[2px] pb-1.5 shadow-sm mb-2"><span class="text-[6px] text-amber-400 mb-[2px]">⚓</span><span class="text-amber-400 text-[8px] leading-none">&#9733;</span></div><span class="font-bold text-[9px] text-slate-800 uppercase mb-2 leading-tight flex-grow">ASPERS PANGKOARMADA RI</span><span class="text-[8px] text-slate-500 font-medium border-t border-slate-100 pt-1 w-full">Laksma TNI [Nama Pejabat]</span></div></div>
+              <div class="relative pt-4"><div class="absolute top-0 left-1/2 w-[2px] h-4 bg-slate-800 transform -translate-x-1/2 -mt-4"></div><div class="bg-white border-t-4 border-blue-800 border-x border-b border-slate-200 p-2 text-center shadow-sm h-full flex flex-col items-center justify-start rounded-b"><div class="w-6 flex flex-col items-center bg-slate-900 border border-amber-500 rounded-t-full pt-[2px] pb-1.5 shadow-sm mb-2"><span class="text-[6px] text-amber-400 mb-[2px]">⚓</span><span class="text-amber-400 text-[8px] leading-none">&#9733;</span></div><span class="font-bold text-[9px] text-slate-800 uppercase mb-2 leading-tight flex-grow">ASOPS PANGKOARMADA RI</span><span class="text-[8px] text-slate-500 font-medium border-t border-slate-100 pt-1 w-full">Laksma TNI [Nama Pejabat]</span></div></div>
+              <div class="relative pt-4"><div class="absolute top-0 left-1/2 w-[2px] h-4 bg-slate-800 transform -translate-x-1/2 -mt-4"></div><div class="bg-white border-t-4 border-blue-800 border-x border-b border-slate-200 p-2 text-center shadow-sm h-full flex flex-col items-center justify-start rounded-b"><div class="w-6 flex flex-col items-center bg-slate-900 border border-amber-500 rounded-t-full pt-[2px] pb-1.5 shadow-sm mb-2"><span class="text-[6px] text-amber-400 mb-[2px]">⚓</span><span class="text-amber-400 text-[8px] leading-none">&#9733;</span></div><span class="font-bold text-[9px] text-slate-800 uppercase mb-2 leading-tight flex-grow">DANKOOPSKASEL KOARMADA RI</span><span class="text-[8px] text-slate-500 font-medium border-t border-slate-100 pt-1 w-full">Laksma TNI [Nama Pejabat]</span></div></div>
+              <div class="relative pt-4"><div class="absolute top-0 left-1/2 w-[2px] h-4 bg-slate-800 transform -translate-x-1/2 -mt-4"></div><div class="bg-white border-t-4 border-blue-800 border-x border-b border-slate-200 p-2 text-center shadow-sm h-full flex flex-col items-center justify-start rounded-b"><div class="w-6 flex flex-col items-center bg-slate-900 border border-amber-500 rounded-t-full pt-[2px] pb-1.5 shadow-sm mb-2"><span class="text-[6px] text-amber-400 mb-[2px]">⚓</span><span class="text-amber-400 text-[8px] leading-none">&#9733;</span></div><span class="font-bold text-[9px] text-slate-800 uppercase mb-2 leading-tight flex-grow">DANKOPPEBA KOARMADA RI</span><span class="text-[8px] text-slate-500 font-medium border-t border-slate-100 pt-1 w-full">Laksma TNI [Nama Pejabat]</span></div></div>
+              <div class="relative pt-4"><div class="absolute top-0 left-1/2 w-[2px] h-4 bg-slate-800 transform -translate-x-1/2 -mt-4"></div><div class="bg-white border-t-4 border-blue-800 border-x border-b border-slate-200 p-2 text-center shadow-sm h-full flex flex-col items-center justify-start rounded-b"><div class="w-6 flex flex-col items-center bg-slate-900 border border-amber-500 rounded-t-full pt-[2px] pb-1.5 shadow-sm mb-2"><span class="text-[6px] text-amber-400 mb-[2px]">⚓</span><span class="text-amber-400 text-[8px] leading-none">&#9733;</span></div><span class="font-bold text-[9px] text-slate-800 uppercase mb-2 leading-tight flex-grow">DANKOLAT KOARMADA RI</span><span class="text-[8px] text-slate-500 font-medium border-t border-slate-100 pt-1 w-full">Laksma TNI [Nama Pejabat]</span></div></div>
+              <div class="relative pt-4"><div class="absolute top-0 left-1/2 w-[2px] h-4 bg-slate-800 transform -translate-x-1/2 -mt-4"></div><div class="bg-white border-t-4 border-blue-800 border-x border-b border-slate-200 p-2 text-center shadow-sm h-full flex flex-col items-center justify-start rounded-b"><div class="w-6 flex flex-col items-center bg-slate-900 border border-amber-500 rounded-t-full pt-[2px] pb-1.5 shadow-sm mb-2"><span class="text-[6px] text-amber-400 mb-[2px]">⚓</span><span class="text-amber-400 text-[8px] leading-none">&#9733;</span></div><span class="font-bold text-[9px] text-slate-800 uppercase mb-2 leading-tight flex-grow">DANSATDUK KOARMADA RI</span><span class="text-[8px] text-slate-500 font-medium border-t border-slate-100 pt-1 w-full">Laksma TNI [Nama Pejabat]</span></div></div>
+              <div class="relative pt-4"><div class="absolute top-0 left-1/2 w-[2px] h-4 bg-slate-800 transform -translate-x-1/2 -mt-4"></div><div class="bg-white border-t-4 border-blue-800 border-x border-b border-slate-200 p-2 text-center shadow-sm h-full flex flex-col items-center justify-start rounded-b"><div class="w-6 flex flex-col items-center bg-slate-900 border border-amber-500 rounded-t-full pt-[2px] pb-1.5 shadow-sm mb-2"><span class="text-[6px] text-amber-400 mb-[2px]">⚓</span><span class="text-amber-400 text-[8px] leading-none">&#9733;</span></div><span class="font-bold text-[9px] text-slate-800 uppercase mb-2 leading-tight flex-grow">DAN KRI INDUK KOARMADA RI</span><span class="text-[8px] text-slate-500 font-medium border-t border-slate-100 pt-1 w-full">Laksma TNI [Nama Pejabat]</span></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. KOLONEL (4 Jabatan) -->
+        <div class="relative z-10 w-full mt-14 flex flex-col items-center">
+          <div class="bg-slate-200 text-slate-700 font-bold px-6 py-1.5 rounded-full text-[11px] mb-2 border border-slate-300 z-10">KOLONEL (3 Melati Emas)</div>
+          
+          <div class="w-3/4 flex relative pt-6" style="padding-left: 12.5%; padding-right: 12.5%;">
+            <div class="absolute top-0 h-[2px] bg-slate-800" style="left: 12.5%; right: 12.5%;"></div>
+            
+            <div class="grid grid-cols-4 gap-4 w-full">
+              <!-- Item 11-14 -->
+              <div class="relative pt-4"><div class="absolute top-0 left-1/2 w-[2px] h-4 bg-slate-800 transform -translate-x-1/2 -mt-4"></div><div class="bg-white border-t-4 border-slate-500 border-x border-b border-slate-200 p-2 text-center shadow-sm h-full flex flex-col items-center justify-start rounded-b"><div class="w-6 flex flex-col items-center bg-slate-900 border border-amber-500 rounded-t-full pt-[4px] pb-1.5 shadow-sm mb-2 gap-[2px]"><span class="text-amber-400 text-[7px] leading-none">&#10047;</span><span class="text-amber-400 text-[7px] leading-none">&#10047;</span><span class="text-amber-400 text-[7px] leading-none">&#10047;</span></div><span class="font-bold text-[10px] text-slate-800 uppercase mb-2 flex-grow">DANSATKOR</span><span class="text-[9px] text-slate-500 font-medium border-t border-slate-100 pt-1 w-full">Kolonel Laut [Nama Pejabat]</span></div></div>
+              <div class="relative pt-4"><div class="absolute top-0 left-1/2 w-[2px] h-4 bg-slate-800 transform -translate-x-1/2 -mt-4"></div><div class="bg-white border-t-4 border-slate-500 border-x border-b border-slate-200 p-2 text-center shadow-sm h-full flex flex-col items-center justify-start rounded-b"><div class="w-6 flex flex-col items-center bg-slate-900 border border-amber-500 rounded-t-full pt-[4px] pb-1.5 shadow-sm mb-2 gap-[2px]"><span class="text-amber-400 text-[7px] leading-none">&#10047;</span><span class="text-amber-400 text-[7px] leading-none">&#10047;</span><span class="text-amber-400 text-[7px] leading-none">&#10047;</span></div><span class="font-bold text-[10px] text-slate-800 uppercase mb-2 flex-grow">DANSATSEL</span><span class="text-[9px] text-slate-500 font-medium border-t border-slate-100 pt-1 w-full">Kolonel Laut [Nama Pejabat]</span></div></div>
+              <div class="relative pt-4"><div class="absolute top-0 left-1/2 w-[2px] h-4 bg-slate-800 transform -translate-x-1/2 -mt-4"></div><div class="bg-white border-t-4 border-slate-500 border-x border-b border-slate-200 p-2 text-center shadow-sm h-full flex flex-col items-center justify-start rounded-b"><div class="w-6 flex flex-col items-center bg-slate-900 border border-amber-500 rounded-t-full pt-[4px] pb-1.5 shadow-sm mb-2 gap-[2px]"><span class="text-amber-400 text-[7px] leading-none">&#10047;</span><span class="text-amber-400 text-[7px] leading-none">&#10047;</span><span class="text-amber-400 text-[7px] leading-none">&#10047;</span></div><span class="font-bold text-[10px] text-slate-800 uppercase mb-2 flex-grow">DAN KRI FRIGATE</span><span class="text-[9px] text-slate-500 font-medium border-t border-slate-100 pt-1 w-full">Kolonel Laut [Nama Pejabat]</span></div></div>
+              <div class="relative pt-4"><div class="absolute top-0 left-1/2 w-[2px] h-4 bg-slate-800 transform -translate-x-1/2 -mt-4"></div><div class="bg-white border-t-4 border-slate-500 border-x border-b border-slate-200 p-2 text-center shadow-sm h-full flex flex-col items-center justify-start rounded-b"><div class="w-6 flex flex-col items-center bg-slate-900 border border-amber-500 rounded-t-full pt-[4px] pb-1.5 shadow-sm mb-2 gap-[2px]"><span class="text-amber-400 text-[7px] leading-none">&#10047;</span><span class="text-amber-400 text-[7px] leading-none">&#10047;</span><span class="text-amber-400 text-[7px] leading-none">&#10047;</span></div><span class="font-bold text-[10px] text-slate-800 uppercase mb-2 flex-grow">DAN KRI LPD</span><span class="text-[9px] text-slate-500 font-medium border-t border-slate-100 pt-1 w-full">Kolonel Laut [Nama Pejabat]</span></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. LETNAN KOLONEL (6 Jabatan) -->
+        <div class="relative z-10 w-full mt-14 flex flex-col items-center">
+          <div class="bg-slate-200 text-slate-700 font-bold px-6 py-1.5 rounded-full text-[11px] mb-2 border border-slate-300 z-10">LETNAN KOLONEL (2 Melati Emas)</div>
+          
+          <div class="w-11/12 flex relative pt-6" style="padding-left: 8.33%; padding-right: 8.33%;">
+            <div class="absolute top-0 h-[2px] bg-slate-800" style="left: 8.33%; right: 8.33%;"></div>
+            
+            <div class="grid grid-cols-6 gap-3 w-full">
+              <!-- Item 15-20 -->
+              <div class="relative pt-4"><div class="absolute top-0 left-1/2 w-[2px] h-4 bg-slate-800 transform -translate-x-1/2 -mt-4"></div><div class="bg-white border-t-2 border-slate-400 border-x border-b border-slate-200 p-2 text-center shadow-sm h-full flex flex-col items-center justify-start rounded-b"><div class="w-6 flex flex-col items-center bg-slate-900 border border-amber-500 rounded-t-full pt-[6px] pb-1.5 shadow-sm mb-2 gap-[3px]"><span class="text-amber-400 text-[7px] leading-none">&#10047;</span><span class="text-amber-400 text-[7px] leading-none">&#10047;</span></div><span class="font-bold text-[9px] text-slate-800 uppercase mb-2 leading-tight flex-grow">DAN KRI KASEL</span><span class="text-[8px] text-slate-500 font-medium border-t border-slate-100 pt-1 w-full">Letkol Laut [Nama Pejabat]</span></div></div>
+              <div class="relative pt-4"><div class="absolute top-0 left-1/2 w-[2px] h-4 bg-slate-800 transform -translate-x-1/2 -mt-4"></div><div class="bg-white border-t-2 border-slate-400 border-x border-b border-slate-200 p-2 text-center shadow-sm h-full flex flex-col items-center justify-start rounded-b"><div class="w-6 flex flex-col items-center bg-slate-900 border border-amber-500 rounded-t-full pt-[6px] pb-1.5 shadow-sm mb-2 gap-[3px]"><span class="text-amber-400 text-[7px] leading-none">&#10047;</span><span class="text-amber-400 text-[7px] leading-none">&#10047;</span></div><span class="font-bold text-[9px] text-slate-800 uppercase mb-2 leading-tight flex-grow">PALAKSA KRI FRIGATE</span><span class="text-[8px] text-slate-500 font-medium border-t border-slate-100 pt-1 w-full">Letkol Laut [Nama Pejabat]</span></div></div>
+              <div class="relative pt-4"><div class="absolute top-0 left-1/2 w-[2px] h-4 bg-slate-800 transform -translate-x-1/2 -mt-4"></div><div class="bg-white border-t-2 border-slate-400 border-x border-b border-slate-200 p-2 text-center shadow-sm h-full flex flex-col items-center justify-start rounded-b"><div class="w-6 flex flex-col items-center bg-slate-900 border border-amber-500 rounded-t-full pt-[6px] pb-1.5 shadow-sm mb-2 gap-[3px]"><span class="text-amber-400 text-[7px] leading-none">&#10047;</span><span class="text-amber-400 text-[7px] leading-none">&#10047;</span></div><span class="font-bold text-[9px] text-slate-800 uppercase mb-2 leading-tight flex-grow">PALAKSA KRI LPD</span><span class="text-[8px] text-slate-500 font-medium border-t border-slate-100 pt-1 w-full">Letkol Laut [Nama Pejabat]</span></div></div>
+              <div class="relative pt-4"><div class="absolute top-0 left-1/2 w-[2px] h-4 bg-slate-800 transform -translate-x-1/2 -mt-4"></div><div class="bg-white border-t-2 border-slate-400 border-x border-b border-slate-200 p-2 text-center shadow-sm h-full flex flex-col items-center justify-start rounded-b"><div class="w-6 flex flex-col items-center bg-slate-900 border border-amber-500 rounded-t-full pt-[6px] pb-1.5 shadow-sm mb-2 gap-[3px]"><span class="text-amber-400 text-[7px] leading-none">&#10047;</span><span class="text-amber-400 text-[7px] leading-none">&#10047;</span></div><span class="font-bold text-[9px] text-slate-800 uppercase mb-2 leading-tight flex-grow">DANSATPROV KOARMADA RI</span><span class="text-[8px] text-slate-500 font-medium border-t border-slate-100 pt-1 w-full">Letkol Laut [Nama Pejabat]</span></div></div>
+              <div class="relative pt-4"><div class="absolute top-0 left-1/2 w-[2px] h-4 bg-slate-800 transform -translate-x-1/2 -mt-4"></div><div class="bg-white border-t-2 border-slate-400 border-x border-b border-slate-200 p-2 text-center shadow-sm h-full flex flex-col items-center justify-start rounded-b"><div class="w-6 flex flex-col items-center bg-slate-900 border border-amber-500 rounded-t-full pt-[6px] pb-1.5 shadow-sm mb-2 gap-[3px]"><span class="text-amber-400 text-[7px] leading-none">&#10047;</span><span class="text-amber-400 text-[7px] leading-none">&#10047;</span></div><span class="font-bold text-[9px] text-slate-800 uppercase mb-2 leading-tight flex-grow">DANSAT-SRT KOARMADA</span><span class="text-[8px] text-slate-500 font-medium border-t border-slate-100 pt-1 w-full">Letkol Laut [Nama Pejabat]</span></div></div>
+              <div class="relative pt-4"><div class="absolute top-0 left-1/2 w-[2px] h-4 bg-slate-800 transform -translate-x-1/2 -mt-4"></div><div class="bg-white border-t-2 border-slate-400 border-x border-b border-slate-200 p-2 text-center shadow-sm h-full flex flex-col items-center justify-start rounded-b"><div class="w-6 flex flex-col items-center bg-slate-900 border border-amber-500 rounded-t-full pt-[6px] pb-1.5 shadow-sm mb-2 gap-[3px]"><span class="text-amber-400 text-[7px] leading-none">&#10047;</span><span class="text-amber-400 text-[7px] leading-none">&#10047;</span></div><span class="font-bold text-[9px] text-slate-800 uppercase mb-2 leading-tight flex-grow">DANSEKASEL</span><span class="text-[8px] text-slate-500 font-medium border-t border-slate-100 pt-1 w-full">Letkol Laut [Nama Pejabat]</span></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. MAYOR (5 Jabatan) -->
+        <div class="relative z-10 w-full mt-14 flex flex-col items-center pb-8">
+          <div class="bg-slate-200 text-slate-700 font-bold px-6 py-1.5 rounded-full text-[11px] mb-2 border border-slate-300 z-10">MAYOR (1 Melati Emas)</div>
+          
+          <div class="w-5/6 flex relative pt-6" style="padding-left: 10%; padding-right: 10%;">
+            <div class="absolute top-0 h-[2px] bg-slate-800" style="left: 10%; right: 10%;"></div>
+            
+            <div class="grid grid-cols-5 gap-3 w-full">
+              <!-- Item 21-25 -->
+              <div class="relative pt-4"><div class="absolute top-0 left-1/2 w-[2px] h-4 bg-slate-800 transform -translate-x-1/2 -mt-4"></div><div class="bg-slate-50 border border-slate-300 p-2 text-center h-full flex flex-col items-center justify-start rounded shadow-sm"><div class="w-6 flex flex-col items-center bg-slate-900 border border-amber-500 rounded-t-full pt-[8px] pb-2 shadow-sm mb-2"><span class="text-amber-400 text-[7px] leading-none">&#10047;</span></div><span class="font-semibold text-[9px] text-slate-800 uppercase mb-2 leading-tight flex-grow">DANDIKSEKAD KOARMADA</span><span class="text-[8px] text-slate-500 font-medium border-t border-slate-200 pt-1 w-full">Mayor Laut [Nama Pejabat]</span></div></div>
+              <div class="relative pt-4"><div class="absolute top-0 left-1/2 w-[2px] h-4 bg-slate-800 transform -translate-x-1/2 -mt-4"></div><div class="bg-slate-50 border border-slate-300 p-2 text-center h-full flex flex-col items-center justify-start rounded shadow-sm"><div class="w-6 flex flex-col items-center bg-slate-900 border border-amber-500 rounded-t-full pt-[8px] pb-2 shadow-sm mb-2"><span class="text-amber-400 text-[7px] leading-none">&#10047;</span></div><span class="font-semibold text-[9px] text-slate-800 uppercase mb-2 leading-tight flex-grow">DAN KRI KAPAL CEPAT</span><span class="text-[8px] text-slate-500 font-medium border-t border-slate-200 pt-1 w-full">Mayor Laut [Nama Pejabat]</span></div></div>
+              <div class="relative pt-4"><div class="absolute top-0 left-1/2 w-[2px] h-4 bg-slate-800 transform -translate-x-1/2 -mt-4"></div><div class="bg-slate-50 border border-slate-300 p-2 text-center h-full flex flex-col items-center justify-start rounded shadow-sm"><div class="w-6 flex flex-col items-center bg-slate-900 border border-amber-500 rounded-t-full pt-[8px] pb-2 shadow-sm mb-2"><span class="text-amber-400 text-[7px] leading-none">&#10047;</span></div><span class="font-semibold text-[9px] text-slate-800 uppercase mb-2 leading-tight flex-grow">WADANSATPROV KOARMADA RI</span><span class="text-[8px] text-slate-500 font-medium border-t border-slate-200 pt-1 w-full">Mayor Laut [Nama Pejabat]</span></div></div>
+              <div class="relative pt-4"><div class="absolute top-0 left-1/2 w-[2px] h-4 bg-slate-800 transform -translate-x-1/2 -mt-4"></div><div class="bg-slate-50 border border-slate-300 p-2 text-center h-full flex flex-col items-center justify-start rounded shadow-sm"><div class="w-6 flex flex-col items-center bg-slate-900 border border-amber-500 rounded-t-full pt-[8px] pb-2 shadow-sm mb-2"><span class="text-amber-400 text-[7px] leading-none">&#10047;</span></div><span class="font-semibold text-[9px] text-slate-800 uppercase mb-2 leading-tight flex-grow">WADANSAT-SRT</span><span class="text-[8px] text-slate-500 font-medium border-t border-slate-200 pt-1 w-full">Mayor Laut [Nama Pejabat]</span></div></div>
+              <div class="relative pt-4"><div class="absolute top-0 left-1/2 w-[2px] h-4 bg-slate-800 transform -translate-x-1/2 -mt-4"></div><div class="bg-slate-50 border border-slate-300 p-2 text-center h-full flex flex-col items-center justify-start rounded shadow-sm"><div class="w-6 flex flex-col items-center bg-slate-900 border border-amber-500 rounded-t-full pt-[8px] pb-2 shadow-sm mb-2"><span class="text-amber-400 text-[7px] leading-none">&#10047;</span></div><span class="font-semibold text-[9px] text-slate-800 uppercase mb-2 leading-tight flex-grow">DANDIKJUR</span><span class="text-[8px] text-slate-500 font-medium border-t border-slate-200 pt-1 w-full">Mayor Laut [Nama Pejabat]</span></div></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-slate-900 text-slate-400 py-10 mt-auto border-t-4 border-blue-900">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
+      <div class="flex justify-center gap-6 mb-6">
+        <div class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center border border-slate-700 hover:bg-slate-700 transition cursor-pointer">⚓</div>
+        <div class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center border border-slate-700 hover:bg-slate-700 transition cursor-pointer">🛡️</div>
+        <div class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center border border-slate-700 hover:bg-slate-700 transition cursor-pointer">🦅</div>
+      </div>
+      <p class="text-sm font-semibold text-slate-300">Copyright &copy; 2026 Komando Armada RI RBX</p>
+      <p class="text-xs mt-2">Designed By Humas Koarmada RI RBX</p>
+    </div>
+  </footer>
+
+</body>
+</html>
