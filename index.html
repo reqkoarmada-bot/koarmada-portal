@@ -3,106 +3,260 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portal Resmi KOARMADA RI</title>
+  <title>Beranda - Koarmada RI</title>
+  
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+
   <style>
     body { font-family: 'Inter', sans-serif; }
+    .font-resmi { font-family: 'Playfair Display', serif; }
+    
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #f1f5f9; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
   </style>
 </head>
-<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col justify-between">
+<body class="bg-slate-50 text-slate-800 antialiased flex flex-col min-h-screen">
 
-  <header class="bg-slate-800 border-b border-slate-700 py-4 px-6 flex justify-between items-center">
-    <div class="flex items-center gap-3">
-      <span class="text-2xl">⚓</span>
-      <div>
-        <h1 class="font-bold text-base text-amber-400">KOMANDO ARMADA RI</h1>
-        <p class="text-[10px] text-slate-400">TNI Angkatan Laut</p>
+  <div class="bg-slate-900 text-white">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-4">
+        <div class="w-14 h-14 bg-white rounded-full p-1 shadow-lg">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Koarmada_RI.svg/250px-Koarmada_RI.svg.png?utm_source=id.wikipedia.org&utm_campaign=parser&utm_content=thumbnail" alt="Logo" class="w-full h-full object-contain">
+        </div>
+        <div>
+          <h1 class="text-xl md:text-2xl font-bold tracking-wide uppercase">Komando Armada Republik Indonesia</h1>
+          <p class="text-red-600 text-xs md:text-sm font-semibold tracking-widest uppercase">"Ekapada Banda Jala Nusa"</p>
+        </div>
       </div>
     </div>
-    <div class="flex items-center gap-2">
-      <a href="berita.html" class="text-xs bg-slate-700 hover:bg-slate-600 text-slate-200 font-medium px-3 py-1.5 rounded-lg transition">
-        Semua Berita
-      </a>
-      <a href="admin-berita.html" class="text-xs bg-amber-500/10 text-amber-400 border border-amber-500/30 hover:bg-amber-500 hover:text-slate-950 font-semibold px-3 py-1.5 rounded-lg transition">
-        Panel Admin
-      </a>
-    </div>
-  </header>
+  </div>
 
-  <main class="max-w-6xl mx-auto p-6 w-full flex-1 space-y-8">
-    <div class="border-b border-slate-700 pb-3">
-      <h2 class="text-2xl font-bold text-white flex items-center gap-2">
-        <span>📰</span> Berita Terkini
-      </h2>
+  <nav class="bg-blue-900 sticky top-0 z-40 shadow-md">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <ul class="flex flex-wrap justify-center md:justify-start gap-8 text-sm font-semibold text-white/90">
+        
+        <li><a href="index.html" class="block py-4 text-amber-400 border-b-2 border-amber-400">BERANDA</a></li>
+        
+        <li class="relative group">
+          <a href="#" class="flex items-center gap-1 py-4 hover:text-white transition-colors border-b-2 border-transparent hover:border-amber-400 cursor-pointer">
+            PROFIL 
+            <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </a>
+          <div class="absolute left-0 top-full hidden group-hover:block w-48 bg-white text-slate-800 shadow-xl rounded-b-lg overflow-hidden border-t-4 border-amber-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <ul class="flex flex-col text-sm font-medium">
+              <li><a href="sejarah.html" class="block px-4 py-3 hover:bg-slate-50 hover:text-blue-700 transition border-b border-slate-100">Sejarah Koarmada</a></li>
+              <li><a href="visi.html" class="block px-4 py-3 hover:bg-slate-50 hover:text-blue-700 transition border-b border-slate-100">Visi & Misi</a></li>
+              <li><a href="struktur.html" class="block px-4 py-3 hover:bg-slate-50 hover:text-blue-700 transition">Struktur Organisasi</a></li>
+            </ul>
+          </div>
+        </li>
+
+        <li><a href="berita.html" class="block py-4 hover:text-white transition-colors border-b-2 border-transparent hover:border-amber-400">BERITA</a></li>
+        
+        <li><a href="pengumuman.html" class="block py-4 hover:text-white transition-colors border-b-2 border-transparent hover:border-amber-400">PENGUMUMAN</a></li>
+
+        <li class="relative group">
+          <a href="#" class="flex items-center gap-1 py-4 hover:text-white transition-colors border-b-2 border-transparent hover:border-amber-400 cursor-pointer">
+            GALERI 
+            <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </a>
+          <div class="absolute left-0 top-full hidden group-hover:block w-40 bg-white text-slate-800 shadow-xl rounded-b-lg overflow-hidden border-t-4 border-amber-400">
+            <ul class="flex flex-col text-sm font-medium">
+              <li><a href="#" class="block px-4 py-3 hover:bg-slate-50 hover:text-blue-700 transition border-b border-slate-100">Galeri Foto</a></li>
+              <li><a href="#" class="block px-4 py-3 hover:bg-slate-50 hover:text-blue-700 transition">Galeri Video</a></li>
+            </ul>
+          </div>
+        </li>
+
+        <li><a href="pendaftaran.html" class="block py-4 hover:text-white transition-colors border-b-2 border-transparent hover:border-amber-400">REKRUTMEN</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="flex-grow max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8">
+    
+    <div class="relative w-full h-64 md:h-96 bg-slate-900 rounded-2xl overflow-hidden shadow-2xl mb-12 flex items-center justify-center">
+      <img src="https://plain-apac-prod-public.komododecks.com/202608/08/2e1mla3Iz8Qk7Eb312zx/image.png" alt="Kapal Perang" class="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-overlay">
+      <div class="relative z-10 text-center px-4">
+        <h2 class="font-resmi text-4xl md:text-6xl font-black text-white drop-shadow-lg mb-4 tracking-wide">
+          SELAMAT DATANG DI<br><span class="text-red-600">PORTAL KOARMADA RI</span>
+        </h2>
+        <p class="text-slate-200 text-lg md:text-xl max-w-2xl mx-auto font-medium">
+          Gerbang informasi terpadu, transparan, dan terpercaya menuju pengabdian untuk menjaga kedaulatan laut nusantara.
+        </p>
+      </div>
     </div>
 
-    <div id="gridBeritaIndex" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <p class="text-xs text-slate-400 col-span-full text-center py-12">Memuat berita terbaru...</p>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+      
+      <a href="struktur.html" class="group bg-white rounded-2xl p-6 border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+        <div class="w-14 h-14 bg-blue-100 text-blue-800 rounded-xl flex items-center justify-center mb-6 text-2xl group-hover:bg-blue-800 group-hover:text-white transition-colors">
+          ⚓
+        </div>
+        <h3 class="text-xl font-bold text-slate-900 mb-2 font-resmi">Struktur Komando</h3>
+        <p class="text-slate-500 text-sm leading-relaxed">
+          Pelajari hierarki, jajaran kepemimpinan, dan pembagian wilayah tugas Komando Armada Republik Indonesia.
+        </p>
+      </a>
+
+      <a href="#" class="group bg-white rounded-2xl p-6 border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+        <div class="w-14 h-14 bg-blue-100 text-blue-800 rounded-xl flex items-center justify-center mb-6 text-2xl group-hover:bg-blue-800 group-hover:text-white transition-colors">
+          🛡️
+        </div>
+        <h3 class="text-xl font-bold text-slate-900 mb-2 font-resmi">Operasi & Keamanan</h3>
+        <p class="text-slate-500 text-sm leading-relaxed">
+          Informasi terkini mengenai patroli, latihan gabungan, dan upaya perlindungan kedaulatan maritim negara.
+        </p>
+      </a>
+
+      <a href="pendaftaran.html" class="group bg-white rounded-2xl p-6 border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+        <div class="w-14 h-14 bg-blue-100 text-blue-800 rounded-xl flex items-center justify-center mb-6 text-2xl group-hover:bg-blue-800 group-hover:text-white transition-colors">
+          📝
+        </div>
+        <h3 class="text-xl font-bold text-slate-900 mb-2 font-resmi">Informasi Pendaftaran</h3>
+        <p class="text-slate-500 text-sm leading-relaxed">
+          Akses portal rekrutmen terpadu, persyaratan calon prajurit, dan pantau status seleksi penerimaan.
+        </p>
+      </a>
     </div>
+
+    <div class="flex items-center justify-between border-b-2 border-slate-200 pb-3 mb-8">
+      <h3 class="font-resmi text-2xl md:text-3xl font-bold text-slate-900 border-b-4 border-blue-800 -mb-[19px] pb-3 px-2">Berita Terkini</h3>
+      <a href="berita.html" class="text-sm font-semibold text-blue-700 hover:text-amber-500 transition-colors">Lihat Semua Berita &rarr;</a>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+      
+      <div onclick="bukaModalBerita('UPACARA KENAIKAN PANGKAT VIA POIN BULANAN DIGELAR DI KOARMADA II', '02 AGU 2026', 'Komando Armada II, Minggu (2/8/2026) – [RI] TNI Angkatan Laut melaksanakan Upacara Kenaikan Pangkat via Poin Bulanan di Komando Armada II. Kegiatan berlangsung dengan tertib dan khidmat sebagai bentuk penghargaan kepada personel yang telah menunjukkan dedikasi, disiplin, serta kinerja yang baik.', 'https://media.discordapp.net/attachments/1301201450713747508/1533821974520795236/1_20260803_061406_0000-1.png?ex=6a77d147&is=6a767fc7&hm=81bd5458f0c8ce48aeda15c60a832ff1e2b14365992300a6e45453d61a4e6f3e&=&format=webp&quality=lossless&width=1024&height=1024', false)" 
+           class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden group hover:shadow-md transition cursor-pointer">
+        <div class="h-48 bg-slate-200 overflow-hidden">
+          <img src="https://media.discordapp.net/attachments/1301201450713747508/1533821974520795236/1_20260803_061406_0000-1.png?ex=6a77d147&is=6a767fc7&hm=81bd5458f0c8ce48aeda15c60a832ff1e2b14365992300a6e45453d61a4e6f3e&=&format=webp&quality=lossless&width=1024&height=1024" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Berita 1">
+        </div>
+        <div class="p-5">
+          <div class="text-xs text-amber-600 font-bold mb-2">02 AGU 2026</div>
+          <h4 class="font-bold text-slate-900 mb-3 line-clamp-2 group-hover:text-blue-700 transition">
+            UPACARA KENAIKAN PANGKAT VIA POIN BULANAN DIGELAR DI KOARMADA II
+          </h4>
+          <p class="text-sm text-slate-500 line-clamp-3">Komando Armada II, Minggu (2/8/2026) – [RI] TNI Angkatan Laut melaksanakan Upacara Kenaikan Pangkat via Poin Bulanan di Komando Armada II. Kegiatan berlangsung dengan tertib dan khidmat sebagai bentuk penghargaan kepada personel yang telah menunjukkan dedikasi, disiplin, serta kinerja yang baik.</p>
+        </div>
+      </div>
+
+      <div onclick="bukaModalBerita('DIRGAHAYU HARI BHAKTI TNI ANGKATAN UDARA KE-79', '29 JUL 2026', '\&quot;Swa Bhuwana Paksa\&quot; — Sayap Tanah Air. 79 tahun bukan sekadar perjalanan waktu, melainkan bukti nyata semangat perjuangan, pengabdian, dan pengorbanan TNI Angkatan Udara dalam menjaga kedaulatan serta keamanan wilayah udara Negara Kesatuan Republik Indonesia.', 'https://cdn.discordapp.com/attachments/1301201450713747508/1533031017030484018/tni_angkatan_udara_musicaldown.com_1785573066.mp4?ex=6a7793a4&is=6a764224&hm=c65772ef837f09dba59d962eeebeaad6cf6e53baa37f659e90861d3595107a07&', true)" 
+           class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden group hover:shadow-md transition cursor-pointer">
+        <div class="h-48 bg-slate-200 overflow-hidden relative pointer-events-none">
+          <video 
+            src="https://cdn.discordapp.com/attachments/1301201450713747508/1533031017030484018/tni_angkatan_udara_musicaldown.com_1785573066.mp4?ex=6a7793a4&is=6a764224&hm=c65772ef837f09dba59d962eeebeaad6cf6e53baa37f659e90861d3595107a07&" 
+            class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+          </video>
+        </div>
+        <div class="p-5">
+          <div class="text-xs text-amber-600 font-bold mb-2">29 JUL 2026</div>
+          <h4 class="font-bold text-slate-900 mb-3 line-clamp-2 group-hover:text-blue-700 transition">
+            DIRGAHAYU HARI BHAKTI TNI ANGKATAN UDARA KE-79
+          </h4>
+          <p class="text-sm text-slate-500 line-clamp-3">
+            "Swa Bhuwana Paksa" — Sayap Tanah Air. 79 tahun bukan sekadar perjalanan waktu, melainkan bukti nyata semangat perjuangan, pengabdian, dan pengorbanan TNI Angkatan Udara dalam menjaga kedaulatan serta keamanan wilayah udara Negara Kesatuan Republik Indonesia.
+          </p>
+        </div>
+      </div>
+
+      <div onclick="bukaModalBerita('UPACARA PELANTIKAN SISWA DIKMABA AKT 15 & SARMIL', '09 JUL 2026', 'Selamat kepada seluruh siswa yang telah resmi dilantik! Semoga ilmu dan kedisiplinan yang didapat menjadi bekal pengabdian yang terbaik bagi negara. Teruslah berlatih, setia, dan banggakan satuan kita. Semangat mengabdi! 🇮🇩🌊.', 'https://media.discordapp.net/attachments/1301201450713747508/1524812754886852708/1_20260709_231327_0000.png?ex=6a78004a&is=6a76aeca&hm=8a4c8e0080b45c30f032863273f84f2dd05e552dbfa0283bb570b9660b0c76b4&=&format=webp&quality=lossless&width=1024&height=1024', false)" 
+           class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden group hover:shadow-md transition cursor-pointer">
+        <div class="h-48 bg-slate-200 overflow-hidden">
+          <img src="https://media.discordapp.net/attachments/1301201450713747508/1524812754886852708/1_20260709_231327_0000.png?ex=6a78004a&is=6a76aeca&hm=8a4c8e0080b45c30f032863273f84f2dd05e552dbfa0283bb570b9660b0c76b4&=&format=webp&quality=lossless&width=1024&height=1024" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Berita 3">
+        </div>
+        <div class="p-5">
+          <div class="text-xs text-amber-600 font-bold mb-2">09 JUL 2026</div>
+          <h4 class="font-bold text-slate-900 mb-3 line-clamp-2 group-hover:text-blue-700 transition">
+            UPACARA PELANTIKAN SISWA DIKMABA AKT 15 & SARMIL
+          </h4>
+          <p class="text-sm text-slate-500 line-clamp-3">Selamat kepada seluruh siswa yang telah resmi dilantik! Semoga ilmu dan kedisiplinan yang didapat menjadi bekal pengabdian yang terbaik bagi negara. Teruslah berlatih, setia, dan banggakan satuan kita. Semangat mengabdi! 🇮🇩🌊.</p>
+        </div>
+      </div>
+
+    </div>
+
   </main>
 
-  <footer class="text-center py-4 text-xs text-slate-500 border-t border-slate-800">
-    Humas Komando Armada RI &copy; 2026
+  <div id="modalDetailBerita" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
+    <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative flex flex-col border border-slate-200">
+      
+      <button onclick="tutupModalBerita()" class="absolute top-3 right-3 bg-slate-100 hover:bg-red-600 hover:text-white text-slate-600 w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold transition z-10 shadow">
+        ✕
+      </button>
+
+      <div id="modalMedia" class="w-full bg-slate-900 flex items-center justify-center overflow-hidden rounded-t-2xl max-h-80">
+      </div>
+
+      <div class="p-6 space-y-3">
+        <div id="modalTanggal" class="text-xs text-amber-600 font-bold"></div>
+        <h3 id="modalJudul" class="font-resmi text-2xl font-bold text-slate-900 leading-snug"></h3>
+        <hr class="border-slate-100">
+        <p id="modalDeskripsi" class="text-sm text-slate-600 leading-relaxed whitespace-pre-line"></p>
+      </div>
+
+      <div class="p-4 bg-slate-50 border-t border-slate-100 text-right rounded-b-2xl">
+        <button onclick="tutupModalBerita()" class="px-5 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs font-semibold rounded-lg transition">
+          Tutup
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <footer class="bg-slate-900 text-slate-400 py-10 mt-auto border-t-4 border-blue-900">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
+      <div class="flex justify-center gap-6 mb-6">
+        <div class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center border border-slate-700 hover:bg-slate-700 transition cursor-pointer">⚓</div>
+        <div class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center border border-slate-700 hover:bg-slate-700 transition cursor-pointer">🛡️</div>
+        <div class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center border border-slate-700 hover:bg-slate-700 transition cursor-pointer">🦅</div>
+      </div>
+      <p class="text-sm font-semibold text-slate-300">Copyright &copy; 2026 Komando Armada RI RBX</p>
+      <p class="text-xs mt-2">Designed By Humas Koarmada RI RBX</p>
+    </div>
   </footer>
 
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
-    import { getFirestore, collection, getDocs, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyAMYa0AF2_aH8N93fR22YIa9Kg0AGjKrLI",
-      authDomain: "portal-koarmada-92e19.firebaseapp.com",
-      projectId: "portal-koarmada-92e19",
-      storageBucket: "portal-koarmada-92e19.firebasestorage.app",
-      messagingSenderId: "966060677941",
-      appId: "1:966060677941:web:cd6074b5d8e2b3b9edca7c"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-
-    async function loadBerita() {
-      const grid = document.getElementById('gridBeritaIndex');
-      try {
-        const q = query(collection(db, "berita"), orderBy("waktu", "desc"), limit(6));
-        const snapshot = await getDocs(q);
-
-        if (snapshot.empty) {
-          grid.innerHTML = `<p class="text-xs text-slate-400 col-span-full text-center py-12">Belum ada berita dipublikasikan.</p>`;
-          return;
-        }
-
-        grid.innerHTML = "";
-        snapshot.forEach((docSnap) => {
-          const item = docSnap.data();
-          grid.innerHTML += `
-            <div class="bg-slate-800 border border-slate-700 rounded-2xl overflow-hidden shadow-lg flex flex-col">
-              <div class="h-48 bg-slate-950 overflow-hidden">
-                <img src="${item.mediaUrl}" alt="Media Berita" class="w-full h-full object-cover">
-              </div>
-              <div class="p-5 flex-1 flex flex-col justify-between space-y-3">
-                <div>
-                  <span class="text-[10px] font-bold text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded border border-amber-400/20">
-                    ${item.tanggal || 'TERKINI'}
-                  </span>
-                  <h3 class="font-bold text-white text-base mt-2 leading-snug">
-                    ${item.judul}
-                  </h3>
-                  <p class="text-xs text-slate-400 mt-2 leading-relaxed">
-                    ${item.deskripsi}
-                  </p>
-                </div>
-              </div>
-            </div>
-          `;
-        });
-      } catch (err) {
-        grid.innerHTML = `<p class="text-xs text-red-400 col-span-full text-center py-12">Gagal memuat berita: ${err.message}</p>`;
+  <script>
+    function bukaModalBerita(judul, tanggal, deskripsi, mediaUrl, isVideo = false) {
+      const modal = document.getElementById('modalDetailBerita');
+      const containerMedia = document.getElementById('modalMedia');
+      
+      if (isVideo) {
+        containerMedia.innerHTML = `<video src="${mediaUrl}" class="w-full h-auto max-h-80 object-cover" controls autoplay></video>`;
+      } else {
+        containerMedia.innerHTML = `<img src="${mediaUrl}" class="w-full h-auto max-h-80 object-cover" alt="Foto Berita">`;
       }
+
+      document.getElementById('modalTanggal').innerText = tanggal;
+      document.getElementById('modalJudul').innerText = judul;
+      document.getElementById('modalDeskripsi').innerText = deskripsi;
+
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
     }
 
-    loadBerita();
+    function tutupModalBerita() {
+      const modal = document.getElementById('modalDetailBerita');
+      document.getElementById('modalMedia').innerHTML = ''; // Menghentikan pemutaran video jika dikutup
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    // Klik di luar kotak modal untuk menutup
+    window.onclick = function(e) {
+      const modal = document.getElementById('modalDetailBerita');
+      if (e.target === modal) {
+        tutupModalBerita();
+      }
+    };
   </script>
+
 </body>
 </html>
