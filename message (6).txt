@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beranda - Koarmada RI</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Playfair Display untuk Judul, Inter untuk Teks/UI -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .font-resmi { font-family: 'Playfair Display', serif; }
+    
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #f1f5f9; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased flex flex-col min-h-screen">
+
+  <!-- TOP HEADER (Logo & Judul Instansi) -->
+  <div class="bg-slate-900 text-white">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-4">
+        <!-- Ganti dengan Logo Asli -->
+        <div class="w-14 h-14 bg-white rounded-full p-1 shadow-lg">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Koarmada_RI.svg/250px-Koarmada_RI.svg.png?utm_source=id.wikipedia.org&utm_campaign=parser&utm_content=thumbnail" alt="Logo" class="w-full h-full object-contain">
+        </div>
+        <div>
+          <h1 class="text-xl md:text-2xl font-bold tracking-wide uppercase">Komando Armada Republik Indonesia</h1>
+          <p class="text-red-600 text-xs md:text-sm font-semibold tracking-widest uppercase">"Ekapada Banda Jala Nusa"</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STICKY NAVBAR -->
+  <nav class="bg-blue-900 sticky top-0 z-50 shadow-md">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <ul class="flex flex-wrap justify-center md:justify-start gap-8 text-sm font-semibold text-white/90">
+        
+        <!-- Menu Aktif: BERANDA -->
+        <li><a href="index.html" class="block py-4 text-amber-400 border-b-2 border-amber-400">BERANDA</a></li>
+        
+        <!-- Menu Dropdown: PROFIL -->
+        <li class="relative group">
+          <a href="#" class="flex items-center gap-1 py-4 hover:text-white transition-colors border-b-2 border-transparent hover:border-amber-400 cursor-pointer">
+            PROFIL 
+            <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </a>
+          <div class="absolute left-0 top-full hidden group-hover:block w-48 bg-white text-slate-800 shadow-xl rounded-b-lg overflow-hidden border-t-4 border-amber-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <ul class="flex flex-col text-sm font-medium">
+              <li><a href="sejarah.html" class="block px-4 py-3 hover:bg-slate-50 hover:text-blue-700 transition border-b border-slate-100">Sejarah Koarmada</a></li>
+              <li><a href="#" class="block px-4 py-3 hover:bg-slate-50 hover:text-blue-700 transition border-b border-slate-100">Visi & Misi</a></li>
+              <li><a href="#" class="block px-4 py-3 hover:bg-slate-50 hover:text-blue-700 transition">Struktur Organisasi</a></li>
+            </ul>
+          </div>
+        </li>
+
+        <!-- Menu Biasa: BERITA (Mengarah ke file berita.html) -->
+        <li><a href="berita.html" class="block py-4 hover:text-white transition-colors border-b-2 border-transparent hover:border-amber-400">BERITA</a></li>
+        
+        <li><a href="#" class="block py-4 hover:text-white transition-colors border-b-2 border-transparent hover:border-amber-400">ARTIKEL</a></li>
+        <li><a href="#" class="block py-4 hover:text-white transition-colors border-b-2 border-transparent hover:border-amber-400">PENGUMUMAN</a></li>
+
+        <!-- Menu Dropdown: GALERI -->
+        <li class="relative group">
+          <a href="#" class="flex items-center gap-1 py-4 hover:text-white transition-colors border-b-2 border-transparent hover:border-amber-400 cursor-pointer">
+            GALERI 
+            <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </a>
+          <div class="absolute left-0 top-full hidden group-hover:block w-40 bg-white text-slate-800 shadow-xl rounded-b-lg overflow-hidden border-t-4 border-amber-400">
+            <ul class="flex flex-col text-sm font-medium">
+              <li><a href="#" class="block px-4 py-3 hover:bg-slate-50 hover:text-blue-700 transition border-b border-slate-100">Galeri Foto</a></li>
+              <li><a href="#" class="block px-4 py-3 hover:bg-slate-50 hover:text-blue-700 transition">Galeri Video</a></li>
+            </ul>
+          </div>
+        </li>
+
+        <li><a href="#" class="block py-4 hover:text-white transition-colors border-b-2 border-transparent hover:border-amber-400">REKRUTMEN</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT AREA (BERANDA) -->
+  <main class="flex-grow max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8">
+    
+    <!-- HERO BANNER SELAMAT DATANG -->
+    <div class="relative w-full h-64 md:h-96 bg-slate-900 rounded-2xl overflow-hidden shadow-2xl mb-12 flex items-center justify-center">
+      <img src="https://plain-apac-prod-public.komododecks.com/202608/08/2e1mla3Iz8Qk7Eb312zx/image.png" alt="Kapal Perang" class="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-overlay">
+      <div class="relative z-10 text-center px-4">
+        <h2 class="font-resmi text-4xl md:text-6xl font-black text-white drop-shadow-lg mb-4 tracking-wide">
+          SELAMAT DATANG DI<br><span class="text-red-600">PORTAL KOARMADA RI</span>
+        </h2>
+        <p class="text-slate-200 text-lg md:text-xl max-w-2xl mx-auto font-medium">
+          Gerbang informasi terpadu, transparan, dan terpercaya menuju pengabdian untuk menjaga kedaulatan laut nusantara.
+        </p>
+      </div>
+    </div>
+
+    <!-- AKSES CEPAT (QUICK LINKS) -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+      
+      <!-- Kartu 1 -->
+      <a href="#" class="group bg-white rounded-2xl p-6 border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+        <div class="w-14 h-14 bg-blue-100 text-blue-800 rounded-xl flex items-center justify-center mb-6 text-2xl group-hover:bg-blue-800 group-hover:text-white transition-colors">
+          ⚓
+        </div>
+        <h3 class="text-xl font-bold text-slate-900 mb-2 font-resmi">Struktur Komando</h3>
+        <p class="text-slate-500 text-sm leading-relaxed">
+          Pelajari hierarki, jajaran kepemimpinan, dan pembagian wilayah tugas Komando Armada Republik Indonesia.
+        </p>
+      </a>
+
+      <!-- Kartu 2 -->
+      <a href="#" class="group bg-white rounded-2xl p-6 border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+        <div class="w-14 h-14 bg-blue-100 text-blue-800 rounded-xl flex items-center justify-center mb-6 text-2xl group-hover:bg-blue-800 group-hover:text-white transition-colors">
+          🛡️
+        </div>
+        <h3 class="text-xl font-bold text-slate-900 mb-2 font-resmi">Operasi & Keamanan</h3>
+        <p class="text-slate-500 text-sm leading-relaxed">
+          Informasi terkini mengenai patroli, latihan gabungan, dan upaya perlindungan kedaulatan maritim negara.
+        </p>
+      </a>
+
+      <!-- Kartu 3 -->
+      <a href="#" class="group bg-white rounded-2xl p-6 border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+        <div class="w-14 h-14 bg-blue-100 text-blue-800 rounded-xl flex items-center justify-center mb-6 text-2xl group-hover:bg-blue-800 group-hover:text-white transition-colors">
+          📝
+        </div>
+        <h3 class="text-xl font-bold text-slate-900 mb-2 font-resmi">Informasi Pendaftaran</h3>
+        <p class="text-slate-500 text-sm leading-relaxed">
+          Akses portal rekrutmen terpadu, persyaratan calon prajurit, dan pantau status seleksi penerimaan.
+        </p>
+      </a>
+    </div>
+
+    <!-- SECTION BERITA TERKINI -->
+    <div class="flex items-center justify-between border-b-2 border-slate-200 pb-3 mb-8">
+      <h3 class="font-resmi text-2xl md:text-3xl font-bold text-slate-900 border-b-4 border-blue-800 -mb-[19px] pb-3 px-2">Berita Terkini</h3>
+      <a href="berita.html" class="text-sm font-semibold text-blue-700 hover:text-amber-500 transition-colors">Lihat Semua Berita &rarr;</a>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+      <!-- Berita 1 -->
+      <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden group hover:shadow-md transition">
+        <div class="h-48 bg-slate-200 overflow-hidden">
+          <img src="https://media.discordapp.net/attachments/1301201450713747508/1533821974520795236/1_20260803_061406_0000-1.png?ex=6a77d147&is=6a767fc7&hm=81bd5458f0c8ce48aeda15c60a832ff1e2b14365992300a6e45453d61a4e6f3e&=&format=webp&quality=lossless&width=1024&height=1024" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Berita 1">
+        </div>
+        <div class="p-5">
+          <div class="text-xs text-amber-600 font-bold mb-2">02 AGU 2026</div>
+          <h4 class="font-bold text-slate-900 mb-3 line-clamp-2 hover:text-blue-700 transition cursor-pointer">
+            UPACARA KENAIKAN PANGKAT VIA POIN BULANAN DIGELAR DI KOARMADA II
+          </h4>
+          <p class="text-sm text-slate-500 line-clamp-3">Komando Armada II, Minggu (2/8/2026) – [RI] TNI Angkatan Laut  melaksanakan Upacara Kenaikan Pangkat via Poin Bulanan di Komando Armada II. Kegiatan berlangsung dengan tertib dan khidmat sebagai bentuk penghargaan kepada personel yang telah menunjukkan dedikasi, disiplin, serta kinerja yang baik.
+
+Prosesi kenaikan pangkat menjadi simbol apresiasi atas pengabdian prajurit sekaligus motivasi untuk terus meningkatkan profesionalisme, loyalitas, dan tanggung jawab dalam menjalankan tugas.
+
+Momentum ini menjadi bentuk apresiasi atas dedikasi prajurit sekaligus dorongan untuk terus mengemban tugas dengan penuh tanggung jawab dan loyalitas.</p>
+        </div>
+      </div>
+
+<!-- Berita 2 -->
+      <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden group hover:shadow-md transition">
+        <div class="h-48 bg-slate-200 overflow-hidden relative">
+          <!-- Tag Video yang sudah diperbaiki -->
+          <!-- Tag Video dengan Suara dan Tombol Play -->
+        <video 
+          src="https://cdn.discordapp.com/attachments/1301201450713747508/1533031017030484018/tni_angkatan_udara_musicaldown.com_1785573066.mp4?ex=6a7793a4&is=6a764224&hm=c65772ef837f09dba59d962eeebeaad6cf6e53baa37f659e90861d3595107a07&" 
+          class="w-full h-full object-cover group-hover:scale-105 transition duration-500" 
+          controls>
+        </video>
+        </div>
+        <div class="p-5">
+          <div class="text-xs text-amber-600 font-bold mb-2">29 JUL 2026</div>
+          <h4 class="font-bold text-slate-900 mb-3 line-clamp-2 hover:text-blue-700 transition cursor-pointer">
+            DIRGAHAYU HARI BHAKTI TNI ANGKATAN UDARA KE-79
+          </h4>
+          <p class="text-sm text-slate-500 line-clamp-3">
+            "Swa Bhuwana Paksa" — Sayap Tanah Air. 79 tahun bukan sekadar perjalanan waktu, melainkan bukti nyata semangat perjuangan, pengabdian, dan pengorbanan TNI Angkatan Udara dalam menjaga kedaulatan serta keamanan wilayah udara Negara Kesatuan Republik Indonesia. Hari Bhakti TNI Angkatan Udara menjadi momentum untuk mengenang jasa dan pengorbanan para pendahulu sekaligus memperkuat tekad seluruh prajurit TNI AU dalam melanjutkan perjuangan demi bangsa dan negara.
+          </p>
+        </div>
+      </div>
+
+      <!-- Berita 3 -->
+      <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden group hover:shadow-md transition">
+        <div class="h-48 bg-slate-200 overflow-hidden">
+          <img src="https://media.discordapp.net/attachments/1301201450713747508/1524812754886852708/1_20260709_231327_0000.png?ex=6a78004a&is=6a76aeca&hm=8a4c8e0080b45c30f032863273f84f2dd05e552dbfa0283bb570b9660b0c76b4&=&format=webp&quality=lossless&width=1024&height=1024" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Berita 3">
+        </div>
+        <div class="p-5">
+          <div class="text-xs text-amber-600 font-bold mb-2">09 JUL 2026</div>
+          <h4 class="font-bold text-slate-900 mb-3 line-clamp-2 hover:text-blue-700 transition cursor-pointer">
+            UPACARA PELANTIKAN SISWA DIKMABA AKT 15 & SARMIL
+          </h4>
+          <p class="text-sm text-slate-500 line-clamp-3">Selamat kepada seluruh siswa yang telah resmi dilantik! Semoga ilmu dan kedisiplinan yang didapat menjadi bekal pengabdian yang terbaik bagi negara. Teruslah berlatih, setia, dan banggakan satuan kita. Semangat mengabdi! 🇮🇩🌊.</p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-slate-900 text-slate-400 py-10 mt-auto border-t-4 border-blue-900">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
+      <div class="flex justify-center gap-6 mb-6">
+        <div class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center border border-slate-700 hover:bg-slate-700 transition cursor-pointer">⚓</div>
+        <div class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center border border-slate-700 hover:bg-slate-700 transition cursor-pointer">🛡️</div>
+        <div class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center border border-slate-700 hover:bg-slate-700 transition cursor-pointer">🦅</div>
+      </div>
+      <p class="text-sm font-semibold text-slate-300">Copyright &copy; 2026 Komando Armada RI RBX</p>
+      <p class="text-xs mt-2">Designed By Humas Koarmada RI RBX</p>
+    </div>
+  </footer>
+
+</body>
+</html>
