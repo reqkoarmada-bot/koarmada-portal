@@ -8,56 +8,44 @@
 </head>
 <body class="bg-gray-950 text-gray-100 min-h-screen flex flex-col justify-between font-sans">
 
-  <header class="bg-blue-950 border-b border-blue-900/60">
+  <header class="bg border-b border-blue-900/60" style="background-color: #0b132b;">
     <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
       <div class="flex items-center gap-3">
-        <div class="bg-blue-900 border border-blue-700 w-10 h-10 rounded-xl flex items-center justify-center text-xl shadow-lg">
+        <div class="bg-blue-900/80 border border-blue-700/60 w-11 h-11 rounded-xl flex items-center justify-center text-2xl shadow-lg">
           ⚓
         </div>
         <div>
-          <h1 class="text-white font-black text-lg tracking-wider leading-none uppercase">PORTAL KOARMADA RI</h1>
-          <p class="text-blue-400 text-[10px] font-semibold tracking-widest mt-0.5 uppercase">Komando Armada Republik Indonesia</p>
+          <h1 class="text-white font-black text-xl tracking-wider leading-none uppercase">PORTAL KOARMADA RI</h1>
+          <p class="text-blue-400 text-[10px] font-bold tracking-widest mt-1 uppercase">Komando Armada Republik Indonesia</p>
         </div>
       </div>
-      
-      <a href="admin-berita.html" class="bg-blue-900/50 hover:bg-blue-800 text-blue-300 border border-blue-700/50 px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5">
-        <span>🔒</span> Admin Berita
-      </a>
     </div>
 
-    <nav class="bg-blue-950/80 border-t border-blue-900/40 backdrop-blur-md">
+    <nav class="bg border-t border-blue-900/40" style="background-color: #1c2541;">
       <div class="max-w-6xl mx-auto px-4">
-        <div class="flex items-center gap-1 md:gap-2 text-xs font-bold uppercase tracking-wider overflow-x-auto py-2.5">
-          <a href="index.html" class="px-3 py-1.5 rounded-lg text-gray-300 hover:text-white hover:bg-blue-900/40 transition whitespace-nowrap">Beranda</a>
-          <a href="index.html#profil" class="px-3 py-1.5 rounded-lg text-gray-300 hover:text-white hover:bg-blue-900/40 transition whitespace-nowrap">Profil</a>
-          <a href="berita.html" class="px-3 py-1.5 rounded-lg text-white bg-blue-800 border border-blue-600/50 shadow transition whitespace-nowrap">Berita</a>
-          <a href="index.html#pengumuman" class="px-3 py-1.5 rounded-lg text-gray-300 hover:text-white hover:bg-blue-900/40 transition whitespace-nowrap">Pengumuman</a>
-          <a href="index.html#galeri" class="px-3 py-1.5 rounded-lg text-gray-300 hover:text-white hover:bg-blue-900/40 transition whitespace-nowrap">Galeri</a>
-          <a href="index.html#rekrutmen" class="px-3 py-1.5 rounded-lg text-gray-300 hover:text-white hover:bg-blue-900/40 transition whitespace-nowrap">Rekrutmen</a>
+        <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider overflow-x-auto py-2.5">
+          <a href="index.html" class="px-4 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-blue-900/50 transition whitespace-nowrap">Beranda</a>
+          <a href="index.html#profil" class="px-4 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-blue-900/50 transition whitespace-nowrap">Profil</a>
+          <a href="berita.html" class="px-4 py-2 rounded-lg text-white bg-blue-700 border border-blue-500/50 shadow transition whitespace-nowrap">Berita</a>
+          <a href="index.html#pengumuman" class="px-4 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-blue-900/50 transition whitespace-nowrap">Pengumuman</a>
+          <a href="index.html#galeri" class="px-4 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-blue-900/50 transition whitespace-nowrap">Galeri</a>
+          <a href="index.html#rekrutmen" class="px-4 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-blue-900/50 transition whitespace-nowrap">Rekrutmen</a>
         </div>
       </div>
     </nav>
   </header>
 
-  <section class="bg-gradient-to-b from-blue-950/40 to-gray-950 py-8 border-b border-gray-800/80">
-    <div class="max-w-6xl mx-auto px-4">
-      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div>
-          <span class="text-[10px] font-bold text-yellow-500 uppercase tracking-widest bg-yellow-500/10 border border-yellow-500/20 px-2.5 py-1 rounded-md">
-            Publikasi Resmi
-          </span>
-          <h2 class="text-2xl font-black text-white mt-2 uppercase tracking-wide">Daftar Berita & Informasi</h2>
-          <p class="text-gray-400 text-xs mt-1">Kumpulan dokumentasi, pengumuman, dan berita terbaru Komando Armada RI.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <main class="max-w-6xl mx-auto px-4 py-8 flex-grow w-full">
     
+    <div class="flex justify-between items-center mb-6 border-b border-gray-800 pb-3">
+      <h2 class="text-lg font-bold border-b-2 border-blue-600 pb-3 -mb-3 text-white uppercase tracking-wider">
+        Berita Terkini
+      </h2>
+    </div>
+
     <div id="gridBeritaPublik" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       <div class="col-span-full text-center py-12 text-gray-500 italic text-sm">
-        Memuat berita terbaru dari database...
+        Memuat berita terbaru...
       </div>
     </div>
 
@@ -108,7 +96,7 @@
           container.innerHTML = `
             <div class="col-span-full text-center py-16 bg-gray-900/50 border border-gray-800 rounded-2xl">
               <p class="text-gray-400 font-medium text-sm">Belum ada berita yang dipublikasikan.</p>
-              <p class="text-gray-600 text-xs mt-1">Gunakan panel admin berita untuk menambahkan postingan pertama.</p>
+              <p class="text-gray-600 text-xs mt-1">Tambahkan postingan dari halaman admin berita.</p>
             </div>
           `;
           return;
@@ -136,20 +124,19 @@
             `;
           }
 
+          // Format Tampilan Kartu Berita Sesuai Gambar
           html += `
-            <article class="bg-gray-900 border border-gray-800 rounded-2xl overflow-hidden shadow-xl flex flex-col justify-between hover:border-blue-500/50 transition duration-300">
+            <article class="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden shadow-xl flex flex-col justify-between hover:border-blue-500/50 transition duration-300">
               <div>
                 ${mediaHtml}
                 <div class="p-5">
-                  <div class="flex items-center justify-between mb-2">
-                    <span class="text-[10px] font-bold text-yellow-500 uppercase tracking-widest bg-yellow-500/10 border border-yellow-500/20 px-2 py-0.5 rounded">
-                      ${data.tanggal || 'TERKINI'}
-                    </span>
-                  </div>
-                  <h3 class="text-white font-black text-sm mb-2 leading-snug uppercase tracking-tight">
+                  <span class="text-[11px] font-bold text-yellow-500 uppercase tracking-wider block mb-1">
+                    ${data.tanggal || 'TERKINI'}
+                  </span>
+                  <h3 class="text-white font-bold text-sm mb-2 leading-snug uppercase tracking-tight line-clamp-2">
                     ${data.judul}
                   </h3>
-                  <p class="text-gray-400 text-xs leading-relaxed whitespace-pre-line">
+                  <p class="text-gray-400 text-xs leading-relaxed whitespace-pre-line line-clamp-4">
                     ${data.deskripsi}
                   </p>
                 </div>
@@ -163,7 +150,7 @@
         console.error("Gagal memuat berita:", err);
         container.innerHTML = `
           <div class="col-span-full text-center py-12 text-red-400 text-xs font-medium">
-            Gagal memuat data dari Firebase. Silakan periksa koneksi internet kamu.
+            Gagal memuat berita dari server Firebase.
           </div>
         `;
       }
